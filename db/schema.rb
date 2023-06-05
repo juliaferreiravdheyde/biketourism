@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_05_183943) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_05_185518) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -28,6 +28,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_05_183943) do
     t.date "date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.bigint "routes_id", null: false
+    t.index ["routes_id"], name: "index_rides_on_routes_id"
+    t.index ["user_id"], name: "index_rides_on_user_id"
   end
 
   create_table "routes", force: :cascade do |t|
@@ -38,6 +42,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_05_183943) do
     t.float "positive_elevetion"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "creator_id", null: false
+    t.index ["creator_id"], name: "index_routes_on_creator_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -45,8 +51,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_05_183943) do
     t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "pinned_route_id"
+    t.index ["pinned_route_id"], name: "index_users_on_pinned_route_id"
   end
 
   add_foreign_key "favorites", "routes"
   add_foreign_key "favorites", "users"
+  add_foreign_key "rides", "routes", column: "routes_id"
+  add_foreign_key "rides", "users"
+  add_foreign_key "routes", "users", column: "creator_id"
+  add_foreign_key "users", "routes", column: "pinned_route_id"
 end
