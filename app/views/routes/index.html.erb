@@ -1,0 +1,10 @@
+<h1>Routess</h1>
+
+<div id="routes">
+  <% @routes.each do |route| %>
+    <%= render route %>
+    <p>
+      <%= link_to "Show this Route", route %>
+    </p>
+  <% end %>
+</div>
