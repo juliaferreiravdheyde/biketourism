@@ -9,4 +9,4 @@
   <% end %>
 </div>
 
-<%= link_to "New Route", new_route_path, class: 'btn btn-primary' %>
+  <%= link_to "New Route", new_route_path if policy(Route).new?  class: 'btn btn-primary'%>

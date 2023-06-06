@@ -2,8 +2,11 @@ class RoutesController < ApplicationController
   before_action :set_routes, only: %i[show]
 
   def index
-    @routes = Route.all
+    @routes = policy_scope(Routes)
   end
+  # def index
+  #   @routes = Route.all
+  # end
 
   def show
     authorize @route
