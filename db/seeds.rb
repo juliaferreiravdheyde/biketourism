@@ -7,6 +7,8 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 User.destroy_all
+Favorite.destroy_all
+Ride.destroy_all
 Route.destroy_all
 
 

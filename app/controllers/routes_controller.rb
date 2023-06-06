@@ -15,7 +15,12 @@ class RoutesController < ApplicationController
 
   def create
     @route = Route.new(route_params)
-    @route.save!
+    @route.creator = current_user
+    if @route.save!
+      redirect_to routes_path
+    else
+      render :new, error: :unprocessable_entity
+    end
   end
 
   private
