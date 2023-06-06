@@ -15,7 +15,7 @@ class RoutesController < ApplicationController
 
   def create
     @route = Route.new(route_params)
-    @route.creator_id = User.new.id
+    @route.creator = current_user
     if @route.save!
       redirect_to routes_path
     else
