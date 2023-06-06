@@ -1,0 +1,69 @@
+
+.banner {
+  background-size: cover;
+  background: url(imagem-capa-3.jpg);
+  background-repeat: no-repeat;
+  background-position: 50% 70%;
+  background-attachment: fixed;
+  padding: 200px 0;
+}
+
+
+.banner-logged {
+  background-size: cover;
+  background: url(imagem-capa-logged.jpg);
+  background-repeat: no-repeat;
+  background-position: 50% 100%;
+  background-attachment: fixed;
+  height: 260px;
+  padding: 100px 0;
+}
+
+.banner-info {
+  background-color: var(--cor-0);
+  padding: 30px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  border-radius: 4px;
+  width: 600px;
+}
+
+.banner-info p {
+max-width: 30ch;
+}
+
+
+.buttons-home {
+  display: flex;
+  gap: 20px
+}
+
+@media (max-width: 800px) {
+  .banner {
+    background-size: cover;
+    background: url(imagem-capa-3.jpg);
+    background-repeat: no-repeat;
+    background-position: 0% 55%;
+    background-attachment: fixed;
+    padding: 80px 0;
+  }
+
+  .banner-logged {
+  background-position: 48% 90%;
+  }
+
+  .banner-info-logged p {
+    max-width: 25ch;
+  }
+
+  .banner-info {
+    width: auto;
+  }
+
+  .buttons-home .btn-primary {
+    font-size: 16px;
+  }
+
+  .buttons-home .btn-secondary {
+    font-size: 16px;
+  }
+  }

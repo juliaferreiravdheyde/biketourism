@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_05_185518) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_06_170326) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -21,6 +21,25 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_05_185518) do
     t.datetime "updated_at", null: false
     t.index ["route_id"], name: "index_favorites_on_route_id"
     t.index ["user_id"], name: "index_favorites_on_user_id"
+  end
+
+  create_table "models", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_models_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_models_on_reset_password_token", unique: true
+  end
+
+  create_table "points", force: :cascade do |t|
+    t.bigint "route_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["route_id"], name: "index_points_on_route_id"
   end
 
   create_table "rides", force: :cascade do |t|
@@ -38,8 +57,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_05_185518) do
     t.string "name"
     t.text "description"
     t.string "type_of_route"
-    t.string "shape"
-    t.float "positive_elevetion"
+    t.float "positive_elevation"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "creator_id", null: false
@@ -57,6 +75,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_05_185518) do
 
   add_foreign_key "favorites", "routes"
   add_foreign_key "favorites", "users"
+  add_foreign_key "points", "routes"
   add_foreign_key "rides", "routes", column: "routes_id"
   add_foreign_key "rides", "users"
   add_foreign_key "routes", "users", column: "creator_id"
