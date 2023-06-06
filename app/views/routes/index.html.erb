@@ -1,12 +1,9 @@
 <h1>Routes</h1>
 
 <div id="routes">
+<ul>
   <% @routes.each do |route| %>
-    <%= render route %>
-    <p>
-      <%= link_to "Show this Route", route %>
-    </p>
+    <li><%= route.name %> - <%= route.description %></li><%= link_to "Show this Route", route %>
   <% end %>
-</div>
-
+</ul>
 <%= link_to "New Route", new_route_path, class: 'btn btn-primary' %>
