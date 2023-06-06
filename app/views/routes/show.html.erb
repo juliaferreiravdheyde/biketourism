@@ -8,7 +8,13 @@
           </ul>
         </div>
       </div>
-      
+
+      <% if policy(@route).edit? %>
+        <%= link_to "Edit this route", edit_route_path(@route) %> |
+      <% end %>
+
+      <%= button_to "Destroy this route", @restaurant, method: :delete if policy(@route).destroy? %>
+
 <button id="find-me">Show my location</button><br />
 <p id="status"></p>
 <a id="map-link" target="_blank"></a>

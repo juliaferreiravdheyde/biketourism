@@ -6,14 +6,17 @@ class RoutesController < ApplicationController
   end
 
   def show
+    authorize @route
     @ride = Ride.new
   end
 
   def new
+    authorize @route
     @route = Route.new
   end
 
   def create
+    authorize @route
     @route = Route.new(route_params)
     @route.save!
   end
