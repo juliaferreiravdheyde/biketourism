@@ -1,5 +1,5 @@
 class RoutesController < ApplicationController
-  before_action :set_routes, only: %i[ show ]
+  before_action :set_routes, only: %i[show]
 
   def index
     @routes = Route.all
