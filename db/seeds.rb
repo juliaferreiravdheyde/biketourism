@@ -17,7 +17,7 @@ user4 = User.create!(email: "thiago@olatu.com", password: "123123")
 user5 = User.create!(email: "juliavdheyde@icloud.com", password: "123123")
 
 
-Route.create!(
+route1 = Route.create!(
   name: "Rota Parque do Ibirapuera",
   description: "Trilha muito tranquilha ao redor do Parque",
   type_of_route: "Urbano",
@@ -25,7 +25,7 @@ Route.create!(
   creator: user1
 )
 
-Route.create!(
+route2 = Route.create!(
   name: "Rota Nervosa Pico do Jaragua",
   description: "Trilha hardcore",
   type_of_route: "Montanha",
@@ -33,7 +33,7 @@ Route.create!(
   creator: user2
 )
 
-Route.create!(
+route3 = Route.create!(
   name: "Rota Imigrantes",
   description: "trilha na descida da serra da Imigrantes",
   type_of_route: "Montanha",
@@ -41,7 +41,7 @@ Route.create!(
   creator: user3
 )
 
-Route.create!(
+route4 = Route.create!(
   name: "Rota Itamambuca",
   description: "trilha maravilhosa para a praia de Itamambuca",
   type_of_route: "Praia",
@@ -49,7 +49,7 @@ Route.create!(
   creator: user4
 )
 
-Route.create!(
+route5 = Route.create!(
   name: "Rota Centro de SP",
   description: "passeio pelo pontos históricos no centro da cidade",
   type_of_route: "Urbano",
