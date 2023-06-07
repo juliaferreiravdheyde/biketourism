@@ -6,55 +6,66 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
-User.destroy_all
-Favorite.destroy_all
-Ride.destroy_all
-Route.destroy_all
+# User.destroy_all
+# Favorite.destroy_all
+# Ride.destroy_all
+# Route.destroy_all
 
-
-user1 = User.create!(email: "joao@gmail.com", password: "123123")
-user2 = User.create!(email: "paulo@gmail.com", password: "123123")
-user3 = User.create!(email: "alphadeny@hotmail.fr", password: "123123")
-user4 = User.create!(email: "thiago@olatu.com", password: "123123")
-user5 = User.create!(email: "juliavdheyde@icloud.com", password: "123123")
-
+user1 = User.create!(first_name: "joao", email: "joao@gmail.com", password: "123123")
+user2 = User.create!(first_name: "paulo", email: "paulo@gmail.com", password: "123123")
+user3 = User.create!(first_name: "alphadeny", email: "alphadeny@hotmail.fr", password: "123123")
+user4 = User.create!(first_name: "thiago", email: "thiago@olatu.com", password: "123123")
+user5 = User.create!(first_name: "julia", email: "juliavdheyde@icloud.com", password: "123123")
 
 route1 = Route.create!(
   name: "Rota Parque do Ibirapuera",
   description: "Trilha muito tranquilha ao redor do Parque",
   type_of_route: "Urbano",
   positive_elevation: 1.5,
-  creator: user1
+  creator: user3,
 )
 
 route2 = Route.create!(
-  name: "Rota Nervosa Pico do Jaragua",
-  description: "Trilha hardcore",
-  type_of_route: "Montanha",
-  positive_elevation: 4.9,
-  creator: user2
-)
-
-route3 = Route.create!(
-  name: "Rota Imigrantes",
-  description: "trilha na descida da serra da Imigrantes",
-  type_of_route: "Montanha",
-  positive_elevation: 4.9,
-  creator: user3
-)
-
-route4 = Route.create!(
-  name: "Rota Itamambuca",
-  description: "trilha maravilhosa para a praia de Itamambuca",
-  type_of_route: "Praia",
-  positive_elevation: 3.2,
-  creator: user4
-)
-
-route5 = Route.create!(
   name: "Rota Centro de SP",
   description: "passeio pelo pontos históricos no centro da cidade",
   type_of_route: "Urbano",
   positive_elevation: 2.9,
-  creator: user5
+  creator: user5,
 )
+
+coordinates = [
+  [-23.442864647150547, -46.774944091838236],
+  [-23.443652042248406, -46.772733962786326],
+  [-23.44728535490771, -46.772373403454196],
+  [-23.450993849417785, -46.77316215199228],
+  [-23.44968232057618, -46.7654225569623],
+  [-23.451709873668655, -46.76633455406208],
+  [-23.453146894935216, -46.76647407787007],
+  [-23.45547267151323, -46.76657391345817],
+  [-23.45745097397038, -46.765919444006045],
+  [-23.457474156473904, -46.76705879170353],
+  [-23.458350134024258, -46.7669407858058]
+]
+coordinates.each do |coordinate|
+  route1.points.create(latitude: coordinate[0], longitude: coordinate[1])
+end
+
+coordinates = [
+  [-23.442864647150547, -46.774944091838236],
+  [-23.443652042248406, -46.772733962786326],
+  [-23.44728535490771, -46.772373403454196],
+  [-23.450993849417785, -46.77316215199228],
+  [-23.44968232057618, -46.7654225569623],
+  [-23.451709873668655, -46.76633455406208],
+  [-23.453146894935216, -46.76647407787007],
+  [-23.45547267151323, -46.76657391345817],
+  [-23.45745097397038, -46.765919444006045],
+  [-23.457474156473904, -46.76705879170353],
+  [-23.458350134024258, -46.7669407858058]
+]
+coordinates.each do |coordinate|
+  route2.points.create(latitude: coordinate[0], longitude: coordinate[1])
+end
+
+route1.save
+route2.save
