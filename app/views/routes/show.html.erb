@@ -14,6 +14,11 @@
   <p data-route-tracking-target = 'position'></p>
 </div>
 
+<%= simple_form_for @route, url: route_pinned_routes_path(@route), method: :post do |f| %>
+  <%= f.submit "Pin your route", class: "btn btn-success"%>
+<% end %>
+
+
 <%# <% if policy(@route).edit? %>
   <%#= link_to "Edit this route", edit_route_path(@route) %> |
 <%# end %>
