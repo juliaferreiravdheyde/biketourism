@@ -13,3 +13,10 @@
 <% if policy(@route).destroy? %>
   <%= link_to "Delete", route_path(@route), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: 'btn btn-danger' %>
 <% end %>
+
+<%= simple_form_for @route, url: route_pinned_routes_path(@route), method: :post do |f| %>
+  <%= f.submit "Pin your route", class: "btn btn-success"%>
+<% end %>
+
+
+<%= render "shared/route_recorder", route: @route %>

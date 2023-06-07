@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     resources :points, only: :create
     resources :favorites, only: :create
     resources :rides, only: %i[new create]
+    resources :pinned_routes, only: :create
   end
   resources :favorites, only: %i[index destroy]
   resources :rides, only: :index
