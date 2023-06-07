@@ -49,18 +49,46 @@
   padding: 16px;
   flex: 1;
 
+  li {
+    margin: 0;
+    display: block;
+  }
+
+  .elevation {
+    font-size: 14px;
+    color: var(--cor-9);
+    display: inline-block;
+  }
+
+  .elevation::after {
+   content: "";
+   display: inline-block;
+   height: 5px;
+   width: 5px;
+   margin: 0 8px;
+   border-radius: 50%;
+   background-color: var(--cor-9);
+   position: relative;
+   top: -2px;
+  }
+
+  .type {
+    font-size: 14px;
+    color: var(--cor-9);
+    display: inline-block;
+  }
+
+
   h3 {
   font-size: 18px;
   text-transform: capitalize;
   font-weight: 400;
+  color: var(--cor-12)
 }
 
   p {
     font-size: 14px;
-    opacity: .5;
-    margin-bottom: 10px;
-    text-transform: capitalize;
-    margin: 0;
+    color: var(--cor-7);
   }
 
   .link {
