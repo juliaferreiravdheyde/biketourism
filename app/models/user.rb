@@ -7,5 +7,6 @@ class User < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :rides, dependent: :destroy
   has_many :routes
+  has_one_attached :photo
   belongs_to :pinned_route, class_name: "Route"
 end
