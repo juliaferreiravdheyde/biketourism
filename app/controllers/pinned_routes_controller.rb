@@ -1,0 +1,2 @@
+class PinnedRoutesController < ApplicationController
+end
