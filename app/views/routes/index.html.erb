@@ -6,4 +6,7 @@
     <li><%= route.name %> - <%= route.description %></li><%= link_to "Show this Route", route %>
   <% end %>
 </ul>
-<%= link_to "New Route", new_route_path, class: 'btn btn-primary' %>
+
+<%= simple_form_for @route do |f| %>
+  <%= f.submit "New Route" %>
+<% end %>

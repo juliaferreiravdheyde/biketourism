@@ -14,6 +14,14 @@ class RoutePolicy < ApplicationPolicy
     true
   end
 
+  def record?
+    register?
+  end
+
+  def register?
+    record.creator == user
+  end
+
   def update?
     record.creator == user
   end
