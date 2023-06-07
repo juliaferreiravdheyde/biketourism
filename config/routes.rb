@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   resources :rides, only: :index
 
   get '/test', to: 'pages#test'
+  get '/routes/:id/record', to: 'routes#record', as: :record
+  patch '/routes/:id/register', to: 'routes#register', as: :register
   # Defines the root path route ("/")
   # root "articles#index"
 end

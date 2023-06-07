@@ -1,29 +1,42 @@
 class RoutesController < ApplicationController
-  before_action :set_route, only: %i[show destroy edit update]
+  before_action :set_route, only: %i[show destroy edit update record register]
 
   def index
     @routes = policy_scope(Route)
+    @route = Route.new
   end
 
   def show
     authorize @route
   end
 
-  def new
-    @route = Route.new
-    authorize @route
-  end
+  # def new
+  #   @route = Route.new
+  #   authorize @route
+  # end
 
   def create
-    @route = Route.new(route_params)
+    @route = Route.new
     authorize @route
     @route.creator = current_user
-    if @route.save!
-      redirect_to route_path(@route)
+    if @route.save(validate: false)
+      redirect_to record_path(@route)
     else
       render :new, error: :unprocessable_entity
     end
+  end
+
+  def record
     authorize @route
+  end
+
+  def register
+    authorize @route
+    if @route.points.size < 2
+      redirect_to register_path(@route), alert: "Not enough tracking data"
+    else
+      redirect_to route_path(@route), notice: "Route successfully shared!"
+    end
   end
 
   def destroy

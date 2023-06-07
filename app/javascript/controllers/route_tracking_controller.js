@@ -2,11 +2,19 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="route-tracking"
 export default class extends Controller {
-  static targets = ['position', 'status', 'startstop', 'save', 'discard']
+  static targets = ['position', 'status', 'startstop', 'save', 'discard', 'tracker', 'registerform']
   static values = { id: Number}
 
   connect() {
     console.log("Connected")
+  }
+
+  showForm() {
+    console.log("in show form");
+    // console.log(this.trackerTarget);
+    // console.log(this.registerformTarget);
+    this.trackerTarget.classList.add("d-none");
+    this.registerformTarget.classList.remove("d-none");
   }
 
   trackRoute() {
@@ -31,6 +39,7 @@ export default class extends Controller {
 
   getCoords() {
 
+    console.log(this.idValue)
     if (!navigator.geolocation) {
       this.statusTarget.textContent = "Geolocation is not supported by your browser";
     } else {

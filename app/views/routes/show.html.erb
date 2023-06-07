@@ -3,11 +3,13 @@
     <li>Name<span><%= @route.name %></span></li>
     <li>Type of Route<span><%= @route.type_of_route %></span></li>
     <li>Description<span><%= @route.description %></span></li>
+    <li>Distance<span> <%= @route.total_distance < 1000 ? "#{@route.total_distance}m" : "#{(@route.total_distance / 1000.0).round(2)}km" %></span></li>
   </ul>
 </div>
 
 <% if policy(@route).edit? %>
-  <%= link_to "Edit this route", edit_route_path(@route) %>
+  <%= link_to "Edit", edit_route_path(@route), class: 'btn btn-primary' %>
 <% end %>
-
-<%= render "shared/route_recorder", route: @route %>
+<% if policy(@route).destroy? %>
+  <%= link_to "Delete", route_path(@route), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: 'btn btn-danger' %>
+<% end %>
