@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root to: "pages#home"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  resources :routes, except: :destroy do
+  resources :routes do
     resources :points, only: :create
     resources :favorites, only: :create
     resources :rides, only: %i[new create]

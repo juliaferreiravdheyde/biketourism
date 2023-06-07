@@ -6,10 +6,11 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
-# User.destroy_all
-# Favorite.destroy_all
-# Ride.destroy_all
-# Route.destroy_all
+Point.destroy_all
+Ride.destroy_all
+Favorite.destroy_all
+Route.destroy_all
+User.destroy_all
 
 user1 = User.create!(first_name: "joao", email: "joao@gmail.com", password: "123123")
 user2 = User.create!(first_name: "paulo", email: "paulo@gmail.com", password: "123123")

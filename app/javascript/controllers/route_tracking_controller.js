@@ -2,7 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="route-tracking"
 export default class extends Controller {
-  static targets = ['position', 'startstop', 'status']
+  static targets = ['position', 'status', 'startstop', 'save', 'discard']
   static values = { id: Number}
 
   connect() {
@@ -11,27 +11,30 @@ export default class extends Controller {
 
   trackRoute() {
     // e.preventDefault()
-    if (this.startstopTarget.classList.contains("stopped")) {
+    if (!this.startstopTarget.classList.contains("started")) {
+      this.intervalID = window.setInterval(this.getCoords.bind(this), 1000);
       this.startstopTarget.classList.remove("stopped");
       this.startstopTarget.classList.add("started");
+      this.saveTarget.classList.add("d-none");
+      this.discardTarget.classList.add("d-none");
       this.startstopTarget.textContent = "Stop Tracking";
-      const intervalID = window.setInterval(this.getCoords.bind(this), 1000);
     } else {
+      clearInterval(this.intervalID);
       this.startstopTarget.classList.remove("started");
       this.startstopTarget.classList.add("stopped");
+      this.saveTarget.classList.remove("d-none");
+      this.discardTarget.classList.remove("d-none");
       this.startstopTarget.textContent = "Restart Tracking";
+      this.statusTarget.textContent = "Recording paused"
     }
   }
 
   getCoords() {
 
-    if (this.startstopTarget.classList.contains("stopped")){
-      clearInterval(intervalID);
-    }
     if (!navigator.geolocation) {
       this.statusTarget.textContent = "Geolocation is not supported by your browser";
     } else {
-      this.statusTarget.textContent = "Locating…";
+      this.statusTarget.textContent = "Recording route…";
       navigator.geolocation.getCurrentPosition(this.success.bind(this), this.error.bind(this));
     }
   }
