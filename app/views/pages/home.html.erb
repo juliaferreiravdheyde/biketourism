@@ -4,5 +4,5 @@
    <%= render "shared/route_cards"%>
 </div>
 <% if current_user.pinned_route.present? %>
-  <%= current_user.pinned_route.name%>
+  <%= link_to current_user.pinned_route.name, route_path(current_user.pinned_route)%>
 <% end %>
