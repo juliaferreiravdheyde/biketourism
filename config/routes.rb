@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   end
   resources :favorites, only: %i[index destroy]
   resources :rides, only: :index
+
+  get '/test', to: 'pages#test'
   # Defines the root path route ("/")
   # root "articles#index"
 end

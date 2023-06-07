@@ -1,0 +1,34 @@
+footer {
+background-color: var(--cor-0);
+padding: 20px 0 35px 0;
+}
+
+.footer-menu {
+  display: flex;
+  gap: 60px;
+  justify-content: space-around;
+
+  li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 20px;
+    height: 20px;
+
+  span {
+    color: var(--cor-6);
+    display: block;
+    }
+
+    i {
+      font-size: 20px;
+      color: var(--cor-6);
+    }
+
+    img {
+      color: var(--cor-6);
+    }
+
+  }
+
+}
