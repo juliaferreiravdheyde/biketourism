@@ -6,7 +6,6 @@ class RoutesController < ApplicationController
   end
 
   def show
-    @ride = Ride.new
     authorize @route
   end
 
@@ -17,9 +16,10 @@ class RoutesController < ApplicationController
 
   def create
     @route = Route.new(route_params)
+    authorize @route
     @route.creator = current_user
     if @route.save!
-      redirect_to routes_path
+      redirect_to route_path(@route)
     else
       render :new, error: :unprocessable_entity
     end
@@ -27,9 +27,9 @@ class RoutesController < ApplicationController
   end
 
   def destroy
+    authorize @route
     @route.destroy
     redirect_to routes_path, notice: "Route succesfully deleted"
-    authorize @route
   end
 
   def edit
