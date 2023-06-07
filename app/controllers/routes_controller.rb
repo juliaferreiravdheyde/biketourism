@@ -33,9 +33,16 @@ class RoutesController < ApplicationController
   end
 
   def edit
+    authorize @route
   end
 
   def update
+    authorize @event
+    if @route.update(route_params)
+      redirect_to routes_path, notice: "Your route was updated!"
+    else
+      rrender :edit, status: :unprocessable_entity
+    end
   end
 
   private
