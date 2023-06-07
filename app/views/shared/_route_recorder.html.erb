@@ -1,0 +1,7 @@
+<div data-controller = 'route-tracking' data-route-tracking-id-value='<%= route.id %>'>
+  <button class='btn btn-primary' data-route-tracking-target='startstop' data-action='click->route-tracking#trackRoute'>Track Route</button>
+  <%= link_to 'Save', '#', data: { route_tracking_target: 'save' }, class: 'btn btn-success d-none' %>
+  <%= link_to 'Discard', route_path(route), onclick: flash[:notice] = 'Route discarded', data: { route_tracking_target: 'discard', turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: 'btn btn-danger d-none' %>
+  <p data-route-tracking-target = 'status'></p>
+  <p data-route-tracking-target = 'position'></p>
+</div>

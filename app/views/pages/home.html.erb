@@ -3,3 +3,6 @@
   <h1 class="pb-3">Best routes</h1>
    <%= render "shared/route_cards"%>
 </div>
+<% if current_user.pinned_route.present? %>
+  <%= link_to current_user.pinned_route.name, route_path(current_user.pinned_route)%>
+<% end %>
