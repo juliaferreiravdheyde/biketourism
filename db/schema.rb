@@ -63,7 +63,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_07_141157) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "pinned_route_id"
-    t.boolean "admin"
     t.string "first_name"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["pinned_route_id"], name: "index_users_on_pinned_route_id"

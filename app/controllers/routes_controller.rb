@@ -2,7 +2,7 @@ class RoutesController < ApplicationController
   before_action :set_route, only: %i[show destroy edit update]
 
   def index
-    @routes = Route.all
+    @routes = policy_scope(Route)
   end
 
   def show
