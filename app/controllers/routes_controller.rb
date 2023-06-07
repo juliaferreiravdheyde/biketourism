@@ -7,10 +7,12 @@ class RoutesController < ApplicationController
 
   def show
     @ride = Ride.new
+    authorize @route
   end
 
   def new
     @route = Route.new
+    authorize @route
   end
 
   def create
@@ -21,6 +23,7 @@ class RoutesController < ApplicationController
     else
       render :new, error: :unprocessable_entity
     end
+    authorize @route
   end
 
   private
