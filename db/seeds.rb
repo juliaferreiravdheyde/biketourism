@@ -9,9 +9,10 @@
 # require 'open-uri'
 # require 'unsplash'
 
+Point.destroy_all
 Ride.destroy_all
-Route.destroy_all
 Favorite.destroy_all
+Route.destroy_all
 User.destroy_all
 
 User.create!(email: "joao@gmail.com", password: "123123")
@@ -19,3 +20,5 @@ User.create!(email: "paulo@gmail.com", password: "123123")
 User.create!(email: "alphadeny@hotmail.fr", password: "123123")
 User.create!(email: "thiago@olatu.com", password: "123123")
 User.create!(email: "juliavdheyde@icloud.com", password: "123123")
+
+

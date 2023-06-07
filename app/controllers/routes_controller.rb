@@ -1,5 +1,5 @@
 class RoutesController < ApplicationController
-  before_action :set_routes, only: %i[show]
+  before_action :set_route, only: %i[show destroy edit update]
 
   def index
     @routes = Route.all
@@ -23,9 +23,21 @@ class RoutesController < ApplicationController
     end
   end
 
+  def destroy
+    @route.destroy
+    redirect_to routes_path, notice: "Route succesfully deleted"
+    authorize @route
+  end
+
+  def edit
+  end
+
+  def update
+  end
+
   private
 
-  def set_routes
+  def set_route
     @route = Route.find(params[:id])
   end
 
