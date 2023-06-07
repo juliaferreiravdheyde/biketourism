@@ -3,4 +3,5 @@ class Route < ApplicationRecord
   has_many :rides
   has_many :points, dependent: :destroy
   has_many :favorites, dependent: :destroy
+  has_many :points, dependent: :destroy
 end
