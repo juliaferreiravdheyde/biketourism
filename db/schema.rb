@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_07_191656) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_08_173329) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -66,8 +66,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_07_191656) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
-    t.bigint "routes_id", null: false
-    t.index ["routes_id"], name: "index_rides_on_routes_id"
+    t.bigint "route_id", null: false
+    t.boolean "done", default: false
+    t.index ["route_id"], name: "index_rides_on_route_id"
     t.index ["user_id"], name: "index_rides_on_user_id"
   end
 
@@ -102,7 +103,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_07_191656) do
   add_foreign_key "favorites", "routes"
   add_foreign_key "favorites", "users"
   add_foreign_key "points", "routes"
-  add_foreign_key "rides", "routes", column: "routes_id"
+  add_foreign_key "rides", "routes"
   add_foreign_key "rides", "users"
   add_foreign_key "routes", "users", column: "creator_id"
   add_foreign_key "users", "routes", column: "pinned_route_id"
