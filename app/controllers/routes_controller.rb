@@ -9,6 +9,8 @@ class RoutesController < ApplicationController
 
   def show
     authorize @route
+    @ride = Ride.new
+    @ride_on_going = Ride.where(done: false)
   end
 
   # def new
