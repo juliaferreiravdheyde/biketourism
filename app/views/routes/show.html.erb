@@ -14,6 +14,25 @@
   <%= link_to "Delete", route_path(@route), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: 'btn btn-danger' %>
 <% end %>
 
+<%if @ride_on_going.any? %>
+    <%= link_to "Stop and Save", mark_as_done_route_ride_path(@route, @ride_on_going.first), remote: true, data: {turbo_method: :patch}, class: "btn btn-success" %>
+<% else %>
+  <%= simple_form_for [@route,@ride] do |f| %>
+    <%= f.submit "Start Route", class: "btn btn-success"%>
+  <% end %>
+<% end %>
+
+
 <%= simple_form_for @route, url: route_pinned_routes_path(@route), method: :post do |f| %>
   <%= f.submit "Pin your route", class: "btn btn-success"%>
+<% end %>
+
+<% if @favorite.present? %>
+  <%= link_to favorite_path(@favorite.first), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } do  %>
+    <i class="fa-solid fa-heart"></i>
+  <% end %>
+<% else %>
+  <%= link_to  route_favorites_path(@route), data: { turbo_method: :post } do  %>
+    <i class="fa-regular fa-heart"></i>
+  <% end %>
 <% end %>
