@@ -68,9 +68,9 @@ export default class extends Controller {
     fetch(url, {
       method: 'POST',
       headers: {"Accept": "application/json", "X-CSRF-Token": token}})
-      .then(response => response.json())
-      .then((data) => {
-        console.log(data)
-      }
-  )}
+      // .then(response => response.json())
+      // .then((data) => {
+      //   console.log(data)
+      // })
+  }
 }

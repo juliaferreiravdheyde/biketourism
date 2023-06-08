@@ -1,5 +1,5 @@
 <div data-controller = 'route-tracking' data-route-tracking-id-value='<%= @route.id %>'>
-  <div  data-route-tracking-target='tracker'>
+  <div  data-route-tracking-target='tracker' class=<%= 'd-none' if @route.errors.any? %>>
     <button class='btn btn-primary' data-route-tracking-target='startstop' data-action='click->route-tracking#trackRoute'>Track Route</button>
     <button class='btn btn-success d-none' data-route-tracking-target='save' data-action='click->route-tracking#showForm'>Save</button>
     <%= link_to 'Discard', route_path(@route), onclick: flash[:notice] = 'Route discarded', data: { route_tracking_target: 'discard', turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: 'btn btn-danger d-none' %>
@@ -7,9 +7,10 @@
     <p data-route-tracking-target = 'position'></p>
   </div>
 
-  <%= simple_form_for @route, url: register_path(@route), method: 'PATCH', html: { class: "d-none", data: { route_tracking_target: 'registerform'} } do |f| %>
+  <%= simple_form_for @route, url: register_path(@route), method: 'PATCH', html: { class: @route.errors.any? ? "" : "d-none", data: { route_tracking_target: 'registerform'} } do |f| %>
     <%= f.input :name %>
     <%= f.input :description %>
+    <%= f.input :type_of_route, collection: Route::TYPE_OF_ROUTE %>
     <%= f.input :photos, as: :file %>
     <%= f.submit "Post Route" %>
   <% end %>
