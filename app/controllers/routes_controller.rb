@@ -36,10 +36,13 @@ class RoutesController < ApplicationController
 
   def register
     authorize @route
+    @route.distance = @route.total_distance
     if @route.points.size < 2
       redirect_to register_path(@route), alert: "Not enough tracking data"
-    else
+    elsif @route.update(route_params)
       redirect_to route_path(@route), notice: "Route successfully shared!"
+    else
+      render :record, status: :unprocessable_entity
     end
   end
 
@@ -69,6 +72,6 @@ class RoutesController < ApplicationController
   end
 
   def route_params
-    params.require(:route).permit(:name, :description, :type_of_route, :photos, :positive_elevation)
+    params.require(:route).permit(:name, :description, :distance, :type_of_route, :photos, :positive_elevation)
   end
 end
