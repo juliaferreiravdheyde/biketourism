@@ -3,7 +3,7 @@
     <li>Name<span><%= @route.name %></span></li>
     <li>Type of Route<span><%= @route.type_of_route %></span></li>
     <li>Description<span><%= @route.description %></span></li>
-    <li>Distance<span> <%= @route.total_distance < 1000 ? "#{@route.total_distance}m" : "#{(@route.total_distance / 1000.0).round(2)}km" %></span></li>
+    <li>Distance<span> <%= @route.distance < 1000 ? "#{@route.distance}m" : "#{(@route.distance / 1000.0).round(2)}km" %></span></li>
   </ul>
 </div>
 
