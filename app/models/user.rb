@@ -9,4 +9,5 @@ class User < ApplicationRecord
   has_many :routes
   has_one_attached :photo
   belongs_to :pinned_route, optional: true, class_name: "Route"
+
 end

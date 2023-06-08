@@ -1,4 +1,5 @@
 class RoutesController < ApplicationController
+  skip_before_action :authenticate_user!, only: %i[index show]
   before_action :set_route, only: %i[show destroy edit update record register]
 
   def index
