@@ -1,0 +1,9 @@
+<div>
+  <ul class="gallery-vertical">
+    <% routes.each do |route| %>
+      <li>
+        <%= render "shared/route_card", route: route %>
+      </li>
+    <% end %>
+  </ul>
+</div>
