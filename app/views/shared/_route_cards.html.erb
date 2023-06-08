@@ -1,85 +1,18 @@
-<div class="cards">
-  <ul class="gallery">
-
- <li>
-      <div class="card-product">
-        <%= image_tag src="city-route.webp" %>
-        <div class="card-product-infos">
-          <ul>
-            <li><span class="elevation">Moderada</span><span class="type">City</span></li>
-            <li><h3>City Route</h3></li>
-            <li><p>From the capital to the coast</p></li>
-          </ul>
-          <%= image_tag src="button-card.svg", class:"link" %>
-          <%= image_tag src="bookmark.svg", class:"bookmark" %>
-        </div>
-      </div>
-    </li>
-
+<ul class="gallery">
+  <% routes.each do |route| %>
     <li>
       <div class="card-product">
-        <%= image_tag src="route.webp" %>
+        <%= image_tag "city-route.webp" %>
         <div class="card-product-infos">
-
           <ul>
-            <li><span class="elevation">Moderada</span><span class="type">Sea</span></li>
-            <li><h3>Sea Route</h3></li>
-            <li><p>From the capital to the coast</p></li>
+            <li><span class="elevation"><%= route.type_of_route %></span><span class="type"><%= route.positive_elevation %></span></li>
+            <li><h3><%= route.name %></h3></li>
+            <li><p><%= route.description %></p></li>
           </ul>
-          <%= image_tag src="button-card.svg", class:"link" %>
-          <%= image_tag src="bookmark.svg", class:"bookmark" %>
+          <%= image_tag "button-card.svg", class:"link" %>
+          <%= image_tag "bookmark.svg", class:"bookmark" %>
         </div>
       </div>
     </li>
-
-    <li>
-      <div class="card-product">
-        <%= image_tag src="montain-route.webp" %>
-        <div class="card-product-infos">
-          <ul>
-            <li><span class="elevation">Moderada</span><span class="type">Mountain</span></li>
-            <li><h3>Mountain Route</h3></li>
-            <li><p>From the capital to the coast</p></li>
-          </ul>
-          <%= image_tag src="button-card.svg", class:"link" %>
-          <%= image_tag src="bookmark.svg", class:"bookmark" %>
-        </div>
-      </div>
-    </li>
-
-    <li>
-      <div class="card-product">
-        <%= image_tag src="city-route.webp" %>
-        <div class="card-product-infos">
-          <ul>
-            <li><span class="elevation">Moderada</span><span class="type">City</span></li>
-            <li><h3>City Route</h3></li>
-            <li><p>From the capital to the coast</p></li>
-          </ul>
-          <%= image_tag src="button-card.svg", class:"link" %>
-          <%= image_tag src="bookmark.svg", class:"bookmark" %>
-        </div>
-      </div>
-    </li>
-
-     <li>
-      <div class="card-product">
-        <%= image_tag src="city-route.webp" %>
-        <div class="card-product-infos">
-          <ul>
-            <li><span class="elevation">Moderada</span><span class="type">City</span></li>
-            <li><h3>City Route</h3></li>
-            <li><p>From the capital to the coast</p></li>
-          </ul>
-          <%= image_tag src="button-card.svg", class:"link" %>
-          <%= image_tag src="bookmark.svg", class:"bookmark" %>
-        </div>
-      </div>
-    </li>
-
-    <li>
-      <%= image_tag "arrow-right.svg", class:"button-arrow-right" %>
-    </li>
-
-   </ul>
-</div>
+  <% end %>
+</ul>
