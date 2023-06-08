@@ -11,6 +11,7 @@ class RoutesController < ApplicationController
     authorize @route
     @ride = Ride.new
     @ride_on_going = Ride.where(done: false).where(user: current_user)
+    @favorite = Favorite.where(route: @route, user: current_user)
   end
 
   # def new
