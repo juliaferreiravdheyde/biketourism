@@ -4,6 +4,9 @@ class Route < ApplicationRecord
   has_many :points, dependent: :destroy
   has_many :favorites, dependent: :destroy
 
+  validates :name, presence: true
+  validates :type_of_route, presence: true
+
   def total_distance
     distance = 0
     (points.length - 1).times do |i|

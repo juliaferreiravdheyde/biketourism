@@ -34,8 +34,10 @@ class RoutesController < ApplicationController
     authorize @route
     if @route.points.size < 2
       redirect_to register_path(@route), alert: "Not enough tracking data"
-    else
+    elsif @route.update(route_params)
       redirect_to route_path(@route), notice: "Route successfully shared!"
+    else
+      render :record, status: :unprocessable_entity
     end
   end
 
