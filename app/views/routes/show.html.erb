@@ -14,7 +14,7 @@
   <%= link_to "Delete", route_path(@route), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: 'btn btn-danger' %>
 <% end %>
 
-<%if @route.rides.where(done: false).any? %>
+<%if @ride_on_going.any? %>
     <%= link_to "Stop and Save", mark_as_done_route_ride_path(@route, @ride_on_going.first), remote: true, data: {turbo_method: :patch}, class: "btn btn-success" %>
 <% else %>
   <%= simple_form_for [@route,@ride] do |f| %>
