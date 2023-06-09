@@ -29,6 +29,8 @@ class RoutesController < ApplicationController
     @route = Route.new
     authorize @route
     @route.creator = current_user
+    # destroy incompleted routes
+    Route.where(creator: current_user).where(name: nil).each(&:destroy)
     if @route.save(validate: false)
       redirect_to record_path(@route)
     else

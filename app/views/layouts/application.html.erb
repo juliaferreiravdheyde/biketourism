@@ -13,12 +13,13 @@
   </head>
 
   <body>
-    <%= render "shared/navbar" %>
-    <%= render "shared/flashes" %>
-    <div class="content-size">
-    <%= yield %>
-    </div>
+    <main class="flex-shrink-0">
+      <%= render "shared/navbar" %>
+      <%= render "shared/flashes" %>
+      <div>
+        <%= yield %>
+      </div>
+    </main>
     <%= render "shared/footer" %>
-
   </body>
 </html>
