@@ -1,6 +1,6 @@
 class Point < ApplicationRecord
   belongs_to :route
-  validates :latitude, uniqueness: { scope: :longitude }
+  validates :latitude, uniqueness: { scope: %i[longitude route_id] }
   validate :far_enough?
 
   def self.distance_between(point1, point2)
@@ -24,6 +24,10 @@ class Point < ApplicationRecord
 
   def far_enough?
     # some code to check distance between current point and the last one registered
-    Point.distance_between(Point.last, self) > 1.0
+    if Point.last.nil?
+      true
+    else
+      Point.distance_between(Point.last, self) > 1.0
+    end
   end
 end

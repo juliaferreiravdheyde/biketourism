@@ -1,3 +1,9 @@
+<div style="width: 100%; height: 600px;"
+  data-controller="map"
+  data-map-markers-value="<%= @markers.to_json %>"
+  data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+</div>
+
 <div class="route-details">
   <ul>
     <li>Name<span><%= @route.name %></span></li>
@@ -28,11 +34,11 @@
 <% end %>
 
 <% if @favorite.present? %>
-  <%= link_to favorite_path(@favorite.first), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } do  %>
+  <%= link_to favorite_path(@favorite.first), data: { turbo_method: :delete } do  %>
     <i class="fa-solid fa-heart"></i>
   <% end %>
 <% else %>
-  <%= link_to  route_favorites_path(@route), data: { turbo_method: :post } do  %>
+  <%= link_to route_favorites_path(@route), data: { turbo_method: :post } do  %>
     <i class="fa-regular fa-heart"></i>
   <% end %>
 <% end %>

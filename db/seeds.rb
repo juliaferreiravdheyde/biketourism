@@ -18,21 +18,24 @@ user3 = User.create!(first_name: "alphadeny", email: "alphadeny@hotmail.fr", pas
 user4 = User.create!(first_name: "thiago", email: "thiago@olatu.com", password: "123123")
 user5 = User.create!(first_name: "julia", email: "juliavdheyde@icloud.com", password: "123123")
 
-route1 = Route.create!(
+route1 = Route.new(
   name: "Rota Parque do Ibirapuera",
   description: "Trilha muito tranquilha ao redor do Parque",
-  type_of_route: "Urbano",
+  type_of_route: "Urban",
   positive_elevation: 1.5,
-  creator: user3,
+  creator: user3
 )
 
-route2 = Route.create!(
+route2 = Route.new(
   name: "Rota Centro de SP",
   description: "passeio pelo pontos históricos no centro da cidade",
-  type_of_route: "Urbano",
+  type_of_route: "Urban",
   positive_elevation: 2.9,
-  creator: user5,
+  creator: user5
 )
+
+route1.save(validate: false)
+route2.save(validate: false)
 
 coordinates = [
   [-23.442864647150547, -46.774944091838236],
@@ -47,7 +50,9 @@ coordinates = [
   [-23.457474156473904, -46.76705879170353],
   [-23.458350134024258, -46.7669407858058]
 ]
+
 coordinates.each do |coordinate|
+  route1.points
   route1.points.create(latitude: coordinate[0], longitude: coordinate[1])
 end
 
@@ -67,6 +72,9 @@ coordinates = [
 coordinates.each do |coordinate|
   route2.points.create(latitude: coordinate[0], longitude: coordinate[1])
 end
+
+route1.distance = route1.total_distance
+route2.distance = route2.total_distance
 
 route1.save
 route2.save

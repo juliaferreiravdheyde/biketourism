@@ -12,6 +12,12 @@ class RoutesController < ApplicationController
     @ride = Ride.new
     @ride_on_going = Ride.where(done: false).where(user: current_user)
     @favorite = Favorite.where(route: @route, user: current_user)
+    @markers = @route.points.map do |point|
+      {
+        lat: point.latitude,
+        lng: point.longitude
+      }
+    end
   end
 
   # def new
