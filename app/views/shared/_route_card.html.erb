@@ -1,6 +1,10 @@
 
 <%= link_to route_path(route) do %>
   <div class="card-product">
+        <% if @route.photos.attached? %>
+          <% @route.photos[1..].each do |photo|%>
+            <%= cl_image_tag photo.key, class:"product-image secondary-image", data: {action:"click->picker#changeImage"} %>
+          <% end %>
     <%= cl_image_tag route.photos[0].key, class:"product-image primary-image", data: {'picker-target': "pimage"} %>
     <div class="card-route-details">
       <ul>
