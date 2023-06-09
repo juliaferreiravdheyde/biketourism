@@ -6,7 +6,7 @@
         <li><span class="type"><%= route.type_of_route %></span></li>
         <li><h3><%= route.name %></h3></li>
         <li><p><%= route.description %></p></li>
-        <li><span class="distance">Distance: </span><%= @route.distance < 1000 ? "#{@route.distance}m" : "#{(@route.distance / 1000.0).round(2)}km" %></li>
+        <li><span class="distance">Distance: <%= @route.distance < 1000 ? "#{@route.distance}m" : "#{(@route.distance / 1000.0).round(2)}km" %></span></li>
 
       </ul>
       <%= image_tag "icon_favorite.svg", class:"bookmark" %>
