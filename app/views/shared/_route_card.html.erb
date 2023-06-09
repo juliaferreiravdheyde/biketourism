@@ -1,6 +1,7 @@
+
 <%= link_to route_path(route) do %>
   <div class="card-product">
-    <%= image_tag "city-route.webp" %>
+    <%= cl_image_tag route.photos[0].key, class:"product-image primary-image", data: {'picker-target': "pimage"} %>
     <div class="card-route-details">
       <ul>
         <li><span class="type"><%= route.type_of_route %></span></li>
