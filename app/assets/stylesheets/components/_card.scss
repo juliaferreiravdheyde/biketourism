@@ -44,7 +44,6 @@
   border-radius: 4px;
   display: flex;
   flex-direction: column;
-  position: relative;
 }
 
 .card-product:hover {
@@ -59,33 +58,46 @@
   border-radius: 4px 4px 0 0;
 }
 
-.card-product-infos {
+.card-route-details {
 
   padding: 16px;
   flex: 1;
+  position: relative;
+
 
   li {
     margin: 0;
     display: block;
   }
 
-  .elevation {
+  .distance {
     font-size: 14px;
-    color: var(--cor-9);
+    color: var(--cor-7);
     display: inline-block;
+    margin: 0;
+    line-height: 1.2;
   }
 
-  .elevation::after {
-   content: "";
-   display: inline-block;
-   height: 5px;
-   width: 5px;
-   margin: 0 8px;
-   border-radius: 50%;
-   background-color: var(--cor-9);
-   position: relative;
-   top: -2px;
-  }
+  // .elevation {
+  //   font-size: 14px;
+  //   color: var(--cor-7);
+  //   display: inline-block;
+  //   margin: 0;
+  //   line-height: 1.2;
+  // }
+
+  // .elevation::before {
+  //  content: "";
+  //  display: inline-block;
+  //  height: 3px;
+  //  width: 3px;
+  //  margin: 0 6px;
+  //  border-radius: 50%;
+  //  background-color: var(--cor-7);
+  //  position: relative;
+  //  top: -2px;
+  // }
+
 
   .type {
     font-size: 14px;
@@ -103,6 +115,11 @@
   p {
     font-size: 14px;
     color: var(--cor-7);
+    line-height: 1.2;
+    white-space: nowrap;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .link {
@@ -113,7 +130,7 @@
 
   .bookmark {
     position: absolute;
-    top: 50%;
+    top: 10px;
     right: 10px;
   }
 }
