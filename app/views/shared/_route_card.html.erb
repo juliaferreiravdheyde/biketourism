@@ -1,5 +1,5 @@
 <div class="card-product">
-  <%= image_tag "city-route.webp" %>
+   <%= cl_image_tag route.photos[0].key, class:"product-image primary-image", data: {'picker-target': "pimage"} %>
   <div class="card-product-infos">
     <ul>
       <li><span class="elevation"><%= route.type_of_route %></span><span class="type"><%= route.positive_elevation %></span></li>
