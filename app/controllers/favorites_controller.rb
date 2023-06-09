@@ -1,5 +1,10 @@
 class FavoritesController < ApplicationController
 
+  def index
+    @routes = Favorite.include(:routes).where(user: current_user)
+    raise
+  end
+
   def create
     @route = Route.find(params[:route_id])
     @favorite = Favorite.create(route: @route, user: current_user)

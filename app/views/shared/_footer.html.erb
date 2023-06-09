@@ -2,8 +2,8 @@
   <div class="container">
       <ul class="footer-menu">
         <li>
-          <%= link_to root_path do %>
-            <%= image_tag "home.svg" %>
+          <%= link_to root_path, class: 'text-center' do %>
+            <i class="fa-solid fa-house"></i>
             <span>Home</span>
           <% end  %>
         </li>
@@ -16,14 +16,14 @@
           <% end %>
         </li>
         <li>
-          <%= link_to favorites_path do %>
-            <%= image_tag "bookmark-footer.svg" %>
+          <%= link_to favorites_path, class: 'text-center' do %>
+            <i class="fa-solid fa-heart" style="cor-06"></i>
             <span>Salvos</span>
           <% end %>
         </li>
         <li>
-          <%= link_to routes_path do %>
-            <%= image_tag "search.svg" %>
+          <%= link_to routes_path, class: 'text-center' do %>
+            <i class="fa-solid fa-magnifying-glass"></i>
             <span>Search</span>
           <% end %>
         </li>
