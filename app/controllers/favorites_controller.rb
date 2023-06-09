@@ -1,4 +1,7 @@
 class FavoritesController < ApplicationController
+  def index
+    @routes = policy_scope(Favorite).map(&:route)
+  end
 
   def create
     @route = Route.find(params[:route_id])

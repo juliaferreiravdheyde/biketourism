@@ -1,21 +1,31 @@
-<footer>
+<footer class="footer mt-auto sticky-bottom">
   <div class="container">
       <ul class="footer-menu">
         <li>
-          <%= image_tag "home.svg" %>
-          <span>Home</span>
+          <%= link_to root_path, class: 'text-center' do %>
+            <i class="fa-solid fa-house"></i>
+            <span>Home</span>
+          <% end  %>
         </li>
         <li>
-          <i class="fa-solid fa-record-vinyl" style="cor-06"></i>
-          <span>Gravar</span>
-        </li>
-         <li>
-           <%= image_tag "bookmark-footer.svg" %>
-          <span>Salvos</span>
+          <%= simple_form_for Route.new do |f| %>
+            <button type="submit" class='icon-button'>
+              <i class="fa-solid fa-record-vinyl" style="cor-06"></i>
+              <span>Gravar</span>
+            </button>
+          <% end %>
         </li>
         <li>
-           <%= image_tag "search.svg" %>
-          <span>Search</span>
+          <%= link_to favorites_path, class: 'text-center' do %>
+            <i class="fa-solid fa-heart" style="cor-06"></i>
+            <span>Salvos</span>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to routes_path, class: 'text-center' do %>
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <span>Search</span>
+          <% end %>
         </li>
       </ul>
   </div>

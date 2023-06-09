@@ -3,7 +3,7 @@ class RoutesController < ApplicationController
   before_action :set_route, only: %i[show destroy edit update record register]
 
   def index
-    @routes = policy_scope(Route)
+    @routes = policy_scope(Route).where.not(name: nil)
     @route = Route.new
   end
 
@@ -29,6 +29,8 @@ class RoutesController < ApplicationController
     @route = Route.new
     authorize @route
     @route.creator = current_user
+    # destroy incompleted routes
+    Route.where(creator: current_user).where(name: nil).each(&:destroy)
     if @route.save(validate: false)
       redirect_to record_path(@route)
     else

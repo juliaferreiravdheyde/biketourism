@@ -1,7 +1,21 @@
 footer {
 background-color: var(--cor-0);
 padding: 20px 0 35px 0;
+width: 100%;
 }
+
+
+.icon-button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.icon-button i {
+  /* Add additional styling for the icon */
+}
+
 
 .footer-menu {
   display: flex;
@@ -15,10 +29,10 @@ padding: 20px 0 35px 0;
     width: 24px;
     height: 24px;
 
-  span {
-    color: var(--cor-6);
-    display: block;
-    }
+    span {
+      color: var(--cor-6);
+      display: block;
+      }
 
     i {
       font-size: 20px;
