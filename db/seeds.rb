@@ -9,6 +9,7 @@
 Point.destroy_all
 Ride.destroy_all
 Favorite.destroy_all
+User.all.each { |user| user.update(pinned_route_id: nil)}
 Route.destroy_all
 User.destroy_all
 

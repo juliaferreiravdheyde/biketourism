@@ -1,8 +1,6 @@
 class FavoritesController < ApplicationController
-
   def index
-    @routes = Favorite.include(:routes).where(user: current_user)
-    raise
+    @routes = policy_scope(Favorite).map(&:route)
   end
 
   def create

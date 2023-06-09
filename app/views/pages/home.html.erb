@@ -5,8 +5,7 @@
       <%= link_to current_user.pinned_route.name, route_path(current_user.pinned_route)%>
     <% end %>
   <% end %>
-  <%= render "shared/route_cards_vertical", routes: @routes %>
   <h2 class="pb-3 pt-5">Best routes</h2>
   <%= render "shared/route_cards_horizontal", routes: @routes %>
   </div>
-   <%= render "shared/type_cards_horizontal" %>
+<%= render "shared/type_cards_horizontal" %>
