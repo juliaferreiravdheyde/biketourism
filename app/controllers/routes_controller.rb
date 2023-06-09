@@ -3,7 +3,7 @@ class RoutesController < ApplicationController
   before_action :set_route, only: %i[show destroy edit update record register]
 
   def index
-    @routes = policy_scope(Route)
+    @routes = policy_scope(Route).where.not(name: nil)
     @route = Route.new
   end
 
