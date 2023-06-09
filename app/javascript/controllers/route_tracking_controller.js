@@ -20,7 +20,7 @@ export default class extends Controller {
   trackRoute() {
     // e.preventDefault()
     if (!this.startstopTarget.classList.contains("started")) {
-      this.intervalID = window.setInterval(this.getCoords.bind(this), 1000);
+      this.intervalID = window.setInterval(this.getCoords.bind(this), 10000);
       this.startstopTarget.classList.remove("stopped");
       this.startstopTarget.classList.add("started");
       this.saveTarget.classList.add("d-none");
