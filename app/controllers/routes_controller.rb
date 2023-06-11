@@ -25,9 +25,8 @@ class RoutesController < ApplicationController
     coordinates = Geocoder.coordinates(city)
     latitude = coordinates[0]
     longitude = coordinates[1]
-    radius = 10 # raio de 10 km
+    radius = 10
 
-    # Encontre as rotas dentro do raio especificado
     @routes = Route.joins(:points).where("ST_DWithin(points.latitude, points.longitude, #{latitude}, #{longitude}, #{radius})")
 
     render json: @routes

@@ -1,9 +1,11 @@
 import { Controller } from "stimulus";
+import mapboxgl from "mapbox-gl";
 
 export default class extends Controller {
   static targets = ["cityInput", "map"];
 
   connect() {
+    mapboxgl.accessToken = process.env.MAPBOX_API_KEY;
     this.initMap();
   }
 
@@ -14,26 +16,41 @@ export default class extends Controller {
     const response = await fetch(`/routes/search?city=${city}`);
     const routes = await response.json();
 
-    // Agora você pode fazer o que quiser com as rotas
-    // Por exemplo, adicionar marcadores no mapa
+    this.clearMarkers();
 
-    // Exemplo básico de adicionar marcadores usando a biblioteca Leaflet
     routes.forEach(route => {
-      const marker = L.marker([route.latitude, route.longitude]).addTo(this.map);
-      marker.bindPopup(route.name);
+      const marker = new mapboxgl.Marker()
+        .setLngLat([route.points.longitude, route.points.latitude])
+        .addTo(this.map);
+      marker.setPopup(new mapboxgl.Popup().setHTML(route.name));
     });
   }
 
-  initMap() {
-    const initialCoordinates = [-23.5505, -46.6333]; // Exemplo de coordenadas para São Paulo, Brasil
-    const initialZoom = 12; // Exemplo de nível de zoom inicial
-
-    this.map = L.map(this.mapTarget).setView(initialCoordinates, initialZoom);
-
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
-      maxZoom: 18,
-    }).addTo(this.map);
+  clearMarkers() {
+    const markers = document.getElementsByClassName("mapboxgl-marker");
+    while (markers[0]) {
+      markers[0].parentNode.removeChild(markers[0]);
+    }
   }
 
+  initMap() {
+    const initialCoordinates = [-23.5505, -46.6333];
+    const initialZoom = 12;
+
+    this.map = new mapboxgl.Map({
+      container: this.mapTarget,
+      style: "mapbox://styles/mapbox/streets-v10",
+      center: initialCoordinates,
+      zoom: initialZoom
+    });
+
+    this.map.addControl(new mapboxgl.NavigationControl());
+
+    const form = this.element.querySelector("form");
+    form.addEventListener("submit", event => {
+      event.preventDefault();
+      this.searchRoutes();
+    });
+  }
 }
+

@@ -1,3 +1,8 @@
 <h1>Routes</h1>
 
-<%= render "shared/route_cards_vertical", routes: @routes %>
+<div data-controller="routes" data-action="routes#index">
+  <div id="map-container"></div>
+  <div id="route-cards"></div>
+</div>
+
+<%#= render "shared/route_cards_vertical", routes: @routes %>
