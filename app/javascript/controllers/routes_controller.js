@@ -20,7 +20,7 @@ export default class extends Controller {
 
     routes.forEach(route => {
       const marker = new mapboxgl.Marker()
-        .setLngLat([route.points.longitude, route.points.latitude])
+        .setLngLat([route.points_longitude, route.points_latitude])
         .addTo(this.map);
       marker.setPopup(new mapboxgl.Popup().setHTML(route.name));
     });

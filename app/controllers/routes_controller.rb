@@ -27,10 +27,13 @@ class RoutesController < ApplicationController
     longitude = coordinates[1]
     radius = 10
 
-    @routes = Route.joins(:points).where("ST_DWithin(points.latitude, points.longitude, #{latitude}, #{longitude}, #{radius})")
+    @routes = Route.joins(:points)
+                   .select("routes.*, points.latitude, points.longitude")
+                   .where("ST_DWithin(points.latitude, points.longitude, #{latitude}, #{longitude}, #{radius})")
 
     render json: @routes
   end
+
 
   # def new
   #   @route = Route.new
