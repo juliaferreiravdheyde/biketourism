@@ -17,17 +17,17 @@ User.all.each { |user| user.update!(pinned_route_id: nil) }
 Route.destroy_all
 User.destroy_all
 
-user1 = User.create!(first_name: "joao", email: "joao@gmail.com", password: "123123")
-user2 = User.create!(first_name: "paulo", email: "paulo@gmail.com", password: "123123")
-user3 = User.create!(first_name: "alphadeny", email: "alphadeny@hotmail.fr", password: "123123")
-user4 = User.create!(first_name: "thiago", email: "thiago@olatu.com", password: "123123")
-user5 = User.create!(first_name: "julia", email: "juliavdheyde@icloud.com", password: "123123")
+user1 = User.create!(first_name: "Joao", email: "joao@gmail.com", password: "123123")
+user2 = User.create!(first_name: "Paulo", email: "paulo@gmail.com", password: "123123")
+user3 = User.create!(first_name: "Alphonse", email: "alphadeny@hotmail.fr", password: "123123")
+user4 = User.create!(first_name: "Thiago", email: "thiago@olatu.com", password: "123123")
+user5 = User.create!(first_name: "Julia", email: "juliavdheyde@icloud.com", password: "123123")
 
 Unsplash.configure do |config|
-  config.application_access_key = ENV["VTQ67nHQkRqw3SRhF-Yaq0qq11vlvjUfeyWMt5UhfOg"]
-  config.application_secret = ENV["zKS0HfCBW3SODlEyGK9I_AOwnu2JtltaN4oQZ5_s2JQ"]
+  config.application_access_key = ENV["ACCESS_KEYS"]
+  config.application_secret = ENV["APPLICATION_SECRET"]
   #config.application_redirect_uri = "https://your-application.com/oauth/callback"
-  #config.utm_source = "alices_terrific_client_app"
+  config.utm_source = "bike_tourism_app"
 
   route1 = Route.new(
     name: "Rota Parque do Ibirapuera",

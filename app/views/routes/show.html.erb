@@ -6,18 +6,27 @@
 
 <div class="container mt-4 mb-4">
   <% if @route.photos.attached?%>
-    <div class="route-media">
+    <div class="route-pictures">
       <% @route.photos.each do |photo| %>
-        <%= cl_image_tag route.photo.key %>
+        <%= cl_image_tag photo.key %>
       <% end %>
     </div>
 <% end  %>
+  <div class='route-creator d-flex align-items-center justify-content-between'>
+    <h3>Created by <%= @route.creator.first_name %></h3>
+    <% if @route.creator.photo.attached? %>
+      <%= cl_image_tag current_user.photo.key, class: "avatar", alt: "dropdown menu" %>
+    <% else %>
+      <%= image_tag "user.svg", class: "avatar"%>
+    <% end %>
+  </div>
   <div class="route-details">
     <ul>
       <li>Name: <span><%= @route.name %></span></li>
       <li>Type of Route: <span><%= @route.type_of_route %></span></li>
       <li>Description: <span><%= @route.description %></span></li>
       <li>Distance: <span> <%= @route.distance < 1000 ? "#{@route.distance}m" : "#{(@route.distance / 1000.0).round(2)}km" %></span></li>
+      <li>Elevation: <span> <%= @route.positive_elevation.nil? ? @route.positive_elevation : '60m' %></li>
     </ul>
   </div>
 
