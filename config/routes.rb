@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resources :routes do
     resources :points, only: :create
     resources :favorites, only: :create
-    resources :rides, only: %i[new create destroy] do
+    resources :rides, only: %i[new create] do
       member do
         patch :mark_as_done
       end
@@ -14,7 +14,7 @@ Rails.application.routes.draw do
     resources :pinned_routes, only: :create
   end
   resources :favorites, only: %i[index destroy]
-  resources :rides, only: :index
+  resources :rides, only: %i[index destroy]
 
   get '/test', to: 'pages#test'
   get '/routes/:id/record', to: 'routes#record', as: :record

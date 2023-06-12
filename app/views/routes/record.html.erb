@@ -6,7 +6,7 @@
     <p data-route-tracking-target = 'status'></p>
     <p data-route-tracking-target = 'position'></p>
   </div>
-<%# 
+<%#
   <div style="width: 100%; height: 300px;"
   data-controller="map"
   data-map-markers-value="<%= @route.points.map { |point| { lat: point.latitude, lng: point.longitude } }.to_json "
@@ -17,7 +17,7 @@
     <%= f.input :name %>
     <%= f.input :description %>
     <%= f.input :type_of_route, collection: Route::TYPE_OF_ROUTE %>
-    <%= f.input :photos, as: :file %>
+    <%= f.input :photos, multiple: true, as: :file %>
     <%= f.submit "Post Route" %>
   <% end %>
 

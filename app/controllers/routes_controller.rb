@@ -20,10 +20,15 @@ class RoutesController < ApplicationController
     end
   end
 
-  # def new
-  #   @route = Route.new
-  #   authorize @route
-  # end
+  def edit
+  end
+
+  def update
+    if @route.save?
+      redirect_to route_path(@route)
+    else
+      render :edit, error: :unprocessable_entity
+  end
 
   def create
     @route = Route.new
