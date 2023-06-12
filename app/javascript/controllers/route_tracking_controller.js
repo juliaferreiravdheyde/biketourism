@@ -2,7 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="route-tracking"
 export default class extends Controller {
-  static targets = ['position', 'status', 'startstop', 'save', 'discard', 'tracker', 'registerform']
+  static targets = ['position', 'status', 'startstop', 'save', 'discard', 'tracker', 'registerform', 'recordgif']
   static values = { id: Number}
 
   connect() {
@@ -25,6 +25,7 @@ export default class extends Controller {
       this.startstopTarget.classList.add("started");
       this.saveTarget.classList.add("d-none");
       this.discardTarget.classList.add("d-none");
+      this.recordgifTarget.classList.remove("d-none");
       this.startstopTarget.textContent = "Stop Tracking";
     } else {
       clearInterval(this.intervalID);
@@ -33,6 +34,7 @@ export default class extends Controller {
       this.saveTarget.classList.remove("d-none");
       this.discardTarget.classList.remove("d-none");
       this.startstopTarget.textContent = "Restart Tracking";
+      this.recordgifTarget.classList.add("d-none");
       this.statusTarget.textContent = "Recording paused"
     }
   }

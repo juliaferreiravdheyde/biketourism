@@ -21,6 +21,7 @@ class RoutesController < ApplicationController
   end
 
   def edit
+    @record.photos.build if @record.photos.blank?
   end
 
   def update
@@ -28,6 +29,7 @@ class RoutesController < ApplicationController
       redirect_to route_path(@route)
     else
       render :edit, error: :unprocessable_entity
+    end
   end
 
   def create
