@@ -1,17 +1,22 @@
-<div class="container mt-3">
   <div data-controller = 'route-tracking' data-route-tracking-id-value='<%= @route.id %>'>
-      <div  data-route-tracking-target='tracker' class=<%= 'd-none' if @route.errors.any? %>>
-        <button class='btn btn-primary w-100 mb-3' data-route-tracking-target='startstop' data-action='click->route-tracking#trackRoute'>Track Route</button>
-        <div class="recording mt-5 mb-5">
-          <p data-route-tracking-target = 'status', class='font-2-s cor-8 text-center' ></p>
-          <p data-route-tracking-target = 'position', class='font-2-s cor-8 text-center'></p>
+      <div class="bg-white pt-2 pb-2">
+        <div class="d-flex justify-content-between align-items-center gap-3 container">
+          <%= link_to route_path(@route), onclick: flash[:notice] = 'Route discarded', data: { route_tracking_target: 'discard', turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: 'd-none close-button' do  %>
+            <i class="fa-regular fa-x"></i>
+          <% end %>
+          <h1 class="cor-11 font-1-s text-center w-100 m-auto">Tracking Route</h1>
+          <button class='btn-save d-none' data-route-tracking-target='save' data-action='click->route-tracking#showForm'>Save</button>
         </div>
-        <div class="d-flex gap-3">
-          <button class='btn btn-success d-none w-100' data-route-tracking-target='save' data-action='click->route-tracking#showForm'>Save</button>
-          <%= link_to 'Discard', route_path(@route), onclick: flash[:notice] = 'Route discarded', data: { route_tracking_target: 'discard', turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: 'btn btn-danger d-none w-100' %>
-        </diV>
       </div>
-    <%#
+      <div class="container mt-5">
+      <div class="d-flex flex-column align-items-center"  data-route-tracking-target='tracker' class=<%= 'd-none' if @route.errors.any? %>>
+        <button class='btn-record mb-2' data-route-tracking-target='startstop' data-action='click->route-tracking#trackRoute'>Track Route</button>
+        <div class="recording mt-4 mb-4">
+          <p data-route-tracking-target='status', class='font-2-m cor-11 text-center mb-2'></p>
+          <p data-route-tracking-target='position', class='font-2-xs cor-8 text-center'></p>
+        </div>
+      </div>
+      <%#
       <div style="width: 100%; height: 300px;"
       data-controller="map"
       data-map-markers-value="<%= @route.points.map { |point| { lat: point.latitude, lng: point.longitude } }.to_json "
