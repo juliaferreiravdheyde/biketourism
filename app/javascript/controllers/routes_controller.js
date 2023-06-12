@@ -37,6 +37,8 @@ export default class extends Controller {
     const initialCoordinates = [-23.5505, -46.6333];
     const initialZoom = 12;
 
+    this.mapTarget.innerHTML = ''; // Limpar o conteúdo do elemento do contêiner do mapa
+
     this.map = new mapboxgl.Map({
       container: this.mapTarget,
       style: "mapbox://styles/mapbox/streets-v10",
@@ -53,4 +55,3 @@ export default class extends Controller {
     });
   }
 }
-

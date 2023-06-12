@@ -1,8 +1,9 @@
 <h1>Routes</h1>
 
-<div data-controller="routes" data-action="routes#index">
-  <div id="map-container"></div>
-  <div id="route-cards"></div>
-</div>
+<%= render "shared/searchbar" %>
 
-<%= render "shared/route_cards_vertical", routes: @routes %>
+<% if @routes.blank? %>
+  <p>No routes in this location</p>
+<% else %>
+  <%= render "shared/route_cards_vertical", routes: @routes %>
+<% end %>
