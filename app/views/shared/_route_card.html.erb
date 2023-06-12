@@ -23,16 +23,22 @@
         <li><p><%= route.description %></p></li>
         <li><span class="distance">Distance: <%= route.distance < 1000 ? "#{route.distance}m" : "#{(route.distance / 1000.0).round(2)}km" %></span></li>
       </ul>
-      <%# <% if @favorite.present? %>
-        <%#= link_to favorite_path(@favorite.first), data: { turbo_method: :delete } do <i class="fa-solid fa-heart"> %>
-
-        <%# end %>
-      <%# else %>
-        <%#= link_to route_favorites_path(route), data: { turbo_method: :post } do <i class="fa-regular fa-heart"> %>
-
-        <%# end %>
-      <%# end %>
-      <%= image_tag "button-card.svg", class:"link" %>
+      <% favorite = Favorite.where(route: route, user: current_user) %>
+      <% if favorite.present? %>
+        <%= link_to favorite_path(favorite.first), data: { turbo_method: :delete }, class:"bookmark" do %>
+           <i class="fa-brands fa-gratipay"></i>
+       <% end %>
+      <% else %>
+        <%= link_to route_favorites_path(route), data: { turbo_method: :post }, class:"bookmark" do %>
+            <i class="fa-sharp fa-regular fa-heart"></i>
+        <%  end %>
+      <% end %>
+      <% if current_user.present? %>
+        <% if current_user.pinned_route.present? %>
+          <%= link_to current_user.pinned_route.name, route_path(current_user.pinned_route), class:"link"%>
+          <i class="fa-regular fa-thumbtack"></i>
+        <% end %>
+      <% end %>
     </div>
   </div>
 <% end %>
