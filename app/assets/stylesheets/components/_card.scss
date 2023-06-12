@@ -148,3 +148,20 @@
     font-size: 16px;
   }
 }
+
+.btn-pin {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  color: #888; /* Altere a cor conforme necessário */
+  z-index: 1;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.btn-pin.pinned {
+  color: #ff0000; /* Altere a cor conforme necessário para o ícone de "pin" fixado */
+}
+
