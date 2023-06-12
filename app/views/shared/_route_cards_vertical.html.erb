@@ -2,7 +2,7 @@
   <ul class="gallery-vertical">
     <% routes.each do |route| %>
       <li>
-        <%= render "shared/route_card", route: route %>
+        <%= render partial: 'shared/route_card', locals: { route: route } %>
       </li>
     <% end %>
   </ul>

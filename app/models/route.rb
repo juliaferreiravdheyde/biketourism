@@ -5,6 +5,7 @@ class Route < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many_attached :photos
 
+
   validates :name, presence: true, length: { minimum: 5 }
   validates :type_of_route, presence: true
 
