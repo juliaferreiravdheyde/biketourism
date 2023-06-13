@@ -39,12 +39,13 @@
 
   <div class="route-details-show mt-4 mb-4">
     <ul>
+
       <div class="details-type d-flex gap-2 mt-3 mb-2">
       <li class="d-flex flex-column align-items-center"><span class="font-2-xss cor-8">Type of Route</span><span class="font-2-s cor-11"><%= @route.type_of_route %></span></li>
       <li class="d-flex flex-column align-items-center"><span class="font-2-xss cor-8">Distance</span> <span class="font-2-s cor-11"> <%= @route.distance < 1000 ? "#{@route.distance}m" : "#{(@route.distance / 1000.0).round(2)}km" %></span></li>
+      <li class="d-flex flex-column align-items-center"><span class="font-2-xss cor-8">Distance</span> <span class="font-2-s cor-11"> <%= @route.positive_elevation.nil? ? '60m' : "#{@route.positive_elevation.to_i}m" %></span></li>
       </div>
       <li><p class="font-2-s cor-11"><%= @route.description %></p></li>
-
     </ul>
 
     <div class="favorite-show">

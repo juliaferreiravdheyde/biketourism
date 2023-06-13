@@ -1,7 +1,5 @@
-class ApplicationRecord < ActiveRecord::Base
-  primary_abstract_class
-
-  def self.distance(lat1, lon1, lat2, lon2)
+module DistanceHelper
+  def distance(lat1, lon1, lat2, lon2)
     rad_per_deg = Math::PI / 180  # PI / 180
     rkm = 6371                  # Earth radius in kilometers
     rm = rkm * 1000             # Radius in meters
