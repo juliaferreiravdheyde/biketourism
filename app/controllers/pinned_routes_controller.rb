@@ -1,23 +1,11 @@
 class PinnedRoutesController < ApplicationController
-
-  # def create
-  #   route = Route.find(params[:route_id])
-  #   current_user.update(pinned_route: route)
-  #   redirect_to root_path
-  # end
-
-  def index
-    @routes = current_user.pinned_route.present? ? [current_user.pinned_route] : []
-  end
-
   def create
-    @route = Route.find(params[:route_id])
-    current_user.update(pinned_route: @route)
-    redirect_to route_path(@route)
-  end
-
-  def destroy
-    current_user.update(pinned_route: nil)
+    route = Route.find(params[:route_id])
+    if current_user.pinned_route == route
+      current_user.update(pinned_route: nil)
+    else
+      current_user.update(pinned_route: route)
+    end
     redirect_to root_path
   end
 end

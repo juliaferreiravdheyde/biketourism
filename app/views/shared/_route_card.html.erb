@@ -1,5 +1,15 @@
-<%= link_to route_path(route) do %>
   <div class="card-product">
+    <div class="pin-icon">
+      <% if current_user&.pinned_route == route %>
+        <%= button_to route_pinned_routes_path(current_user.pinned_route), class: "pin-button" do %>
+          <i class="fa-solid fa-thumbtack pinned"></i>
+        <% end %>
+      <% else %>
+        <%= button_to route_pinned_routes_path(route_id: route.id), class: "pin-button" do %>
+          <i class="fa-regular fa-thumbtack"></i>
+        <% end %>
+      <% end %>
+    </div>
     <% if route.photos.attached? %>
       <%= cl_image_tag route.photos[0].key, class: "product-image primary-image", data: { 'picker-target': "pimage" } %>
     <% else %>
@@ -23,20 +33,6 @@
         <li><p><%= route.description %></p></li>
         <li><span class="distance">Distance: <%= route.distance < 1000 ? "#{route.distance}m" : "#{(route.distance / 1000.0).round(2)}km" %></span></li>
       </ul>
-      <% pinned_route = current_user.pinned_route %>
-      <% if pinned_route == route %>
-        <%= link_to pinned_route_path, method: :delete, remote: true, data: { turbo_frame: "route-cards" }, class: "btn-pin" do %>
-        <%#= link_to pinned_route_path(pinned_route), data: { turbo_method: :delete}, class: "btn-pin" do %>
-
-        <% end %>
-      <% else %>
-        <%= link_to pinned_routes_path(route_id: route.id), method: :post, remote: true, data: { turbo_frame: "route-cards" }, class: "btn-pin" do %>
-        <%#= link_to pinned_routes_path(route_id: route.id), data: { turbo_method: :post}, method: :post, class: "btn-pin" do %>
-         <i class="fa-regular fa-thumbtack"></i>
-        <% end %>
-      <% end %>
-
-
       <% favorite = Favorite.where(route: route, user: current_user) %>
       <% if favorite.present? %>
         <%= link_to favorite_path(favorite.first), data: { turbo_method: :delete }, class: "bookmark" do %>
@@ -49,4 +45,3 @@
       <% end %>
     </div>
   </div>
-<% end %>
