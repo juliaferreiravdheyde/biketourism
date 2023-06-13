@@ -11,3 +11,6 @@ export { application }
 
 const application = Application.start()
 application.register("routes", RoutesController)
+
+//= require pinned_controller
+
