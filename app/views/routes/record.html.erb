@@ -24,7 +24,7 @@
       data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] ">
       </div> %>
     <%= simple_form_for @route, url: register_path(@route), method: 'PATCH', html: { class: @route.errors.any? ? "" : "d-none", data: { route_tracking_target: 'registerform'} } do |f| %>
-    <h2 class="mb-3 cor-12 font-1-m-b">Post your rote</h2>
+    <h2 class="mb-3 cor-12 font-1-m-b">Post your route</h2>
       <div class="form-inputs cor-9 font-2-xs">
         <%= f.input :name %>
         <%= f.input :description %>

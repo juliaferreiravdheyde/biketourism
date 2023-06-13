@@ -5,13 +5,22 @@
 </div>
 
 <div class="container mt-4 mb-4">
+  <% if @favorite.present? %>
+    <%= link_to favorite_path(@favorite.first), data: { turbo_method: :delete } do  %>
+      <i class="fa-solid fa-heart"></i>
+    <% end %>
+  <% else %>
+    <%= link_to route_favorites_path(@route), data: { turbo_method: :post } do  %>
+      <i class="fa-regular fa-heart"></i>
+    <% end %>
+  <% end %>
   <% if @route.photos.attached?%>
     <div class="route-pictures">
       <% @route.photos.each do |photo| %>
         <%= cl_image_tag photo.key %>
       <% end %>
     </div>
-<% end  %>
+  <% end  %>
   <div class='route-creator d-flex align-items-center justify-content-between'>
     <h3>Created by <%= @route.creator.first_name %></h3>
     <% if @route.creator.photo.attached? %>
@@ -49,15 +58,5 @@
 
   <%= simple_form_for @route, url: route_pinned_routes_path(@route), method: :post do |f| %>
     <%= f.submit "Pin your route", class: "btn btn-success mb-3"%>
-  <% end %>
-
-  <% if @favorite.present? %>
-    <%= link_to favorite_path(@favorite.first), data: { turbo_method: :delete } do  %>
-      <i class="fa-solid fa-heart"></i>
-    <% end %>
-  <% else %>
-    <%= link_to route_favorites_path(@route), data: { turbo_method: :post } do  %>
-      <i class="fa-regular fa-heart"></i>
-    <% end %>
   <% end %>
 </div>

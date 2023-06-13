@@ -1,8 +1,11 @@
 <div class="container mt-3">
   <h1 class="mb-3 cor-12 font-1-m-b">Edit Route</h1>
 
+  <% if !@route.photos.reject {|photo| photo.id.nil? }.empty? %>
+    <%= render 'route_photos', route: @route %>
+  <% end %>
+
   <%= simple_form_for @route do |f| %>
-      <%= f.input :name, label: 'Title', placeholder: 'ex: Passeio no Parque Ibirapuera' %>
       <%= f.input :description, label: 'Description', placeholder: 'ex: Trilha leve, muito agradável' %>
       <%= f.input :photos, as: :file, input_html: { multiple: true }%>
       <%= f.submit "Update", class: "btn btn-primary" %>

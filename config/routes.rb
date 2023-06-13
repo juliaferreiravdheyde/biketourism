@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   get '/test', to: 'pages#test'
   get '/routes/:id/record', to: 'routes#record', as: :record
   patch '/routes/:id/register', to: 'routes#register', as: :register
+  delete '/photos/:id', to: 'routes#delete_image_attachment', as: :delete_route_photo
   # Defines the root path route ("/")
   # root "articles#index"
 end

@@ -20,18 +20,6 @@ class RoutesController < ApplicationController
     end
   end
 
-  def edit
-    @record.photos.build if @record.photos.blank?
-  end
-
-  def update
-    if @route.save?
-      redirect_to route_path(@route)
-    else
-      render :edit, error: :unprocessable_entity
-    end
-  end
-
   def create
     @route = Route.new
     authorize @route
@@ -67,18 +55,36 @@ class RoutesController < ApplicationController
     redirect_to routes_path, notice: "Route succesfully deleted"
   end
 
+  def delete_image_attachment
+    @route_photo = ActiveStorage::Attachment.find(params[:id])
+    @route_photo.purge
+    redirect_back(fallback_location: request.referer)
+  end
+
   def edit
     authorize @route
+    @route.photos.build if @route.photos.blank?
   end
 
   def update
     authorize @route
-    if @route.update(route_params)
+    if params[:route][:photos].present?
+      @route.photos.attach(params[:route][:photos])
+    end
+    if @route.update(route_params.except('photos'))
       redirect_to route_path(@route), notice: "Your route was updated!"
     else
       render :edit, status: :unprocessable_entity
     end
   end
+
+  # def update
+  #   if @route.save?
+  #     redirect_to route_path(@route)
+  #   else
+  #     render :edit, error: :unprocessable_entity
+  #   end
+  # end
 
   private
 
@@ -87,6 +93,6 @@ class RoutesController < ApplicationController
   end
 
   def route_params
-    params.require(:route).permit(:name, :description, :distance, :type_of_route, :photos, :positive_elevation)
+    params.require(:route).permit(:name, :description, :distance, :type_of_route, :positive_elevation, photos: [])
   end
 end
