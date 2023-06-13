@@ -7,7 +7,7 @@ class FavoritesController < ApplicationController
     @route = Route.find(params[:route_id])
     @favorite = Favorite.create(route: @route, user: current_user)
     authorize @favorite
-    redirect_to route_path(@route)
+    redirect_to root_path
   end
 
   def destroy
@@ -15,6 +15,17 @@ class FavoritesController < ApplicationController
     authorize @favorite
     @route = @favorite.route
     @favorite.destroy
-    redirect_to route_path(@route)
+    redirect_to root_path
   end
 end
+
+
+# def create
+#   route = Route.find(params[:route_id])
+#   if current_user.pinned_route == route
+#     current_user.update(pinned_route: nil)
+#   else
+#     current_user.update(pinned_route: route)
+#   end
+#   redirect_to root_path
+# end

@@ -44,6 +44,8 @@
   border-radius: 4px;
   display: flex;
   flex-direction: column;
+  position: relative;
+
 }
 
 .card-product:hover {
@@ -142,13 +144,23 @@
   padding: 12px;
 }
 
-@media (max-width: 800px) {
-
-  .card-product-infos .price {
-    font-size: 16px;
-  }
-}
-
 .pin-button {
   z-index: 30;
+  border: 0;
+  border-radius: 2px;
+
+}
+
+.pin-button-pinned {
+  z-index: 30;
+  border: 0;
+  color: var(--cor-p1);
+  border-radius: 2px;
+
+}
+
+.pin-icon {
+  position: absolute;
+  top: 6px;
+  right: 6px;
 }

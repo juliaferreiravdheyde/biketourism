@@ -2,11 +2,11 @@
     <div class="pin-icon">
       <% if current_user&.pinned_route == route %>
         <%= button_to route_pinned_routes_path(current_user.pinned_route), class: "pin-button" do %>
-          <i class="fa-solid fa-thumbtack pinned"></i>
+          <i class="fa-solid fa-thumbtack"></i>
         <% end %>
       <% else %>
-        <%= button_to route_pinned_routes_path(route_id: route.id), class: "pin-button" do %>
-          <i class="fa-regular fa-thumbtack"></i>
+        <%= button_to route_pinned_routes_path(route_id: route.id), class: "pin-button-pinned" do %>
+          <i class="fa-solid fa-thumbtack"></i>
         <% end %>
       <% end %>
     </div>
@@ -39,7 +39,7 @@
           <i class="fa-brands fa-gratipay"></i>
         <% end %>
       <% else %>
-        <%= link_to route_favorites_path(route), data: { turbo_method: :post }, class: "bookmark" do %>
+        <%= button_to route_favorites_path(route), data: { turbo_method: :post }, class: "bookmark" do %>
           <i class="fa-sharp fa-regular fa-heart"></i>
         <% end %>
       <% end %>

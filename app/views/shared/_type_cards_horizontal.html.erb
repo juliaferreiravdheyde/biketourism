@@ -1,32 +1,40 @@
 <div class="background-gallery-vertical-type mb-5">
- <h2 class="container pb-3">Browse by type of routes</h2>
+  <h2 class="container pb-3">Browse by type of routes</h2>
   <ul class="gallery-vertical-type container">
     <li>
       <div class="card-type">
-        <%= image_tag "urban.webp" %>
-        <span>Urban</span>
-        </div>
+        <%= button_to routes_path(type_of_route: "Urban"), method: :get do %>
+          <%= image_tag "urban.webp" %>
+          <span>Urban</span>
+        <% end %>
+      </div>
     </li>
 
     <li>
       <div class="card-type">
-        <%= image_tag "suburban.webp" %>
-        <span>Suburban</span>
-        </div>
+        <%= button_to routes_path(type_of_route: "Suburban"), method: :get do %>
+          <%= image_tag "suburban.webp" %>
+          <span>Suburban</span>
+        <% end %>
+      </div>
     </li>
 
     <li>
       <div class="card-type">
-        <%= image_tag "countryside.webp" %>
-        <span>CountrySide</span>
-        </div>
+        <%= button_to routes_path(type_of_route: "CountrySide"), method: :get do %>
+          <%= image_tag "countryside.webp" %>
+          <span>CountrySide</span>
+        <% end %>
+      </div>
     </li>
 
-     <li>
+    <li>
       <div class="card-type">
-        <%= image_tag "mountain.webp" %>
-        <span>Mountain</span>
-        </div>
+        <%= button_to routes_path(type_of_route: "Mountain"), method: :get do %>
+          <%= image_tag "mountain.webp" %>
+          <span>Mountain</span>
+        <% end %>
+      </div>
     </li>
   </ul>
- </div>
+</div>
