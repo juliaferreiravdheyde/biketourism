@@ -3,6 +3,8 @@ class Point < ApplicationRecord
   validates :latitude, uniqueness: { scope: %i[longitude route_id] }
   validate :far_enough?
 
+  geocoded_by :address
+
   def self.distance_between(point1, point2)
     rad_per_deg = Math::PI / 180  # PI / 180
     rkm = 6371                  # Earth radius in kilometers
