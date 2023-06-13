@@ -12,3 +12,4 @@ application.register("map", MapController)
 
 import RouteTrackingController from "./route_tracking_controller"
 application.register("route-tracking", RouteTrackingController)
+
