@@ -1,3 +1,41 @@
+.map-show {
+  position: relative;
+}
+
+.route-title-show {
+  position: absolute;
+  top: 0;
+  z-index: 99;
+  padding: 4px 8px;
+  background-color: #fff;
+  border-radius: 2px;
+  margin-top: 10px;
+
+
+  h1 {
+    max-width: 25ch;
+  }
+}
+
+.route-details-show {
+  position: relative;
+}
+
+.favorite-show {
+  position: absolute;
+  top: 0;
+  right: 10px;
+}
+
+.buttons-show {
+ display: flex;
+ flex-wrap: nowrap;
+ justify-content: center;
+ align-items: center;
+ gap: 16px;
+ padding: 20px;
+ margin-top: 20px;
+
 .route-pictures {
   display: flex;
   height: 100px;
