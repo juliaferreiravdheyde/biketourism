@@ -11,6 +11,10 @@ class Route < ApplicationRecord
 
   TYPE_OF_ROUTE = ['Urban', 'Suburban', 'CountrySide', 'Mountain']
 
+  # pg_search_scope :search_by_type_of_route, against: :type_of_route
+
+  # pg_search_scope :search_by_distance, against: :distance
+
   def total_distance
     distance = 0
     (points.length - 1).times do |i|

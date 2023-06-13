@@ -4,6 +4,7 @@ class RoutesController < ApplicationController
 
   def index
     @route = Route.new
+
     if ( params[:search].present? ? params[:search][:address].present? : false )
       address = params[:search][:address]
       coordinates = Geocoder.coordinates(address)
@@ -30,15 +31,22 @@ class RoutesController < ApplicationController
     else
       @routes = policy_scope(Route).where.not(name: nil)
 
-    if params[:type_of_route].present?
-      # Filtrar as rotas pelo tipo de rota
-      @routes = Route.where(type_of_route: params[:type_of_route])
-    else
-      # Obter todas as rotas
-      @routes = policy_scope(Route).where.not(name: nil)
+      if params[:type_of_route].present?
+        @routes = Route.where(type_of_route: params[:type_of_route])
+      else
+        @routes = policy_scope(Route).where.not(name: nil)
+      end
+
+      if params[:search].present? && params[:search][:distance].present?
+        distance_value = params[:search][:distance].to_f
+        puts "BATATAAAAAAAAAAAAA"
+        puts distance_value
+        @routes = @routes.where(distance: distance_value)
+      else
+        @routes = policy_scope(Route).where.not(name: nil)
+      end
     end
-    end
-  end
+end
 
   def show
     authorize @route
