@@ -4,7 +4,7 @@ class RoutesController < ApplicationController
 
   def index
     @route = Route.new
-    if params[:search][:address].present?
+    if ( params[:search].present? ? params[:search][:address].present? : false )
       address = params[:search][:address]
       coordinates = Geocoder.coordinates(address)
       latitude = coordinates[0]
