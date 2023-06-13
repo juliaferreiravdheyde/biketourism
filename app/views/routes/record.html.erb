@@ -7,7 +7,7 @@
             </div>
             <%= render "shared/map", markers: [], height: "300px", html_options: { class: 'd-none' }%>
           </div>
-          <%= link_to route_path(@route), onclick: flash[:notice] = 'Route discarded', data: { route_tracking_target: 'discard', turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: 'd-none close-button' do  %>
+          <%= link_to route_path(@route), data: { route_tracking_target: 'discard', turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: 'd-none close-button' do  %>
             <i class="fa-regular fa-x"></i>
           <% end %>
           <h1 class="cor-11 font-1-s text-center w-100 m-auto">Tracking Route</h1>

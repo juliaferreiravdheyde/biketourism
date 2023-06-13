@@ -1,10 +1,10 @@
 
 <div class="container pt-4 pb-4">
   <%= render "shared/searchbar" %>
-  <<% if current_user.present? %>
+  <% if current_user.present? %>
     <% if current_user.pinned_route.present? %>
       <%= link_to current_user.pinned_route.name, route_path(current_user.pinned_route), class:"btn-pin"%>
-    <% end %> 
+    <% end %>
   <% end %>
   <h2 class="pb-3 pt-4">Best routes</h2>
   <div>

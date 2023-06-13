@@ -27,9 +27,16 @@ class RoutesController < ApplicationController
 
       # Execute the query using ActiveRecord
       @routes = policy_scope(Route).find_by_sql([query, latitude, latitude, latitude, longitude, longitude, radius])
-
     else
       @routes = policy_scope(Route).where.not(name: nil)
+
+    if params[:type_of_route].present?
+      # Filtrar as rotas pelo tipo de rota
+      @routes = Route.where(type_of_route: params[:type_of_route])
+    else
+      # Obter todas as rotas
+      @routes = policy_scope(Route).where.not(name: nil)
+    end
     end
   end
 
