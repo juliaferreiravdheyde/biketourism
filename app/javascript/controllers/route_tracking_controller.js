@@ -6,10 +6,14 @@ export default class extends Controller {
   static values = { id: Number }
 
   connect() {
-    console.log("Cect")
-    console.log(this.mapTarget)
-    console.log("Should show map")
+    console.log("Connected")
+    console.log(this.mapTarget.dataset.mapMarkersValue)
+
   }
+
+  // mapController() {
+  //   return this.application.getControllerForElementAndIdentifier(this.mapTarget, 'map')
+  // }
 
   showForm() {
     console.log("in show form");
@@ -30,7 +34,7 @@ export default class extends Controller {
       // this.recordgifTarget.classList.remove("d-none");
       this.startstopTarget.textContent = "Stop Tracking";
       this.statusTarget.textContent = "Recording route..."
-      this.startstopTarget.classList.add("animated")
+      // this.startstopTarget.classList.add("animated")
 
     } else {
       clearInterval(this.intervalID);
@@ -41,10 +45,20 @@ export default class extends Controller {
       this.startstopTarget.textContent = "Restart Tracking";
       this.recordgifTarget.classList.add("d-none");
       this.statusTarget.textContent = "Recording paused"
-      this.startstopTarget.classList.remove("animated")
+      // this.startstopTarget.classList.remove("animated")
       this.startstopTarget.classList.remove("btn-record")
       this.startstopTarget.classList.add("btn-paused")
+      this.loadMarkers()
     }
+  }
+
+  loadMarkers() {
+    fetch(`/routes/${this.idValue}/record`)
+      .then(response => response.json)
+      .then(data => {
+        console.log(data)
+        this.mapTarget.outerHTML = data
+  })
   }
 
   getCoords() {

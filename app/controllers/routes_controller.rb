@@ -61,6 +61,14 @@ class RoutesController < ApplicationController
 
   def record
     authorize @route
+    respond_to do |format|
+      unless @route.points.empty?
+        @markers = @route.points.map { |point| { lat: point.latitude, lng: point.longitude } }
+        format.text { render partial: "shared/map", locals: { markers: @markers, height: "300px", html_options: { class: '' } }, formats: [:html] }
+      else
+        format.html
+      end
+    end
   end
 
   def register
@@ -122,28 +130,23 @@ class RoutesController < ApplicationController
     params.require(:route).permit(:name, :description, :distance, :type_of_route, :positive_elevation, photos: [])
   end
 
+  # # Build the SQL query using ActiveRecord syntax
+  # query = <<-SQL
+  #   SELECT DISTINCT routes.*
+  #   FROM routes
+  #   INNER JOIN points ON points.route_id = routes.id
+  #   WHERE (
+  #     2 * 6371 * asin(
+  #       sqrt(
+  #         sin((radians(points.latitude) - radians(?)) / 2) * sin((radians(points.latitude) - radians(?)) / 2) +
+  #         cos(radians(?)) * cos(radians(points.latitude)) *
+  #         sin((radians(points.longitude) - radians(?)) / 2) * sin((radians(points.longitude) - radians(?)) / 2)
+  #       )
+  #     )
+  #   ) <= ?
+  # SQL
 
- user_latitude = 37.7749
-user_longitude = -122.4194
-radius_km = 10
-
-# Build the SQL query using ActiveRecord syntax
-query = <<-SQL
-  SELECT DISTINCT routes.*
-  FROM routes
-  INNER JOIN points ON points.route_id = routes.id
-  WHERE (
-    2 * 6371 * asin(
-      sqrt(
-        sin((radians(points.latitude) - radians(?)) / 2) * sin((radians(points.latitude) - radians(?)) / 2) +
-        cos(radians(?)) * cos(radians(points.latitude)) *
-        sin((radians(points.longitude) - radians(?)) / 2) * sin((radians(points.longitude) - radians(?)) / 2)
-      )
-    )
-  ) <= ?
-SQL
-
-# Execute the query using ActiveRecord
-routes_within_radius = Route.find_by_sql([query, user_latitude, user_latitude, user_latitude, user_longitude, user_longitude, radius_km])
+  # # Execute the query using ActiveRecord
+  # routes_within_radius = Route.find_by_sql([query, user_latitude, user_latitude, user_latitude, user_longitude, user_longitude, radius_km])
 
 end

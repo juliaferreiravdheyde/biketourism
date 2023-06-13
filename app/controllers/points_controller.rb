@@ -6,6 +6,6 @@ class PointsController < ApplicationController
     point.latitude = params[:latitude]
     point.longitude = params[:longitude]
     point.save!
-    render json: {result: 'ok!'}
+    render json: { result: 'ok!' }
   end
 end
