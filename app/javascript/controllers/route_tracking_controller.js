@@ -2,11 +2,13 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="route-tracking"
 export default class extends Controller {
-  static targets = ['position', 'status', 'startstop', 'save', 'discard', 'tracker', 'registerform', 'recordgif', 'ongoing', 'map']
+  static targets = ['position', 'status', 'startstop', 'save', 'discard', 'tracker', 'registerform', 'recordgif', 'map']
   static values = { id: Number }
 
   connect() {
-    console.log("Connected")
+    console.log("Cect")
+    console.log(this.mapTarget)
+    console.log("Should show map")
   }
 
   showForm() {
@@ -24,9 +26,8 @@ export default class extends Controller {
       this.startstopTarget.classList.remove("stopped");
       this.startstopTarget.classList.add("started");
       this.saveTarget.classList.add("d-none");
-      // this.ongoingTarget.classList.remove("d-none");
       this.discardTarget.classList.add("d-none");
-      this.recordgifTarget.classList.remove("d-none");
+      // this.recordgifTarget.classList.remove("d-none");
       this.startstopTarget.textContent = "Stop Tracking";
       this.statusTarget.textContent = "Recording route..."
       this.startstopTarget.classList.add("animated")
@@ -37,7 +38,6 @@ export default class extends Controller {
       this.startstopTarget.classList.add("stopped");
       this.saveTarget.classList.remove("d-none");
       this.discardTarget.classList.remove("d-none");
-      // this.ongoingTarget.classList.add("d-none");
       this.startstopTarget.textContent = "Restart Tracking";
       this.recordgifTarget.classList.add("d-none");
       this.statusTarget.textContent = "Recording paused"
