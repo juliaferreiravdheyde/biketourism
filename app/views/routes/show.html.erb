@@ -23,20 +23,7 @@
         <li class="d-flex flex-column align-items-center"><span class="font-2-xs cor-7">Distance</span> <span class="font-2-s cor-11"> <%= @route.distance < 1000 ? "#{@route.distance}m" : "#{(@route.distance / 1000.0).round(2)}km" %></span></li>
         </div>
       </ul>
-
-      <div class="favorite-show">
-        <% if @favorite.present? %>
-          <%= link_to favorite_path(@favorite.first), data: { turbo_method: :delete } do  %>
-            <i class="fa-solid fa-heart" style="color:var(--cor-11)"></i>
-        <% end %>
-        <% else %>
-          <%= link_to route_favorites_path(@route), data: { turbo_method: :post } do  %>
-            <i class="fa-regular fa-heart" style="color: var(--cor-11)"></i>
-          <% end %>
-        <% end %>
-      </div>
-    
-    <% if @route.photos.attached?%>
+      <% if @route.photos.attached?%>
     <div class="route-pictures">
       <% @route.photos.each do |photo| %>
         <%= cl_image_tag photo.key %>
@@ -51,7 +38,20 @@
       <%= image_tag "user.svg", class: "avatar"%>
     <% end %>
   </div>
-    
+
+      <div class="favorite-show">
+        <% if @favorite.present? %>
+          <%= link_to favorite_path(@favorite.first), data: { turbo_method: :delete } do  %>
+            <i class="fa-solid fa-heart" style="color:var(--cor-11)"></i>
+        <% end %>
+        <% else %>
+          <%= link_to route_favorites_path(@route), data: { turbo_method: :post } do  %>
+            <i class="fa-regular fa-heart" style="color: var(--cor-11)"></i>
+          <% end %>
+        <% end %>
+      </div>
+
+
  </div>
 
   <div class="buttons-show">
