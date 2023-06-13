@@ -6,9 +6,8 @@ export default class extends Controller {
   static values = { id: Number }
 
   connect() {
-    console.log("Connected")
+    console.log("Conneed")
     console.log(this.mapTarget.dataset.mapMarkersValue)
-
   }
 
   // mapController() {
@@ -32,33 +31,32 @@ export default class extends Controller {
       this.saveTarget.classList.add("d-none");
       this.discardTarget.classList.add("d-none");
       // this.recordgifTarget.classList.remove("d-none");
-      this.startstopTarget.textContent = "Stop Tracking";
+      this.startstopTarget.innerHTML = '<i class="fa-solid fa-stop" style="font-size: 50px;"></i>';
       this.statusTarget.textContent = "Recording route..."
-      // this.startstopTarget.classList.add("animated")
-
     } else {
       clearInterval(this.intervalID);
       this.startstopTarget.classList.remove("started");
       this.startstopTarget.classList.add("stopped");
       this.saveTarget.classList.remove("d-none");
       this.discardTarget.classList.remove("d-none");
-      this.startstopTarget.textContent = "Restart Tracking";
+      this.startstopTarget.textContent = "Continue Tracking";
       this.recordgifTarget.classList.add("d-none");
       this.statusTarget.textContent = "Recording paused"
-      // this.startstopTarget.classList.remove("animated")
-      this.startstopTarget.classList.remove("btn-record")
-      this.startstopTarget.classList.add("btn-paused")
       this.loadMarkers()
     }
   }
 
   loadMarkers() {
-    fetch(`/routes/${this.idValue}/record`)
-      .then(response => response.json)
-      .then(data => {
-        console.log(data)
+    console.log("Loading markers")
+    fetch( `/routes/${this.idValue}/record`, {headers: {"Accept": "text/plain"}} )
+      .then((response) => response.text())
+      .then((data) => {
+        console.log("Rendering map")
         this.mapTarget.outerHTML = data
-  })
+      })
+      .catch(error => {
+        console.error("Error:", error);
+      });
   }
 
   getCoords() {

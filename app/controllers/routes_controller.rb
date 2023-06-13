@@ -69,11 +69,13 @@ class RoutesController < ApplicationController
   def record
     authorize @route
     respond_to do |format|
-      unless @route.points.empty?
-        @markers = @route.points.map { |point| { lat: point.latitude, lng: point.longitude } }
-        format.text { render partial: "shared/map", locals: { markers: @markers, height: "300px", html_options: { class: '' } }, formats: [:html] }
-      else
+      if @route.points.empty?
         format.html
+        format.text { render partial: "shared/map", locals: { markers: @markers, height: "300px", html_options: { class: 'd-none' } }, formats: [:html] }
+      else
+        @markers = @route.points.map { |point| { lat: point.latitude, lng: point.longitude } }
+        format.html
+        format.text { render partial: "shared/map", locals: { markers: @markers, height: "300px", html_options: { class: '' } }, formats: [:html] }
       end
     end
   end

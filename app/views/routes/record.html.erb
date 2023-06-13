@@ -14,6 +14,12 @@
           <button class='btn-save d-none' data-route-tracking-target='save' data-action='click->route-tracking#showForm'>Save</button>
         </div>
       </div>
+      <div class='record-top-half-display'>
+        <div class='recording-gif'>
+          <%= image_tag('recording.gif', class: 'd-none', data: { route_tracking_target: 'recordgif'} )%>
+        </div>
+        <%= render "shared/map", markers: @markers ? @markers : [], height: "300px", html_options: { class:  @markers ? '' : 'd-none' }%>
+      </div>
       <div class="container mt-5">
       <div class="d-flex flex-column align-items-center"  data-route-tracking-target='tracker' class=<%= 'd-none' if @route.errors.any? %>>
         <button class='btn-record mb-2' data-route-tracking-target='startstop' data-action='click->route-tracking#trackRoute'>Track Route</button>

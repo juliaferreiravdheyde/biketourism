@@ -21,6 +21,8 @@
         <%= yield %>
       </div>
     </main>
-    <%= render "shared/footer" %>
+    <% unless controller_name == "routes" && action_name == "record" %>
+      <%= render "shared/footer" %>
+    <% end %>
   </body>
 </html>
