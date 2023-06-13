@@ -9,17 +9,20 @@
   background-color: var(--cor-0);
   width: 100%;
   padding: 4px 0;
-
-
-  h1 {
-    max-width: 25ch;
-  }
 }
 
 .route-details-show {
   position: relative;
 
   p {max-width: 36ch;}
+}
+
+
+.details-type li {
+
+  padding: 4px 12px;
+  border: 1px solid var(--cor-4);
+  border-radius: 12px;
 }
 
 .favorite-show {
@@ -55,7 +58,7 @@
     width: 310px;
     height: 200px;
     object-fit: cover;
-    border-radius: 10px;
+    border-radius: 12px;
   }
 }
 

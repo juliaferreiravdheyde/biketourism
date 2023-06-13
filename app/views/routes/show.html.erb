@@ -39,11 +39,12 @@
 
   <div class="route-details-show mt-4 mb-4">
     <ul>
-      <li><p class="font-2-s cor-11"><%= @route.description %></p></li>
-      <div class="d-flex gap-5 mt-3 mb-3">
-      <li class="d-flex flex-column align-items-center"><span class="font-2-xs cor-7">Type of Route</span><span class="font-2-s cor-11"><%= @route.type_of_route %></span></li>
-      <li class="d-flex flex-column align-items-center"><span class="font-2-xs cor-7">Distance</span> <span class="font-2-s cor-11"> <%= @route.distance < 1000 ? "#{@route.distance}m" : "#{(@route.distance / 1000.0).round(2)}km" %></span></li>
+      <div class="details-type d-flex gap-2 mt-3 mb-2">
+      <li class="d-flex flex-column align-items-center"><span class="font-2-xss cor-8">Type of Route</span><span class="font-2-s cor-11"><%= @route.type_of_route %></span></li>
+      <li class="d-flex flex-column align-items-center"><span class="font-2-xss cor-8">Distance</span> <span class="font-2-s cor-11"> <%= @route.distance < 1000 ? "#{@route.distance}m" : "#{(@route.distance / 1000.0).round(2)}km" %></span></li>
       </div>
+      <li><p class="font-2-s cor-11"><%= @route.description %></p></li>
+
     </ul>
 
     <div class="favorite-show">
@@ -71,7 +72,7 @@
     <% end %>
 
     <%if @ride_on_going.any? %>
-        <%= link_to "Stop", mark_as_done_route_ride_path(@route, @ride_on_going.first), remote: true, data: {turbo_method: :patch}, class: "btn-start-stop-show" %>
+        <%= button_to "Stop", mark_as_done_route_ride_path(@route, @ride_on_going.first), remote: true, data: {turbo_method: :patch}, class: "btn-start-stop-show" %>
     <% else %>
       <%= simple_form_for [@route,@ride] do |f| %>
         <%= f.submit "Start", class: "btn-start-stop-show"%>
