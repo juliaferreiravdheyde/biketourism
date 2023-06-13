@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   include Pundit::Authorization
 
   # Pundit: allow-list approach
-  after_action :verify_authorized, except: :index, unless: :skip_pundit?
+  after_action :verify_authorized, except: [:index, :delete_image_attachment], unless: :skip_pundit?
   after_action :verify_policy_scoped, only: :index, unless: :skip_pundit?
 
   before_action :authenticate_user!

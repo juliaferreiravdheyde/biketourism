@@ -13,7 +13,6 @@
   </div>
 </div>
 
-
 <div class="container mt-3 mb-3">
 
   <div class="route-details-show">
@@ -36,10 +35,26 @@
           <% end %>
         <% end %>
       </div>
+    
+    <% if @route.photos.attached?%>
+    <div class="route-pictures">
+      <% @route.photos.each do |photo| %>
+        <%= cl_image_tag photo.key %>
+      <% end %>
+    </div>
+    <% end  %>
+  <div class='route-creator d-flex align-items-center justify-content-between'>
+    <h3>Created by <%= @route.creator.first_name %></h3>
+    <% if @route.creator.photo.attached? %>
+      <%= cl_image_tag current_user.photo.key, class: "avatar", alt: "dropdown menu" %>
+    <% else %>
+      <%= image_tag "user.svg", class: "avatar"%>
+    <% end %>
   </div>
+    
+ </div>
 
   <div class="buttons-show">
-
     <% if policy(@route).edit? %>
       <%= link_to "Edit", edit_route_path(@route), class: 'btn btn-primary' %>
     <% end %>
@@ -59,5 +74,4 @@
       <%= f.submit "Pin", class: "btn-pin-circle-show"%>
     <% end %>
   </div>
-
 </div>

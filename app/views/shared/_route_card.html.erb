@@ -1,21 +1,31 @@
-<%= link_to route_path(route) do %>
   <div class="card-product">
-      <% if route.photos.attached? %>
-        <%= cl_image_tag route.photos[0].key, class:"product-image primary-image", data: {'picker-target': "pimage"} %>
+    <div class="pin-icon">
+      <% if current_user&.pinned_route == route %>
+        <%= button_to route_pinned_routes_path(current_user.pinned_route), class: "pin-button" do %>
+          <i class="fa-solid fa-thumbtack"></i>
+        <% end %>
       <% else %>
-        <% default_image_url = case route.type_of_route
-                               when "Urban"
-                                then "urban.webp"
-                               when "Suburban"
-                                then "suburban.webp"
-                               when "CountrySide"
-                                then "countryside.webp"
-                               when "Mountain"
-                                then "mountain.webp"
-                               end
-        %>
-        <%= image_tag default_image_url, class: "product-image primary-image" %>
+        <%= button_to route_pinned_routes_path(route_id: route.id), class: "pin-button" do %>
+          <i class="fa-solid fa-thumbtack"></i>
+        <% end %>
       <% end %>
+    </div>
+    <% if route.photos.attached? %>
+      <%= cl_image_tag route.photos[0].key, class: "product-image primary-image", data: { 'picker-target': "pimage" } %>
+    <% else %>
+      <% default_image_url = case route.type_of_route
+                             when "Urban"
+                               then "urban.webp"
+                             when "Suburban"
+                               then "suburban.webp"
+                             when "CountrySide"
+                               then "countryside.webp"
+                             when "Mountain"
+                               then "mountain.webp"
+                             end
+      %>
+      <%= image_tag default_image_url, class: "product-image primary-image" %>
+    <% end %>
     <div class="card-route-details">
       <ul>
         <li><span class="type"><%= route.type_of_route %></span></li>
@@ -25,20 +35,13 @@
       </ul>
       <% favorite = Favorite.where(route: route, user: current_user) %>
       <% if favorite.present? %>
-        <%= link_to favorite_path(favorite.first), data: { turbo_method: :delete }, class:"bookmark" do %>
-           <i class="fa-brands fa-gratipay"></i>
-       <% end %>
+        <%= link_to favorite_path(favorite.first), data: { turbo_method: :delete }, class: "bookmark" do %>
+          <i class="fa-brands fa-gratipay"></i>
+        <% end %>
       <% else %>
-        <%= link_to route_favorites_path(route), data: { turbo_method: :post }, class:"bookmark" do %>
-            <i class="fa-sharp fa-regular fa-heart"></i>
-        <%  end %>
-      <% end %>
-      <% if current_user.present? %>
-        <% if current_user.pinned_route.present? %>
-          <%= link_to current_user.pinned_route.name, route_path(current_user.pinned_route), class:"link"%>
-          <i class="fa-regular fa-thumbtack"></i>
+        <%= button_to route_favorites_path(route), data: { turbo_method: :post }, class: "bookmark" do %>
+          <i class="fa-sharp fa-regular fa-heart"></i>
         <% end %>
       <% end %>
     </div>
   </div>
-<% end %>
