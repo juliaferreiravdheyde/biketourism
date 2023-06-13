@@ -2,12 +2,18 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="route-tracking"
 export default class extends Controller {
-  static targets = ['position', 'status', 'startstop', 'save', 'discard', 'tracker', 'registerform', 'ongoing']
-  static values = { id: Number}
+  static targets = ['position', 'status', 'startstop', 'save', 'discard', 'tracker', 'registerform', 'recordgif', 'map']
+  static values = { id: Number }
 
   connect() {
     console.log("Connected")
+    console.log(this.mapTarget.dataset.mapMarkersValue)
+
   }
+
+  // mapController() {
+  //   return this.application.getControllerForElementAndIdentifier(this.mapTarget, 'map')
+  // }
 
   showForm() {
     console.log("in show form");
@@ -24,11 +30,11 @@ export default class extends Controller {
       this.startstopTarget.classList.remove("stopped");
       this.startstopTarget.classList.add("started");
       this.saveTarget.classList.add("d-none");
-      // this.ongoingTarget.classList.remove("d-none");
       this.discardTarget.classList.add("d-none");
+      // this.recordgifTarget.classList.remove("d-none");
       this.startstopTarget.textContent = "Stop Tracking";
       this.statusTarget.textContent = "Recording route..."
-      this.startstopTarget.classList.add("animated")
+      // this.startstopTarget.classList.add("animated")
 
     } else {
       clearInterval(this.intervalID);
@@ -36,16 +42,23 @@ export default class extends Controller {
       this.startstopTarget.classList.add("stopped");
       this.saveTarget.classList.remove("d-none");
       this.discardTarget.classList.remove("d-none");
-      // this.ongoingTarget.classList.add("d-none");
       this.startstopTarget.textContent = "Restart Tracking";
+      this.recordgifTarget.classList.add("d-none");
       this.statusTarget.textContent = "Recording paused"
-      this.startstopTarget.classList.remove("animated")
+      // this.startstopTarget.classList.remove("animated")
       this.startstopTarget.classList.remove("btn-record")
       this.startstopTarget.classList.add("btn-paused")
-
-
-
+      this.loadMarkers()
     }
+  }
+
+  loadMarkers() {
+    fetch(`/routes/${this.idValue}/record`)
+      .then(response => response.json)
+      .then(data => {
+        console.log(data)
+        this.mapTarget.outerHTML = data
+  })
   }
 
   getCoords() {
