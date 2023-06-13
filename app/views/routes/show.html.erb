@@ -16,40 +16,45 @@
 <div class="container mt-3 mb-3">
 
   <div class="route-details-show">
-      <ul>
-        <li><p class="font-2-s cor-9"><%= @route.description %></p></li>
-        <div class="d-flex gap-5 mt-2">
-        <li class="d-flex flex-column align-items-center"><span class="font-2-xs cor-7">Type of Route</span><span class="font-2-s cor-10"><%= @route.type_of_route %></span></li>
-        <li class="d-flex flex-column align-items-center"><span class="font-2-xs cor-7">Distance</span> <span class="font-2-s cor-11"> <%= @route.distance < 1000 ? "#{@route.distance}m" : "#{(@route.distance / 1000.0).round(2)}km" %></span></li>
-        </div>
-      </ul>
-      <% if @route.photos.attached?%>
-    <div class="route-pictures">
-      <% @route.photos.each do |photo| %>
-        <%= cl_image_tag photo.key %>
+    <ul>
+      <li><p class="font-2-s cor-9"><%= @route.description %></p></li>
+      <div class="d-flex gap-5 mt-2">
+      <li class="d-flex flex-column align-items-center"><span class="font-2-xs cor-7">Type of Route</span><span class="font-2-s cor-10"><%= @route.type_of_route %></span></li>
+      <li class="d-flex flex-column align-items-center"><span class="font-2-xs cor-7">Distance</span> <span class="font-2-s cor-11"> <%= @route.distance < 1000 ? "#{@route.distance}m" : "#{(@route.distance / 1000.0).round(2)}km" %></span></li>
+      </div>
+    </ul>
+
+    <div class="favorite-show">
+      <% if @favorite.present? %>
+        <%= link_to favorite_path(@favorite.first), data: { turbo_method: :delete } do  %>
+          <i class="fa-solid fa-heart" style="color:var(--cor-11)"></i>
+      <% end %>
+      <% else %>
+        <%= link_to route_favorites_path(@route), data: { turbo_method: :post } do  %>
+          <i class="fa-regular fa-heart" style="color: var(--cor-11)"></i>
+        <% end %>
       <% end %>
     </div>
-    <% end  %>
+  </div>
+
+  <% if @route.photos.attached?%>
+    <ul class="route-pictures">
+      <% @route.photos.each do |photo| %>
+      <li>
+        <%= cl_image_tag photo.key %>
+      </li>
+      <% end %>
+    </ul>
+  <% end  %>
+
   <div class='route-creator d-flex align-items-center justify-content-between'>
-    <h3>Created by <%= @route.creator.first_name %></h3>
+    <h3 class="font-2-xs cor-10">Created by <%= @route.creator.first_name %></h3>
     <% if @route.creator.photo.attached? %>
       <%= cl_image_tag current_user.photo.key, class: "avatar", alt: "dropdown menu" %>
     <% else %>
       <%= image_tag "user.svg", class: "avatar"%>
     <% end %>
   </div>
-
-      <div class="favorite-show">
-        <% if @favorite.present? %>
-          <%= link_to favorite_path(@favorite.first), data: { turbo_method: :delete } do  %>
-            <i class="fa-solid fa-heart" style="color:var(--cor-11)"></i>
-        <% end %>
-        <% else %>
-          <%= link_to route_favorites_path(@route), data: { turbo_method: :post } do  %>
-            <i class="fa-regular fa-heart" style="color: var(--cor-11)"></i>
-          <% end %>
-        <% end %>
-      </div>
 
 
  </div>
