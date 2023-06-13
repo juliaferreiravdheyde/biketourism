@@ -86,6 +86,8 @@ Unsplash.configure do |config|
 
   route1.distance = route1.total_distance
   route2.distance = route2.total_distance
+  route1.positive_elevation = route1.total_positive_elevation
+  route2.positive_elevation = route2.total_positive_elevation
 
   route1.save
   route2.save

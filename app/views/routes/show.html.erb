@@ -31,7 +31,7 @@
       <li>Type of Route: <span><%= @route.type_of_route %></span></li>
       <li>Description: <span><%= @route.description %></span></li>
       <li>Distance: <span> <%= @route.distance < 1000 ? "#{@route.distance}m" : "#{(@route.distance / 1000.0).round(2)}km" %></span></li>
-      <li>Elevation: <span> <%= @route.positive_elevation.nil? ? @route.positive_elevation : '60m' %></li>
+      <li>Elevation: <span> <%= @route.positive_elevation.nil? ? '60m' : "#{@route.positive_elevation.to_i}m" %></li>
     </ul>
   </div>
 

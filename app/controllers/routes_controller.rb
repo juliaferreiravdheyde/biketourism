@@ -75,10 +75,11 @@ class RoutesController < ApplicationController
 
   def register
     authorize @route
-    @route.distance = @route.total_distance
     if @route.points.size < 2
       redirect_to register_path(@route), alert: "Not enough tracking data"
     elsif @route.update(route_params)
+      @route.distance = @route.total_distance
+      @route.positive_elevation = @route.total_positive_elevation
       redirect_to route_path(@route), notice: "Route successfully shared!"
     else
       render :record, status: :unprocessable_entity
@@ -150,5 +151,4 @@ class RoutesController < ApplicationController
 
   # # Execute the query using ActiveRecord
   # routes_within_radius = Route.find_by_sql([query, user_latitude, user_latitude, user_latitude, user_longitude, user_longitude, radius_km])
-
 end
