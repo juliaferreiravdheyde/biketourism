@@ -12,7 +12,7 @@ display: block;
 position: relative;
 }
 
-.btn-start-show {
+.btn-start-stop-show {
   color: var(--cor-0);
   padding: 0.75rem;
   height: 80px;
@@ -24,17 +24,7 @@ position: relative;
   display: inline-block;
   }
 
-  .btn-stop-save-show {
-    color: var(--cor-p1);
-    padding: 0.75rem;
-    height: 80px;
-    width: 80px;
-    border-radius: 50%;
-    text-align: center;
-    border: none;
-    background-color: var(--cor-3);
-    display: inline-block;
-    }
+
 
 .btn-pin-circle-show {
   color: var(--cor-p1);
