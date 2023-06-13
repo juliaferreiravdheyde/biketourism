@@ -53,11 +53,6 @@ class RoutesController < ApplicationController
     end
   end
 
-  # def new
-  #   @route = Route.new
-  #   authorize @route
-  # end
-
   def create
     @route = Route.new
     authorize @route
@@ -73,6 +68,14 @@ class RoutesController < ApplicationController
 
   def record
     authorize @route
+    respond_to do |format|
+      unless @route.points.empty?
+        @markers = @route.points.map { |point| { lat: point.latitude, lng: point.longitude } }
+        format.text { render partial: "shared/map", locals: { markers: @markers, height: "300px", html_options: { class: '' } }, formats: [:html] }
+      else
+        format.html
+      end
+    end
   end
 
   def register
@@ -93,18 +96,36 @@ class RoutesController < ApplicationController
     redirect_to routes_path, notice: "Route succesfully deleted"
   end
 
+  def delete_image_attachment
+    @route_photo = ActiveStorage::Attachment.find(params[:id])
+    @route_photo.purge
+    redirect_back(fallback_location: request.referer)
+  end
+
   def edit
     authorize @route
+    @route.photos.build if @route.photos.blank?
   end
 
   def update
     authorize @route
-    if @route.update(route_params)
+    if params[:route][:photos].present?
+      @route.photos.attach(params[:route][:photos])
+    end
+    if @route.update(route_params.except('photos'))
       redirect_to route_path(@route), notice: "Your route was updated!"
     else
       render :edit, status: :unprocessable_entity
     end
   end
+
+  # def update
+  #   if @route.save?
+  #     redirect_to route_path(@route)
+  #   else
+  #     render :edit, error: :unprocessable_entity
+  #   end
+  # end
 
   private
 
@@ -113,31 +134,26 @@ class RoutesController < ApplicationController
   end
 
   def route_params
-    params.require(:route).permit(:name, :description, :distance, :type_of_route, :photos, :positive_elevation)
+    params.require(:route).permit(:name, :description, :distance, :type_of_route, :positive_elevation, photos: [])
   end
 
+  # # Build the SQL query using ActiveRecord syntax
+  # query = <<-SQL
+  #   SELECT DISTINCT routes.*
+  #   FROM routes
+  #   INNER JOIN points ON points.route_id = routes.id
+  #   WHERE (
+  #     2 * 6371 * asin(
+  #       sqrt(
+  #         sin((radians(points.latitude) - radians(?)) / 2) * sin((radians(points.latitude) - radians(?)) / 2) +
+  #         cos(radians(?)) * cos(radians(points.latitude)) *
+  #         sin((radians(points.longitude) - radians(?)) / 2) * sin((radians(points.longitude) - radians(?)) / 2)
+  #       )
+  #     )
+  #   ) <= ?
+  # SQL
 
-  user_latitude = 37.7749
-  user_longitude = -122.4194
-  radius_km = 10
-
-  # Build the SQL query using ActiveRecord syntax
-  query = <<-SQL
-    SELECT DISTINCT routes.*
-    FROM routes
-    INNER JOIN points ON points.route_id = routes.id
-    WHERE (
-      2 * 6371 * asin(
-        sqrt(
-          sin((radians(points.latitude) - radians(?)) / 2) * sin((radians(points.latitude) - radians(?)) / 2) +
-          cos(radians(?)) * cos(radians(points.latitude)) *
-          sin((radians(points.longitude) - radians(?)) / 2) * sin((radians(points.longitude) - radians(?)) / 2)
-        )
-      )
-    ) <= ?
-  SQL
-
-  # Execute the query using ActiveRecord
-  routes_within_radius = Route.find_by_sql([query, user_latitude, user_latitude, user_latitude, user_longitude, user_longitude, radius_km])
+  # # Execute the query using ActiveRecord
+  # routes_within_radius = Route.find_by_sql([query, user_latitude, user_latitude, user_latitude, user_longitude, user_longitude, radius_km])
 
 end

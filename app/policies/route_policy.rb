@@ -15,7 +15,7 @@ class RoutePolicy < ApplicationPolicy
   end
 
   def record?
-    register?
+    register? && record.name.nil?
   end
 
   def register?

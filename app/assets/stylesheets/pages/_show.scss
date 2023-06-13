@@ -1,0 +1,72 @@
+.map-show {
+  position: relative;
+}
+
+.route-title-show {
+  position: absolute;
+  top: 0;
+  z-index: 99;
+  padding: 4px 8px;
+  background-color: #fff;
+  border-radius: 2px;
+  margin-top: 10px;
+
+
+  h1 {
+    max-width: 25ch;
+  }
+}
+
+.route-details-show {
+  position: relative;
+}
+
+.favorite-show {
+  position: absolute;
+  top: 0;
+  right: 10px;
+}
+
+.buttons-show {
+ display: flex;
+ flex-wrap: nowrap;
+ justify-content: center;
+ align-items: center;
+ gap: 16px;
+ padding: 20px;
+ margin-top: 20px;
+}
+
+.route-pictures {
+  display: grid;
+	grid-template-columns: repeat(5, 80vw);
+	grid-template-rows: 1fr;
+	grid-column-gap: 1rem;
+	grid-row-gap: 1rem;
+	overflow: scroll;
+	scroll-snap-type: both mandatory;
+	scroll-padding: 1rem;
+  margin: 1rem 0 0.3rem 0;
+
+
+  img {
+    width: 310px;
+    height: 200px;
+    object-fit: cover ;
+  }
+}
+
+.route-pictures li {
+	display: block;
+	border-radius: 3px;
+  }
+
+.route-pictures {
+	scroll-snap-type: unset;
+}
+
+.route-pictures li {
+	scroll-snap-align: center;
+	display: inline-block;
+	border-radius: 3px;
+  }
