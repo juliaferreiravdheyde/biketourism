@@ -1,7 +1,8 @@
-
+<div>
 <%= simple_form_for :search, url: routes_path , method: "GET", html: {class: 'form-inline' } do |f| %>
-  <%= f.input :address, input_html: {value: ""} %>
-  <%= f.input :distance, as: :range, input_html: { min: 0, max: 100, step: 1, value: 0 }, label: "Distance (km)" %>
-  <%= f.input :type_of_route, as: :select, collection: ["Urban", "Suburban", "CountrySide", "Mountain"], include_blank: "All Types", label: "Type of Route" %>
+  <%= f.input :address, input_html: {value: @address } %>
+  <%= f.input :distance, as: :range, input_html: { min: 0, max: 100, step: 1, value: @distance }, label: "Distance (km)" %>
+  <%= f.input :type_of_route, as: :select, collection: Route::TYPE_OF_ROUTE, include_blank: "All Types", label: "Type of Route", selected: @type_of_route %>
   <%= f.submit "Search", class: "btn btn-primary" %>
 <% end %>
+</div>

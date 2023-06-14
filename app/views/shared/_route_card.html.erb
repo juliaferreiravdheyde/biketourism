@@ -33,7 +33,9 @@
         <li><span class="type"><%= route.type_of_route %></span></li>
         <li><h3><%= route.name %></h3></li>
         <li><p><%= route.description %></p></li>
-        <li><span class="distance">Distance: <%= route.distance < 1000 ? "#{route.distance}m" : "#{(route.distance / 1000.0).round(2)}km" %></span></li>
+        <% if route.distance.present? %>
+           <li><span class="distance">Distance: <%= route.distance < 1000 ? "#{route.distance}m" : "#{(route.distance / 1000.0).round(2)}km" %></span></li>
+        <% end %>
       </ul>
       <% favorite = Favorite.where(route: route, user: current_user) %>
       <% if favorite.present? %>
@@ -41,7 +43,7 @@
           <i class="fa-brands fa-gratipay"></i>
         <% end %>
       <% else %>
-        <%= button_to route_favorites_path(route), data: { turbo_method: :post }, class: "bookmark" do %>
+        <%= link_to route_favorites_path(route), data: { turbo_method: :post }, class: "bookmark" do %>
           <i class="fa-sharp fa-regular fa-heart"></i>
         <% end %>
       <% end %>
