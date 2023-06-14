@@ -104,7 +104,13 @@ class RoutesController < ApplicationController
   def update
     authorize @route
     if params[:route][:photos].present?
-      @route.photos.attach(params[:route][:photos])
+      params[:route][:photos][1..].each do |photo|
+        @route.photos.attach(io: photo,
+                             filename: photo.original_filename,
+                             content_type: photo.content_type,
+                             metadata: { user_id: current_user.id }
+                            )
+      end
     end
     if @route.update(route_params.except('photos'))
       redirect_to route_path(@route), notice: "Your route was updated!"
