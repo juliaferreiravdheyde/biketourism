@@ -1,47 +1,51 @@
-  <div class="card-product">
-    <div class="pin-icon">
-      <% if current_user&.pinned_route == route %>
-        <%= button_to route_pinned_routes_path(current_user.pinned_route), class: "pin-button" do %>
-          <i class="fa-solid fa-thumbtack"></i>
-        <% end %>
-      <% else %>
-        <%= button_to route_pinned_routes_path(route_id: route.id), class: "pin-button pinned" do %>
-          <i class="fa-solid fa-thumbtack"></i>
-        <% end %>
+<div class="card-product">
+  <div class="pin-icon">
+    <% if current_user&.pinned_route == route %>
+      <%= button_to route_pinned_routes_path(current_user.pinned_route), class: "pin-button" do %>
+        <%# <i class="fa-solid fa-thumbtack"></i> %>
+        <%= image_tag 'pin-branco-2.svg' %>
       <% end %>
-    </div>
-    <% if route.photos.attached? %>
-      <%= cl_image_tag route.photos[0].key, class: "product-image primary-image", data: { 'picker-target': "pimage" } %>
     <% else %>
-      <% default_image_url = case route.type_of_route
-                             when "Urban"
-                               then "urban.webp"
-                             when "Suburban"
-                               then "suburban.webp"
-                             when "CountrySide"
-                               then "countryside.webp"
-                             when "Mountain"
-                               then "mountain.webp"
-                             end
-      %>
-      <%= image_tag default_image_url, class: "product-image primary-image" %>
-    <% end %>
-    <div class="card-route-details">
-      <ul>
-        <li><span class="type"><%= route.type_of_route %></span></li>
-        <li><h3><%= route.name %></h3></li>
-        <li><p><%= route.description %></p></li>
-        <li><span class="distance">Distance: <%= route.distance < 1000 ? "#{route.distance}m" : "#{(route.distance / 1000.0).round(2)}km" %></span></li>
-      </ul>
-      <% favorite = Favorite.where(route: route, user: current_user) %>
-      <% if favorite.present? %>
-        <%= link_to favorite_path(favorite.first), data: { turbo_method: :delete }, class: "bookmark" do %>
-          <i class="fa-solid fa-heart" style="color: var(--cor-p1);"></i>
-        <% end %>
-      <% else %>
-        <%= button_to route_favorites_path(route), data: { turbo_method: :post }, class: "bookmark" do %>
-          <i class="fa-solid fa-heart" style="color: var(--cor-8);"></i>
-        <% end %>
+      <%= button_to route_pinned_routes_path(route_id: route.id), class: "pin-button" do %>
+        <%# <i class="fa-solid fa-thumbtack"></i> %>
+        <%= image_tag 'pin-verde-2.svg' %>
       <% end %>
-    </div>
+    <% end %>
   </div>
+  <% if route.photos.attached? %>
+    <%= cl_image_tag route.photos[0].key, class: "product-image primary-image", data: { 'picker-target': "pimage" } %>
+  <% else %>
+    <% default_image_url = case route.type_of_route
+                            when "Urban"
+                              then "urban.webp"
+                            when "Suburban"
+                              then "suburban.webp"
+                            when "CountrySide"
+                              then "countryside.webp"
+                            when "Mountain"
+                              then "mountain.webp"
+                            end
+    %>
+    <%= image_tag default_image_url, class: "product-image primary-image" %>
+  <% end %>
+  <div class="card-route-details">
+    <ul>
+      <li><span class="type"><%= route.type_of_route %></span></li>
+      <li><h3><%= route.name %></h3></li>
+      <li><p><%= route.description %></p></li>
+      <li><span class="distance">Distance: <%= route.distance < 1000 ? "#{route.distance}m" : "#{(route.distance / 1000.0).round(2)}km" %></span>
+      <span class="elevation">Elevation: <%= route.positive_elevation.nil? ? '60m' : "#{route.positive_elevation.to_i}m"%></span></li>
+    </ul>
+
+    <% favorite = Favorite.where(route: route, user: current_user) %>
+    <% if favorite.present? %>
+      <%= link_to favorite_path(favorite.first), data: { turbo_method: :delete }, class: "bookmark" do %>
+        <i class="fa-solid fa-heart" style="color: var(--cor-p1);"></i>
+      <% end %>
+    <% else %>
+      <%= button_to route_favorites_path(route), data: { turbo_method: :post }, class: "bookmark" do %>
+        <i class="fa-solid fa-heart" style="color: var(--cor-8);"></i>
+      <% end %>
+    <% end %>
+  </div>
+</div>
