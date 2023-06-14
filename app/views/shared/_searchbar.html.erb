@@ -2,9 +2,11 @@
 
 <div class="row g-0 d-flex align-items-start search-bar">
   <div class="col border-end-0">
-      <%= simple_form_for :search, url: routes_path, method: "GET", html: { } do |f| %>
-        <%= f.input :address, input_html: { value: @address, class: "search-input" },label: false, placeholder: "Search your Route" %>
+    <%= simple_form_for :search, url: routes_path, method: "GET", html: { } do |f| %>
+      <%= f.input :address, input_html: { value: @address, class: "search-input" }, label: false, placeholder: "Search your Route" do %>
+        <i class="fas fa-search"></i>
       <% end %>
+    <% end %>
   </div>
   <div class="col-auto border-0 search-filter">
     <button type="button" class="btn btn-filter"  data-bs-toggle="modal" data-bs-target="#exampleModal">

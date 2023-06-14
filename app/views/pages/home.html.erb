@@ -1,9 +1,6 @@
 
 <div class="container pt-4 pb-4">
-  <!--<%= simple_form_for :search, url: routes_path , method: "GET", html: {class: 'form-inline' } do |f| %>
-    <%= f.input :address, input_html: {value: @address}, label: false, placeholder: "Search your Route" %>
-    <%= f.submit "Search", class: "btn btn-primary" %>
-  <% end %> -->
+  <%= render "shared/searchbar" %>
   <% if current_user.present? %>
     <% if current_user.pinned_route.present? %>
       <%= link_to current_user.pinned_route.name, route_path(current_user.pinned_route), class:"btn-pin"%>
