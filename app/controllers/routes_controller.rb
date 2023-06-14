@@ -2,6 +2,10 @@ class RoutesController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[index show]
   before_action :set_route, only: %i[show destroy edit update record register]
 
+  after_action :skip_authorization, only: %i[my_routes]
+  after_action :verify_policy_scoped, only: %i[my_routes], unless: :skip_pundit?
+
+
   def index
     @routes = Route.all
     @address = ""
@@ -20,6 +24,10 @@ class RoutesController < ApplicationController
         @routes = @routes.where(id: points.map(&:route).pluck(:id).uniq) if points.present?
       end
     end
+  end
+
+  def my_routes
+    @my_routes = policy_scope(Route).where(creator: current_user).where.not(name: nil)
   end
 
   def show
@@ -64,10 +72,12 @@ class RoutesController < ApplicationController
 
   def register
     authorize @route
-    @route.distance = @route.total_distance
     if @route.points.size < 2
       redirect_to register_path(@route), alert: "Not enough tracking data"
     elsif @route.update(route_params)
+      @route.distance = @route.total_distance
+      @route.positive_elevation = @route.total_positive_elevation
+      @route.save
       redirect_to route_path(@route), notice: "Route successfully shared!"
     else
       render :record, status: :unprocessable_entity
@@ -120,6 +130,8 @@ class RoutesController < ApplicationController
   def route_params
     params.require(:route).permit(:name, :description, :distance, :type_of_route, :positive_elevation, photos: [])
   end
+end  
+  
 
   # # Build the SQL query using ActiveRecord syntax
   # query = <<-SQL
@@ -127,6 +139,7 @@ class RoutesController < ApplicationController
   #   FROM routes
   #   INNER JOIN points ON points.route_id = routes.id
   #   WHERE (
+
     #     2 * 6371 * asin(
       #       sqrt(
         #         sin((radians(points.latitude) - radians(?)) / 2) * sin((radians(points.latitude) - radians(?)) / 2) +
@@ -140,7 +153,7 @@ class RoutesController < ApplicationController
         # # Execute the query using ActiveRecord
         # routes_within_radius = Route.find_by_sql([query, user_latitude, user_latitude, user_latitude, user_longitude, user_longitude, radius_km])
 
-      end
+ 
 
       #   if @address.present? && (params[:search][:distance] == "0") && !(@type_of_route.present?)
       #     address = params[:search][:address]
@@ -165,3 +178,6 @@ class RoutesController < ApplicationController
       #     #   # Execute the query using ActiveRecord
       #     @routes = policy_scope(Route).find_by_sql([query, latitude, latitude, latitude, longitude, longitude, radius])
       #   elsif params[:search][:distance] != "0" && !(params[:search][:address].present?) && !(params[:search][:type_of_route].present?)
+
+
+

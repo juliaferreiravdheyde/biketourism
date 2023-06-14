@@ -6,25 +6,30 @@
   position: absolute;
   top: 0;
   z-index: 99;
-  padding: 4px 8px;
-  background-color: #fff;
-  border-radius: 2px;
-  margin-top: 10px;
-
-
-  h1 {
-    max-width: 25ch;
-  }
+  background-color: var(--cor-0);
+  width: 100%;
+  padding: 4px 0;
 }
 
 .route-details-show {
   position: relative;
+
+  p {max-width: 36ch;}
+}
+
+
+.details-type li {
+
+  padding: 4px 12px;
+  border: 1px solid var(--cor-4);
+  border-radius: 12px;
 }
 
 .favorite-show {
   position: absolute;
   top: 0;
   right: 10px;
+  display: block;
 }
 
 .buttons-show {
@@ -46,13 +51,14 @@
 	overflow: scroll;
 	scroll-snap-type: both mandatory;
 	scroll-padding: 1rem;
-  margin: 1rem 0 0.3rem 0;
+  margin-bottom: 0.4rem;
 
 
   img {
     width: 310px;
     height: 200px;
-    object-fit: cover ;
+    object-fit: cover;
+    border-radius: 16px;
   }
 }
 
@@ -70,3 +76,19 @@
 	display: inline-block;
 	border-radius: 3px;
   }
+
+.route-creator-show {
+position: absolute;
+bottom: 6px;
+right: 6px;
+z-index: 1000;
+
+h3 {
+
+background-color: #fff;
+padding: 2px 4px;
+border-radius: 12px;
+
+}
+
+}
