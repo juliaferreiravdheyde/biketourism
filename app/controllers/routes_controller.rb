@@ -2,6 +2,10 @@ class RoutesController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[index show]
   before_action :set_route, only: %i[show destroy edit update record register]
 
+  after_action :skip_authorization, only: %i[my_routes]
+  after_action :verify_policy_scoped, only: %i[my_routes], unless: :skip_pundit?
+
+
   def index
     @route = Route.new
     if ( params[:search].present? ? params[:search][:address].present? : false )
@@ -38,6 +42,10 @@ class RoutesController < ApplicationController
       @routes = policy_scope(Route).where.not(name: nil)
     end
     end
+  end
+
+  def my_routes
+    @my_routes = policy_scope(Route).where(creator: current_user).where.not(name: nil)
   end
 
   def show
@@ -87,6 +95,7 @@ class RoutesController < ApplicationController
     elsif @route.update(route_params)
       @route.distance = @route.total_distance
       @route.positive_elevation = @route.total_positive_elevation
+      @route.save
       redirect_to route_path(@route), notice: "Route successfully shared!"
     else
       render :record, status: :unprocessable_entity

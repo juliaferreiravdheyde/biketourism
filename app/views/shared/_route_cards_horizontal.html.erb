@@ -1,10 +1,12 @@
 <ul class="gallery">
-  <% routes.first(5).each do |route| %>
+  <% routes.each do |route| %>
     <li>
       <%= render partial: 'shared/route_card', locals: { route: route } %>
     </li>
   <% end %>
   <li>
-    <%= image_tag "arrow-right.svg", class:"button-arrow-right" %>
+    <%= link_to routes_path do %>
+      <%= image_tag "arrow-right.svg", class:"button-arrow-right" %>
+    <% end %>
   </li>
 </ul>
