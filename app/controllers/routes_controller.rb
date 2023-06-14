@@ -4,49 +4,64 @@ class RoutesController < ApplicationController
 
   def index
     @route = Route.new
+    @routes = Route.all
 
-    if ( params[:search].present? ? params[:search][:address].present? : false )
-      address = params[:search][:address]
-      coordinates = Geocoder.coordinates(address)
-      latitude = coordinates[0]
-      longitude = coordinates[1]
-      radius = 10
-      query = <<-SQL
-        SELECT DISTINCT routes.*
-        FROM routes
-        INNER JOIN points ON points.route_id = routes.id
-        WHERE (
+    if params[:search].present?
+      if params[:search][:address].present? && (params[:search][:distance] == "0") && !(params[:search][:type_of_route].present?)
+        address = params[:search][:address]
+        coordinates = Geocoder.coordinates(address)
+        latitude = coordinates[0]
+        longitude = coordinates[1]
+        radius = 10
+        query = <<-SQL
+          SELECT DISTINCT routes.*
+          FROM routes
+          INNER JOIN points ON points.route_id = routes.id
+          WHERE (
           2 * 6371 * asin(
             sqrt(
               sin((radians(points.latitude) - radians(?)) / 2) * sin((radians(points.latitude) - radians(?)) / 2) +
               cos(radians(?)) * cos(radians(points.latitude)) *
-              sin((radians(points.longitude) - radians(?)) / 2) * sin((radians(points.longitude) - radians(?)) / 2)
-            )
-          )
-        ) <= ?
-      SQL
-
-      # Execute the query using ActiveRecord
-      @routes = policy_scope(Route).find_by_sql([query, latitude, latitude, latitude, longitude, longitude, radius])
+                sin((radians(points.longitude) - radians(?)) / 2) * sin((radians(points.longitude) - radians(?)) / 2)
+                )
+              )
+            ) <= ?
+        SQL
+        #   # Execute the query using ActiveRecord
+        @routes = policy_scope(Route).find_by_sql([query, latitude, latitude, latitude, longitude, longitude, radius])
+      elsif params[:search][:distance] != "0" && !(params[:search][:address].present?) && !(params[:search][:type_of_route].present?)
+        @routes = @routes.search_by_distance(params[:distance]) if params[:distance].present?
+      elsif params[:search][:type_of_route].present? && params[:search][:distance] == "0" && !(params[:search][:address].present?)
+        raise
+      elsif params[:search][:address].present? && params[:search][:distance] != "0" && !(params[:search][:type_of_route].present?)
+        raise
+      elsif params[:search][:address].present? && params[:search][:type_of_route].present? && params[:search][:distance] == "0"
+        raise
+      elsif params[:search][:distance] != "0" && params[:search][:type_of_route].present? && !(params[:search][:address].present?)
+        raise
+      elsif params[:search][:address].present? && params[:search][:distance] != "0" && params[:search][:type_of_route].present?
+        raise
+      else
+        @routes = policy_scope(Route).where.not(name: nil) # precisa estar duplicado porque senao bate no policy
+      end
     else
-      @routes = policy_scope(Route).where.not(name: nil)
-
-      if params[:type_of_route].present?
-        @routes = Route.where(type_of_route: params[:type_of_route])
-      else
-        @routes = policy_scope(Route).where.not(name: nil)
-      end
-
-      if params[:search].present? && params[:search][:distance].present?
-        distance_value = params[:search][:distance].to_f
-        puts "BATATAAAAAAAAAAAAA"
-        puts distance_value
-        @routes = @routes.where(distance: distance_value)
-      else
-        @routes = policy_scope(Route).where.not(name: nil)
-      end
+      @routes = policy_scope(Route).where.not(name: nil) # precisa estar duplicado porque senao bate no policy
     end
-end
+
+    # @routes = @routes.search_by_distance(params[:distance]) if params[:distance].present?
+    #   # if params[:search].present? && params[:search][:distance].present?
+    #   #   distance_value = params[:search][:distance].to_i
+    #   #   @routes = @routes.where(distance: distance_value)
+    #   # else
+    #   #   @routes = policy_scope(Route).where.not(name: nil)
+    #   # end
+    #   @routes = @routes.search_by_type_of_route(params[:type_of_route]) if params[:type_of_route].present?
+    #   # if params[:type_of_route].present?
+    #   #   @routes = Route.where(type_of_route: params[:type_of_route])
+    #   # else
+    #   #   @routes = policy_scope(Route).where.not(name: nil)
+    #   # end
+  end
 
   def show
     authorize @route

@@ -1,4 +1,5 @@
 class Route < ApplicationRecord
+  include PgSearch::Model
   belongs_to :creator, class_name: "User"
   has_many :rides
   has_many :points, dependent: :destroy
@@ -11,9 +12,9 @@ class Route < ApplicationRecord
 
   TYPE_OF_ROUTE = ['Urban', 'Suburban', 'CountrySide', 'Mountain']
 
-  # pg_search_scope :search_by_type_of_route, against: :type_of_route
+  pg_search_scope :search_by_type_of_route, against: :type_of_route
 
-  # pg_search_scope :search_by_distance, against: :distance
+  pg_search_scope :search_by_distance, against: :distance
 
   def total_distance
     distance = 0
