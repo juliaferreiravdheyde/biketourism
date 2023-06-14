@@ -7,7 +7,7 @@ class RoutesController < ApplicationController
 
 
   def index
-    @routes = Route.all
+    @routes = Route.where.not(name: nil)
     @address = ""
     @distance = 0
     @type_of_route = nil
@@ -136,8 +136,8 @@ class RoutesController < ApplicationController
   def route_params
     params.require(:route).permit(:name, :description, :distance, :type_of_route, :positive_elevation, photos: [])
   end
-end  
-  
+end
+
 
   # # Build the SQL query using ActiveRecord syntax
   # query = <<-SQL
@@ -159,7 +159,7 @@ end
         # # Execute the query using ActiveRecord
         # routes_within_radius = Route.find_by_sql([query, user_latitude, user_latitude, user_latitude, user_longitude, user_longitude, radius_km])
 
- 
+
 
       #   if @address.present? && (params[:search][:distance] == "0") && !(@type_of_route.present?)
       #     address = params[:search][:address]
@@ -184,6 +184,3 @@ end
       #     #   # Execute the query using ActiveRecord
       #     @routes = policy_scope(Route).find_by_sql([query, latitude, latitude, latitude, longitude, longitude, radius])
       #   elsif params[:search][:distance] != "0" && !(params[:search][:address].present?) && !(params[:search][:type_of_route].present?)
-
-
-
