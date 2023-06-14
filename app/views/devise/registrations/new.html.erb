@@ -1,5 +1,5 @@
-<div class="container mt-3">
-  <h2 class="mb-3 cor-12 font-1-m-b">Sign up</h2>
+<div class="container mt-4">
+  <h2 class="mb-3 cor-12 font-1-xl">Sign up</h2>
 
   <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
     <%= f.error_notification %>
@@ -22,7 +22,7 @@
     </div>
 
     <div class="form-actions">
-      <%= f.button :submit, "Sign up", class:"btn-primary btn-block mb-3 w-100" %>
+      <%= f.button :submit, "Sign up", class:"btn-primary btn-block mb-3 w-100 font-1-m" %>
     </div>
   <% end %>
 
