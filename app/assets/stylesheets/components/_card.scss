@@ -71,11 +71,24 @@
     display: inline-block;
   }
 
+  .type::before {
+    content: "";
+    display: block;
+    height: 2px;
+    width: 8px;
+    margin: 0 6px;
+    color: var(--cor-p1);
+    position: relative;
+    top: -3px;
+    left: -3px;
+   }
+
+
   h3 {
     font: 500 1.125rem/1.35 "Roboto", sans-serif;
     text-transform: capitalize;
     color: var(--cor-11);
-    margin-bottom: 0.4rem;
+    margin-bottom: 0.3rem;
   }
 
   p {
@@ -104,11 +117,12 @@
    display: inline-block;
    height: 3px;
    width: 3px;
-   margin: 0 8px;
+   margin: 0 6px;
    border-radius: 50%;
    background-color: var(--cor-7);
    position: relative;
-   top: -2px;
+   top: -3px;
+   left: -3px;
   }
 
   .link {
@@ -119,8 +133,8 @@
 
   .bookmark {
     position: absolute;
-    top: 16px;
-    right: 16px;
+    top: 8px;
+    right: 2px;
     font-size: 14px;
     border: 0;
     background-color: transparent;
@@ -144,7 +158,6 @@
 .pin-button {
   z-index: 30;
   border: 0;
-  border-radius: 2px;
   border-radius: 50px;
   width: 24px;
   height: 24px;

@@ -1,9 +1,15 @@
 // Specific CSS for your home-page
+.content-size {
+  margin-bottom: 50px;
+  }
+
 .btn-pin {
-  background-color: #060606;
-  color: #fff;
-  padding: 16px 10px;
+  background-color: var(--cor-p1);;
+  color: var(--cor10);
+  padding: 0.8rem;
   display: block;
   text-align: center;
-  border-radius: 4px;
+  border-radius: 50px;
+  margin: 0.8rem 0;
+  font: 600 1.125rem/1.35 "Poppins", sans-serif;
 }
