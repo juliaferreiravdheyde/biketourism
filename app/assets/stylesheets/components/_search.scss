@@ -1,0 +1,19 @@
+.search-bar {
+  position: relative;
+  border: 1px solid #afadad00;
+  .search-input {
+    width: 100%;
+    border-radius: 100px !important;
+  }
+  .search-filter {
+    position: absolute;
+    top: 0;
+    right:0;
+    border-radius:50% !important;
+    color: var(--cor-10);
+    background-color: var(--cor-2);
+  }
+  .btn-filter {
+    border-radius:50% !important;
+  }
+}
