@@ -6,18 +6,10 @@ export default class extends Controller {
   static values = { id: Number }
 
   connect() {
-    console.log("Conneed")
-    console.log(this.mapTarget.dataset.mapMarkersValue)
+    console.log("Tracker connected")
   }
 
-  // mapController() {
-  //   return this.application.getControllerForElementAndIdentifier(this.mapTarget, 'map')
-  // }
-
   showForm() {
-    console.log("in show form");
-    // console.log(this.trackerTarget);
-    // console.log(this.registerformTarget);
     this.trackerTarget.classList.add("d-none");
     this.registerformTarget.classList.remove("d-none");
   }
@@ -30,24 +22,23 @@ export default class extends Controller {
       this.startstopTarget.classList.add("started");
       this.saveTarget.classList.add("d-none");
       this.discardTarget.classList.add("d-none");
-      // this.recordgifTarget.classList.remove("d-none");
-      this.startstopTarget.innerHTML = '<i class="fa-solid fa-stop" style="font-size: 50px;"></i>';
+      this.recordgifTarget.classList.remove("d-none");
       this.statusTarget.textContent = "Recording route..."
+      this.startstopTarget.innerHTML = '<i class="fa-solid fa-stop" style="font-size: 50px;"></i>';
     } else {
       clearInterval(this.intervalID);
       this.startstopTarget.classList.remove("started");
       this.startstopTarget.classList.add("stopped");
       this.saveTarget.classList.remove("d-none");
       this.discardTarget.classList.remove("d-none");
-      this.startstopTarget.textContent = "Continue Tracking";
       this.recordgifTarget.classList.add("d-none");
       this.statusTarget.textContent = "Recording paused"
+      this.startstopTarget.textContent = "Continue Tracking";
       this.loadMarkers()
     }
   }
 
   loadMarkers() {
-    console.log("Loading markers")
     fetch( `/routes/${this.idValue}/record`, {headers: {"Accept": "text/plain"}} )
       .then((response) => response.text())
       .then((data) => {
@@ -60,8 +51,6 @@ export default class extends Controller {
   }
 
   getCoords() {
-
-    console.log(this.idValue)
     if (!navigator.geolocation) {
       this.statusTarget.textContent = "Geolocation is not supported by your browser";
     } else {

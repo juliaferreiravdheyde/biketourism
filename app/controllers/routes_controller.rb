@@ -45,7 +45,7 @@ class RoutesController < ApplicationController
   end
 
   def my_routes
-    @routes = policy_scope(Route).where(user: current_user).where.not(name: nil)
+    @my_routes = policy_scope(Route).where(creator: current_user).where.not(name: nil)
   end
 
   def show
@@ -95,6 +95,7 @@ class RoutesController < ApplicationController
     elsif @route.update(route_params)
       @route.distance = @route.total_distance
       @route.positive_elevation = @route.total_positive_elevation
+      @route.save
       redirect_to route_path(@route), notice: "Route successfully shared!"
     else
       render :record, status: :unprocessable_entity
