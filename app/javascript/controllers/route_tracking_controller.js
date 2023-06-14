@@ -23,8 +23,10 @@ export default class extends Controller {
       this.saveTarget.classList.add("d-none");
       this.discardTarget.classList.add("d-none");
       this.recordgifTarget.classList.remove("d-none");
+      this.mapTarget.classList.add("d-none");
       this.statusTarget.textContent = "Recording route..."
       this.startstopTarget.innerHTML = '<i class="fa-solid fa-stop" style="font-size: 50px;"></i>';
+      document.querySelector('.footer').classList.add('d-none');
     } else {
       clearInterval(this.intervalID);
       this.startstopTarget.classList.remove("started");
@@ -32,6 +34,7 @@ export default class extends Controller {
       this.saveTarget.classList.remove("d-none");
       this.discardTarget.classList.remove("d-none");
       this.recordgifTarget.classList.add("d-none");
+      this.mapTarget.classList.add("d-none");
       this.statusTarget.textContent = "Recording paused"
       this.startstopTarget.textContent = "Continue Tracking";
       this.loadMarkers()

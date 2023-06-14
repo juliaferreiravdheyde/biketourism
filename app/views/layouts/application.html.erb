@@ -17,12 +17,10 @@
     <main class="flex-shrink-0">
       <%= render "shared/navbar" %>
       <%= render "shared/flashes" %>
-      <div class="content-size">
+      <div class="<%= action_name == 'home' ? 'content-size-home' : 'content-size' %>">
         <%= yield %>
       </div>
     </main>
-    <% unless controller_name == "routes" && action_name == "record" %>
       <%= render "shared/footer" %>
-    <% end %>
   </body>
 </html>

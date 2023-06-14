@@ -1,4 +1,0 @@
-<% route.photos.each do |photo| %>
-  <%= cl_image_tag photo.key %>
-  <%= link_to 'Remove', delete_route_photo_path(photo), data: { turbo_method: :delete, turbo_confirm: "Delete photo?" }%>
-<% end %>
