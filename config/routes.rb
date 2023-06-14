@@ -16,7 +16,8 @@ Rails.application.routes.draw do
   resources :favorites, only: %i[index destroy]
   resources :rides, only: %i[index destroy]
 
-  get '/test', to: 'pages#test'
+  # get '/test', to: 'pages#test'
+  get '/myroutes', to: 'routes#my_routes', as: :my_routes
   get '/routes/:id/record', to: 'routes#record', as: :record
   patch '/routes/:id/register', to: 'routes#register', as: :register
   delete '/photos/:id', to: 'routes#delete_image_attachment', as: :delete_route_photo

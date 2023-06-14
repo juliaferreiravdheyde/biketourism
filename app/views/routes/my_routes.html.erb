@@ -1,0 +1,11 @@
+<div class="container mt-3">
+<h1 class="mb-3 cor-12 font-1-m-b">My Posted Routes</h1>
+
+<%= render "shared/searchbar" %>
+
+<% if @my_routes.blank? %>
+  <p>No routes created</p>
+<% else %>
+  <%= render "shared/route_cards_vertical", routes: @my_routes %>
+<% end %>
+</div>
