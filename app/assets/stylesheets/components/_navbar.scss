@@ -24,9 +24,13 @@
   background: var(--cor-p1);
   margin-top: 0.625rem;
   position: relative;
-  } 
+  }
 
 .nav-link:hover {
   color: var(--cor-p1);
   transition: 0.5ms;
+ }
+
+ .navbar-toggler:focus {
+  box-shadow: none;
  }

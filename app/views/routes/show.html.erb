@@ -13,7 +13,7 @@
     </div>
 
 
-    <div class='route-creator-show d-flex align-items-center justify-content-end gap-1'>
+    <div class='route-creator-show d-flex align-items-center justify-content-end'>
     <h3 class="font-2-xss cor-12">Created by <%= @route.creator.first_name %></h3>
     <% if @route.creator.photo.attached? %>
       <%= cl_image_tag current_user.photo.key, class: "avatar", alt: "dropdown menu" %>
