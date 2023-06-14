@@ -7,40 +7,22 @@ class RoutesController < ApplicationController
 
 
   def index
-    @route = Route.new
-    if ( params[:search].present? ? params[:search][:address].present? : false )
-      address = params[:search][:address]
-      coordinates = Geocoder.coordinates(address)
-      latitude = coordinates[0]
-      longitude = coordinates[1]
-      radius = 10
-      query = <<-SQL
-        SELECT DISTINCT routes.*
-        FROM routes
-        INNER JOIN points ON points.route_id = routes.id
-        WHERE (
-          2 * 6371 * asin(
-            sqrt(
-              sin((radians(points.latitude) - radians(?)) / 2) * sin((radians(points.latitude) - radians(?)) / 2) +
-              cos(radians(?)) * cos(radians(points.latitude)) *
-              sin((radians(points.longitude) - radians(?)) / 2) * sin((radians(points.longitude) - radians(?)) / 2)
-            )
-          )
-        ) <= ?
-      SQL
+    @routes = Route.all
+    @address = ""
+    @distance = 0
+    @type_of_route = nil
 
-      # Execute the query using ActiveRecord
-      @routes = policy_scope(Route).find_by_sql([query, latitude, latitude, latitude, longitude, longitude, radius])
-    else
-      @routes = policy_scope(Route).where.not(name: nil)
+    if params[:search].present?
+      @address = params[:search][:address]
+      @distance =  params[:search][:distance].to_i
+      @type_of_route = params[:search][:type_of_route]
 
-    if params[:type_of_route].present?
-      # Filtrar as rotas pelo tipo de rota
-      @routes = Route.where(type_of_route: params[:type_of_route])
-    else
-      # Obter todas as rotas
-      @routes = policy_scope(Route).where.not(name: nil)
-    end
+      @routes = @routes.where("distance <= ?", @distance * 1000 ) if @distance.present? && @distance > 0
+      @routes = @routes.where(type_of_route: @type_of_route ) if @type_of_route.present?
+      if @address.present?
+        points = Point.near(@address, 10)
+        @routes = @routes.where(id: points.map(&:route).pluck(:id).uniq) if points.present?
+      end
     end
   end
 
@@ -148,6 +130,8 @@ class RoutesController < ApplicationController
   def route_params
     params.require(:route).permit(:name, :description, :distance, :type_of_route, :positive_elevation, photos: [])
   end
+end  
+  
 
   # # Build the SQL query using ActiveRecord syntax
   # query = <<-SQL
@@ -155,16 +139,45 @@ class RoutesController < ApplicationController
   #   FROM routes
   #   INNER JOIN points ON points.route_id = routes.id
   #   WHERE (
-  #     2 * 6371 * asin(
-  #       sqrt(
-  #         sin((radians(points.latitude) - radians(?)) / 2) * sin((radians(points.latitude) - radians(?)) / 2) +
-  #         cos(radians(?)) * cos(radians(points.latitude)) *
-  #         sin((radians(points.longitude) - radians(?)) / 2) * sin((radians(points.longitude) - radians(?)) / 2)
-  #       )
-  #     )
-  #   ) <= ?
-  # SQL
 
-  # # Execute the query using ActiveRecord
-  # routes_within_radius = Route.find_by_sql([query, user_latitude, user_latitude, user_latitude, user_longitude, user_longitude, radius_km])
-end
+    #     2 * 6371 * asin(
+      #       sqrt(
+        #         sin((radians(points.latitude) - radians(?)) / 2) * sin((radians(points.latitude) - radians(?)) / 2) +
+        #         cos(radians(?)) * cos(radians(points.latitude)) *
+        #         sin((radians(points.longitude) - radians(?)) / 2) * sin((radians(points.longitude) - radians(?)) / 2)
+        #       )
+        #     )
+        #   ) <= ?
+        # SQL
+
+        # # Execute the query using ActiveRecord
+        # routes_within_radius = Route.find_by_sql([query, user_latitude, user_latitude, user_latitude, user_longitude, user_longitude, radius_km])
+
+ 
+
+      #   if @address.present? && (params[:search][:distance] == "0") && !(@type_of_route.present?)
+      #     address = params[:search][:address]
+      #     coordinates = Geocoder.coordinates(address)
+      #     latitude = coordinates[0]
+      #     longitude = coordinates[1]
+      #     radius = 10
+      #     query = <<-SQL
+      #       SELECT DISTINCT routes.*
+      #       FROM routes
+      #       INNER JOIN points ON points.route_id = routes.id
+      #       WHERE (
+      #       2 * 6371 * asin(
+      #         sqrt(
+      #           sin((radians(points.latitude) - radians(?)) / 2) * sin((radians(points.latitude) - radians(?)) / 2) +
+      #           cos(radians(?)) * cos(radians(points.latitude)) *
+      #             sin((radians(points.longitude) - radians(?)) / 2) * sin((radians(points.longitude) - radians(?)) / 2)
+      #             )
+      #           )
+      #         ) <= ?
+      #     SQL
+      #     #   # Execute the query using ActiveRecord
+      #     @routes = policy_scope(Route).find_by_sql([query, latitude, latitude, latitude, longitude, longitude, radius])
+      #   elsif params[:search][:distance] != "0" && !(params[:search][:address].present?) && !(params[:search][:type_of_route].present?)
+
+
+
