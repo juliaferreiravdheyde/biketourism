@@ -97,7 +97,7 @@ Unsplash.configure do |config|
   rand(2..5).times do
     route_photo = Unsplash::Photo.random(query: "#{route1.type_of_route} Route")
     if route_photo.present?
-      route1.photos.attach(io: URI.open(route_photo.urls.regular), filename: "route_photo.jpg", metadata: { user_id: route1.creator_id } )
+      route1.photos.attach(io: URI.open(route_photo.urls.regular), filename: "#{route1.id}-#{route1.creator_id}", metadata: { user_id: route1.creator_id } )
       route1.save(validate: false)
     else
       puts "Failed to find a Route photo"
@@ -107,7 +107,7 @@ Unsplash.configure do |config|
   rand(2..5).times do
     route_photo = Unsplash::Photo.random(query: "#{route2.type_of_route} Route")
     if route_photo.present?
-      route2.photos.attach(io: URI.open(route_photo.urls.regular), filename: "route_photo.jpg", metadata: { user_id: route2.creator_id })
+      route2.photos.attach(io: URI.open(route_photo.urls.regular), filename: "#{route2.id}-#{route2.creator_id}", metadata: { user_id: route2.creator_id })
       route2.save(validate: false)
     else
       puts "Failed to find a Route photo"

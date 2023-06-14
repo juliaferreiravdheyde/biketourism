@@ -8,7 +8,7 @@
 
     <div class="route-title-show">
       <div class="container">
-        <h1 class="font-1-m-b cor-11 title-show"><%= @route.name %></span></h1>
+        <h1 class="font-1-m-b cor-11 title-show text-center"><%= @route.name %></span></h1>
       </div>
     </div>
 
@@ -26,20 +26,8 @@
 
 <div class="container mt-3 mb-4">
 
-  <% if @route.photos.attached?%>
-    <ul class="route-pictures">
-      <% @route.photos.each do |photo| %>
-      <li>
-        <%= cl_image_tag photo.key %>
-      </li>
-      <% end %>
-    </ul>
-  <% end  %>
-
-
   <div class="route-details-show mt-4 mb-4">
     <ul>
-
       <div class="details-type d-flex gap-2 mt-3 mb-2">
       <li class="d-flex flex-column align-items-center"><span class="font-2-xss cor-8">Type of Route</span><span class="font-2-s cor-11"><%= @route.type_of_route %></span></li>
       <li class="d-flex flex-column align-items-center"><span class="font-2-xss cor-8">Distance</span> <span class="font-2-s cor-11"> <%= @route.distance < 1000 ? "#{@route.distance}m" : "#{(@route.distance / 1000.0).round(2)}km" %></span></li>
@@ -61,11 +49,12 @@
     </div>
   </div>
 
+  <%= render 'shared/route_photos', route: @route %>
 
  </div>
 
   <div class="buttons-show">
-    <% if policy(@route).edit? %>
+    <% if policy(@route).edit_description? %>
       <%= link_to "Edit", edit_route_path(@route), class: 'btn btn-primary' %>
     <% elsif user_signed_in? %>
       <%= link_to "Add Photos", edit_route_path(@route), class: 'btn btn-primary' %>

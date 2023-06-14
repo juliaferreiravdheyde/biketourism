@@ -33,4 +33,12 @@ class RoutePolicy < ApplicationPolicy
   def destroy?
     record.creator == user
   end
+
+  def edit_description?
+    record.creator == user
+  end
+
+  def delete_photo?(photo)
+    photo.metadata[:user_id] == user.id || record.creator == user
+  end
 end
