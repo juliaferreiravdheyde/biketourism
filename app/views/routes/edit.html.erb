@@ -2,7 +2,7 @@
   <h1 class="mb-3 cor-12 font-1-m-b">Edit Route</h1>
 
   <% if !@route.photos.reject {|photo| photo.id.nil? }.empty? %>
-    <%= render 'route_photos', route: @route %>
+    <%= render 'shared/route_photos', route: @route %>
   <% end %>
 
   <%= simple_form_for @route do |f| %>

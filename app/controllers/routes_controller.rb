@@ -122,7 +122,7 @@ class RoutesController < ApplicationController
   def update
     authorize @route
     if params[:route][:photos].present?
-      @route.photos.attach(params[:route][:photos])
+      @route.photos.attach(params[:route][:photos], { metadata: { user_id: @current_user.id } })
     end
     if @route.update(route_params.except('photos'))
       redirect_to route_path(@route), notice: "Your route was updated!"

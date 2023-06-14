@@ -23,7 +23,7 @@ class RoutePolicy < ApplicationPolicy
   end
 
   def update?
-    record.creator == user
+    user.present?
   end
 
   def edit?
