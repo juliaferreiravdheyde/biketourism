@@ -30,13 +30,12 @@
 	scroll-snap-align: center;
 	display: inline-block;
 	border-radius: 3px;
-  }
+}
 
-  .gallery li:last-child {
-    margin: 0 auto;
-    align-self: center;
-
-  }
+.gallery li:last-child {
+  margin: 0 auto;
+  align-self: center;
+}
 
 
 .card-product {
@@ -44,7 +43,6 @@
   display: flex;
   flex-direction: column;
   position: relative;
-
 }
 
 
@@ -62,27 +60,43 @@
   flex: 1;
   position: relative;
 
-
-
-
   li {
     margin: 0;
     display: block;
   }
 
-  .distance {
-    font-size: 14px;
-    color: var(--cor-8);
+  .type {
+    font: 400 0.875rem/1.1 "Roboto", sans-serif;
+    color: var(--cor-9);
     display: inline-block;
-    line-height: 1.0;
+  }
+
+  h3 {
+    font: 500 1.125rem/1.35 "Roboto", sans-serif;
+    text-transform: capitalize;
+    color: var(--cor-11);
+    margin-bottom: 0.4rem;
+  }
+
+  p {
+    font: 400 0.875rem/1.0 "Roboto", sans-serif;
+    color: var(--cor-7);
+    white-space: nowrap;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .distance {
+    font: 400 0.875rem/1.0 "Roboto", sans-serif;
+    color: var(--cor-7);
+    display: inline-block;
   }
 
   // .elevation {
-  //   font-size: 14px;
+  //   font: 400 0.875rem/1.0 "Roboto", sans-serif;
   //   color: var(--cor-7);
   //   display: inline-block;
-  //   margin: 0;
-  //   line-height: 1.2;
   // }
 
   // .elevation::before {
@@ -96,30 +110,6 @@
   //  position: relative;
   //  top: -2px;
   // }
-
-
-  .type {
-    font-size: 14px;
-    color: var(--cor-9);
-    display: inline-block;
-  }
-
-  h3 {
-  font-size: 18px;
-  text-transform: capitalize;
-  font-weight: 400;
-  color: var(--cor-12)
-  }
-
-  p {
-    font-size: 14px;
-    color: var(--cor-7);
-    line-height: 1.2;
-    white-space: nowrap;
-    width: 100%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
 
   .link {
     position: absolute;
@@ -135,10 +125,6 @@
     border: 0;
     background-color: transparent;
   }
-
-
-
-
 }
 
 .button-arrow-right {
@@ -166,4 +152,4 @@
 
 .pin-button.pinned {
     color: var(--cor-p1);
-  }
+}

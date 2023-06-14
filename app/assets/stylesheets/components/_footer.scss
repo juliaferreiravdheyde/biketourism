@@ -1,9 +1,11 @@
 footer {
-background-color: var(--cor-0);
-padding: 20px 0 35px 0;
+background-color: $light-gray-2;
+padding: 12px 0 26px 0;
 width: 100%;
 bottom: 0;
 position: fixed;
+box-shadow: 0 -5px 5px -5px rgba(0, 0, 0, 0.1);
+;
 }
 
 
@@ -32,13 +34,15 @@ position: fixed;
     height: 24px;
 
     span {
-      color: var(--cor-6);
+      color: var(--cor-7);
       display: block;
+      font: 400 0.875rem/1.43 "Roboto", sans-serif;
+
       }
 
     i {
       font-size: 20px;
-      color: var(--cor-6);
+      color: var(--cor-7);
     }
 
     img {
