@@ -1,8 +1,7 @@
 <!-- Button trigger modal -->
-
 <div class="row g-0 d-flex align-items-start search-bar">
   <div class="col border-end-0">
-     <%= simple_form_for :search, url: routes_path, method: "GET", html: { } do |f| %>
+    <%= simple_form_for :search, url: routes_path, method: "GET", html: { } do |f| %>
       <div class="search-icon">
         <i class="fas fa-search"></i>
       </div>
@@ -16,8 +15,6 @@
   </div>
 </div>
 
-
-
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -28,11 +25,14 @@
       </div>
       <div class="modal-body">
         <%= simple_form_for :search, url: routes_path , method: "GET", html: {class: 'form-inline' } do |f| %>
-            <%= f.input :address, input_html: {value: @address }, label: false, required: false, placeholder:"Search City ex: Ribeirão Preto"  %>
+            <%= f.input :address, input_html: {value: address }, label: false, required: false, placeholder:"Search City ex: Ribeirão Preto"  %>
             <%= f.input :distance, as: :range, input_html: { min: 0, max: 100, step: 1, value: distance }, label: "Distance (km)", required: false  %>
             <%= f.input :type_of_route, as: :select, collection: Route::TYPE_OF_ROUTE, include_blank: "All Types", label: "Type of Route", selected: type_of_route, required: false  %>
             <%= f.submit "Search", class: "btn btn-primary" %>
           <% end %>
+      </div>
+      <div class="modal-footer">
+
       </div>
     </div>
   </div>
