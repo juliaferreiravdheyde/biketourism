@@ -29,7 +29,22 @@
       <div class="modal-body">
         <%= simple_form_for :search, url: routes_path , method: "GET", html: {class: 'form-inline' } do |f| %>
             <%= f.input :address, input_html: {value: @address }, label: false, required: false, placeholder:"Search City ex: Ribeirão Preto"  %>
-            <%= f.input :distance, as: :range, input_html: { min: 0, max: 100, step: 1, value: distance }, label: "Distance (km)", required: false  %>
+            <div class="range" data-controller= "slider" >
+              <div class="range-slider">
+                <span class="range-selected" data-slider-target= "range"></span>
+              </div>
+              <div class="range-input">
+                <input type="range" class="min" min="0" max="1000" value="300" step="10" data-slider-target= "minslider" data-action='input->slider#changeRange'>
+                <input type="range" class="max" min="0" max="1000" value="700" step="10" data-slider-target= "maxslider" data-action='input->slider#changeRange'>
+              </div>
+              <div class="range-price">
+                <label for="min">Min</label>
+                <input type="number" name="min" value="300" data-slider-target= "minvalue">
+                <label for="max">Max</label>
+                <input type="number" name="max" value="700" data-slider-target= "maxvalue">
+              </div>
+            </div>
+
             <%= f.input :type_of_route, as: :select, collection: Route::TYPE_OF_ROUTE, include_blank: "All Types", label: "Type of Route", selected: type_of_route, required: false  %>
             <%= f.submit "Search", class: "btn btn-primary" %>
           <% end %>
