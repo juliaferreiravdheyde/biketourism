@@ -12,22 +12,22 @@
   </div>
 
     <%= link_to route do  %>
-    <% if route.photos.attached? %>
-      <%= cl_image_tag route.photos[0].key, class: "product-image primary-image", data: { 'picker-target': "pimage" } %>
-    <% else %>
-      <% default_image_url = case route.type_of_route
-                             when "Urban"
-                               then "urban.webp"
-                             when "Suburban"
-                               then "suburban.webp"
-                             when "CountrySide"
-                               then "countryside.webp"
-                             when "Mountain"
-                               then "mountain.webp"
-                             end
-      %>
-      <%= image_tag default_image_url, class: "product-image primary-image" %>
-    <% end %>
+      <% if route.photos.attached? %>
+        <%= cl_image_tag route.photos[0].key, class: "product-image primary-image", data: { 'picker-target': "pimage" } %>
+      <% else %>
+        <% default_image_url = case route.type_of_route
+                              when "Urban"
+                                then "urban.webp"
+                              when "Suburban"
+                                then "suburban.webp"
+                              when "CountrySide"
+                                then "countryside.webp"
+                              when "Mountain"
+                                then "mountain.webp"
+                              end
+        %>
+        <%= image_tag default_image_url, class: "product-image primary-image" %>
+      <% end %>
      <% end %>
 
     <div class="card-route-details">

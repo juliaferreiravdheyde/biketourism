@@ -47,6 +47,15 @@
 
 
 .card-product > a {
+  img {
+  height: 200px;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 16px;
+  overflow: hidden;
+}
+}
+.card-product > img {
   height: 200px;
   width: 100%;
   object-fit: cover;
@@ -92,6 +101,14 @@
       margin-bottom: 0.3rem;
     }
   }
+
+  h3 {
+      font: 500 1.125rem/1.35 "Roboto", sans-serif;
+      text-transform: capitalize;
+      color: var(--cor-11) !important;
+      margin-bottom: 0.3rem;
+  }
+
 
   p {
     font: 400 0.875rem/1.0 "Roboto", sans-serif;
