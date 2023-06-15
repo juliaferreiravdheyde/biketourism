@@ -1,8 +1,7 @@
 <!-- Button trigger modal -->
-
 <div class="row g-0 d-flex align-items-start search-bar">
   <div class="col border-end-0">
-     <%= simple_form_for :search, url: routes_path, method: "GET", html: { } do |f| %>
+    <%= simple_form_for :search, url: routes_path, method: "GET", html: { } do |f| %>
       <div class="search-icon">
         <i class="fas fa-search"></i>
       </div>
@@ -15,8 +14,6 @@
     </button>
   </div>
 </div>
-
-
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -51,6 +48,9 @@
             <%= f.input :type_of_route, label: false, as: :select, collection: Route::TYPE_OF_ROUTE, prompt: 'Choose route type', include_blank: "All Types", input_html: { class: 'mt-4' }, selected: type_of_route, required: false  %>
             <%= f.submit "Search", class: "btn btn-primary" %>
           <% end %>
+      </div>
+      <div class="modal-footer">
+
       </div>
     </div>
   </div>

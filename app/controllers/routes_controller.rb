@@ -19,10 +19,11 @@ class RoutesController < ApplicationController
       @type_of_route = params[:search][:type_of_route]
 
       @routes = @routes.where("distance >= ? AND distance <= ?", @min_distance * 1000, @max_distance * 1000)
+#     @routes = @routes.where("distance <= ?", @distance * 1000) if @distance.present? && @distance > 0
       @routes = @routes.where(type_of_route: @type_of_route ) if @type_of_route.present?
       if @address.present?
         points = Point.near(@address, 10)
-        @routes = @routes.where(id: points.map(&:route).pluck(:id).uniq) if points.present?
+        @routes = @routes.where(id: points.map(&:route).pluck(:id).uniq) 
       end
     end
   end

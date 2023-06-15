@@ -54,10 +54,10 @@ export default class extends Controller {
   #addMarkersToMap() {
     const startMarker = this.markersValue[0]
     const stopMarker = this.markersValue[this.markersValue.length - 1]
-    new mapboxgl.Marker()
+    new mapboxgl.Marker({ "color": "#69D94A" })
       .setLngLat([ startMarker.lng, startMarker.lat ])
       .addTo(this.map)
-    new mapboxgl.Marker()
+    new mapboxgl.Marker({ "color": "#69D94A" })
       .setLngLat([ stopMarker.lng, stopMarker.lat ])
       .addTo(this.map)
   }

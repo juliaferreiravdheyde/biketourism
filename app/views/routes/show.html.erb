@@ -6,7 +6,7 @@
     data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
   </div>
 
-    <div class="route-title-show">
+    <div class="route-title-show" id="show-route-name">
       <div class="container">
         <h1 class="font-1-m-b cor-11 title-show text-center"><%= @route.name %></span></h1>
       </div>
@@ -14,7 +14,7 @@
 
 
     <div class='route-creator-show d-flex align-items-center justify-content-end'>
-    <h3 class="font-2-xss cor-12">Created by <%= @route.creator.first_name %></h3>
+    <h3 class="font-2-xss cor-11">Created by <%= @route.creator.first_name %></h3>
     <% if @route.creator.photo.attached? %>
       <%= cl_image_tag current_user.photo.key, class: "avatar", alt: "dropdown menu" %>
     <% else %>
@@ -57,7 +57,7 @@
     <% if policy(@route).edit_description? %>
       <%= link_to "Edit", edit_route_path(@route), class: 'btn btn-primary' %>
     <% elsif user_signed_in? %>
-      <%= link_to "Add Photos", edit_route_path(@route), class: 'btn btn-primary' %>
+      <%= link_to "Add Photos", edit_route_path(@route), class: 'btn btn-back' %>
     <% end %>
     <% if policy(@route).destroy? %>
       <%= link_to "Delete", route_path(@route), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: 'btn btn-danger' %>

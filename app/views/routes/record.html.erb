@@ -12,17 +12,17 @@
           <%= image_tag('recording.gif', class: 'd-none', data: { route_tracking_target: 'recordgif'} )%>
         <%= render "shared/map", markers: @markers ? @markers : [], height: "300px", html_options: { class:  @markers ? '' : 'd-none' }%>
       </div>
-      <div class="container mt-5">
+      <div class="container mt-3">
       <div class="d-flex flex-column align-items-center"  data-route-tracking-target='tracker' class=<%= 'd-none' if @route.errors.any? %>>
         <button class='btn-record mb-2' data-route-tracking-target='startstop' data-action='click->route-tracking#trackRoute'>Track Route</button>
-        <div class="recording mt-4 mb-4">
+        <div class="recording mt-4">
           <p data-route-tracking-target='status', class='font-2-m cor-11 text-center mb-2'></p>
           <p data-route-tracking-target='position', class='font-2-xs cor-8 text-center'></p>
         </div>
       </div>
 
     <%= simple_form_for @route, url: register_path(@route), method: 'PATCH', html: { class: @route.errors.any? ? "" : "d-none", data: { route_tracking_target: 'registerform'} } do |f| %>
-    <h2 class="mb-3 cor-12 font-1-m-b">Post your route</h2>
+    <h2 class="mb-3 cor-11 font-1-m-b">Post your route</h2>
       <div class="form-inputs cor-9 font-2-xs">
         <%= f.input :name %>
         <%= f.input :description %>
