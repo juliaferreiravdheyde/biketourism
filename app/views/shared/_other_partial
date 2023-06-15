@@ -1,0 +1,2 @@
+<%= f.input :distance, as: :range, input_html: { min: 0, max: 100, step: 1, value: 20 }, label: "Min Dist", required: false  %>
+<%= f.input :distance, as: :range, input_html: { min: 0, max: 100, step: 1, value: 70 }, label: "Max Dist", required: false  %>

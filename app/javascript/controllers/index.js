@@ -16,5 +16,11 @@ application.register("map", MapController)
 import PinController from "./pin_controller"
 application.register("pin", PinController)
 
+import PinnedController from "./pinned_controller"
+application.register("pinned", PinnedController)
+
 import RouteTrackingController from "./route_tracking_controller"
 application.register("route-tracking", RouteTrackingController)
+
+import SliderController from "./slider_controller"
+application.register("slider", SliderController)
