@@ -1,11 +1,2 @@
-              <div class="range-slider">
-                <span class="range-selected"></span>
-              </div>
-            <%= f.input :distance, as: :range, input_html: { min: 0, max: 100, step: 1, value: 20 }, label: "Min Dist", required: false  %>
-            <%= f.input :distance, as: :range, input_html: { min: 0, max: 100, step: 1, value: 70 }, label: "Max Dist", required: false  %>
-               <div class="range-price d-flex w-80">
-                <label for="min">Min</label>
-                <input type="number" name="min" value="0">
-                <label for="max">Max</label>
-                <input type="number" name="max" value="70">
-              </div>
+<%= f.input :distance, as: :range, input_html: { min: 0, max: 100, step: 1, value: 20 }, label: "Min Dist", required: false  %>
+<%= f.input :distance, as: :range, input_html: { min: 0, max: 100, step: 1, value: 70 }, label: "Max Dist", required: false  %>

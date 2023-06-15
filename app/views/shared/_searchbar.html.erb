@@ -23,29 +23,32 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Choose your Route</h1>
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Find a route</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <%= simple_form_for :search, url: routes_path , method: "GET", html: {class: 'form-inline' } do |f| %>
             <%= f.input :address, input_html: {value: @address }, label: false, required: false, placeholder:"Search City ex: Ribeirão Preto"  %>
             <div class="range" data-controller= "slider" >
-              <div class="range-slider">
-                <span class="range-selected" data-slider-target= "range"></span>
-              </div>
-              <div class="range-input">
-                <input type="range" class="min" min="0" max="1000" value="300" step="10" data-slider-target= "minslider" data-action='input->slider#changeRange'>
-                <input type="range" class="max" min="0" max="1000" value="700" step="10" data-slider-target= "maxslider" data-action='input->slider#changeRange'>
-              </div>
-              <div class="range-price">
-                <label for="min">Min</label>
-                <input type="number" name="min" value="300" data-slider-target= "minvalue" data-action='input->slider#changeValue'>
+              <div class="range-price d-flex justify-content-between align-items-start mt-2 mb-2">
+                <%= f.input :min, label: "min", wrapper_html: { class: 'mb-0', remove_class: 'mb-3' }, label_html: {class: 'text-center'}, input_html: { disabled: true, class:'minValue text-center', value: 30, type: 'number', data: { slider_target: "minvalue", action: 'input->slider#changeValue' } }, required: false %>
+                <p>Route Distance (km)</p>
+                <%= f.input :max, label: "max", wrapper_html: { class: 'mb-0', remove_class: 'mb-3' }, label_html: {class: 'text-center'}, input_html: { disabled: true, class:'maxValue text-center', value: 70, type: 'number' , data: { slider_target: "maxvalue", action: 'input->slider#changeValue' } }, required: false %>
+                <%# <label for="min">Min</label> %>
+                <%# <input type="number" name="min" value="300" data-slider-target= "minvalue" data-action='input->slider#changeValue'>
                 <label for="max">Max</label>
-                <input type="number" name="max" value="700" data-slider-target= "maxvalue" data-action='input->slider#changeValue'>
+                <input type="number" name="max" value="700" data-slider-target= "maxvalue" data-action='input->slider#changeValue'> %>
               </div>
-            </div>
+              <div class="range-slider">
+                  <span class="range-selected" data-slider-target= "range"></span>
+                </div>
+                <div class="range-input">
+                  <input type="range" class="min" min="0" max="100" value="30" step="1" data-slider-target= "minslider" data-action='input->slider#changeRange'>
+                  <input type="range" class="max" min="0" max="100" value="70" step="1" data-slider-target= "maxslider" data-action='input->slider#changeRange'>
+                </div>
+              </div>
 
-            <%= f.input :type_of_route, as: :select, collection: Route::TYPE_OF_ROUTE, include_blank: "All Types", label: "Type of Route", selected: type_of_route, required: false  %>
+            <%= f.input :type_of_route, label: false, as: :select, collection: Route::TYPE_OF_ROUTE, prompt: 'Choose route type', include_blank: "All Types", input_html: { class: 'mt-4' }, selected: type_of_route, required: false  %>
             <%= f.submit "Search", class: "btn btn-primary" %>
           <% end %>
       </div>
