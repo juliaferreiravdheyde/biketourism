@@ -25,13 +25,13 @@
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit, "Update", class: "btn-primary w-100 font-1-m-b" %>
+    <%= f.button :submit, "Update", class: "btn-primary w-100 font-1-m" %>
   </div>
 <% end %>
 
-<h3 class="mb-3 cor-12 font-1-m-b mt-5">Cancel my account</h3>
+<h3 class="mb-1 cor-12 font-1-m-b mt-5">Cancel my account</h3>
 
-<div>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete, class:"btn btn-primary mt-3 mb-3" %></div>
+<div>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete, class:"btn btn-back mt-3 mb-3" %></div>
 
-<%= link_to "Back", :back, class: "btn btn-primary" %>
+<%= link_to "Back", :back, class: "btn btn-back" %>
 </div>
