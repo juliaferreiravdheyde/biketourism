@@ -1,5 +1,5 @@
-<div class="container mt-3">
-  <h1 class="mb-3 cor-12 font-1-m-b">Edit Route</h1>
+<div class="container mt-4">
+  <h1 class="mb-3 cor-12 font-1-xl">Edit Route</h1>
 
   <% if !@route.photos.reject {|photo| photo.id.nil? }.empty? %>
     <%= render 'shared/route_photos', route: @route %>
@@ -9,8 +9,8 @@
       <% if @route.creator == current_user  %>
         <%= f.input :description, label: 'Description', placeholder: 'ex: Trilha leve, muito agradável' %>
       <% end %>
-      <%= f.input :photos, as: :file, input_html: { multiple: true }%>
-      <%= f.submit "#{policy(@route).edit_description? ? 'Update' : 'Add Photos'}", class: "btn btn-primary" %>
+      <%= f.input :photos, as: :file, input_html: { multiple: true} %>
+      <%= f.submit "Save", class: "btn btn-primary" %>
   <% end %>
 
   <%= link_to "Back", route_path(@route) %>

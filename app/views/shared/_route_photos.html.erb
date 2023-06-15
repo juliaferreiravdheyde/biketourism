@@ -1,24 +1,9 @@
-<% if route.photos.attached?%>
-  <ul class="route-pictures">
-    <% route.photos.each do |photo| %>
-    <li>
-      <%= cl_image_tag photo.key %>
-      <%  photo_poster = User.find(photo.metadata[:user_id]) %>
-      <div class="picture-poster">
-        <% if photo_poster.photo.attached? %>
-          <%= cl_image_tag photo_poster.photo.key, class: "avatar", alt: "dropdown menu" %>
-        <% else %>
-          <%= image_tag "user.svg", class: "avatar"%>
-        <% end %>
-      </div>
-      <% if policy(route).delete_photo?(photo) && request.path == edit_route_path(route)  %>
-        <div class="picture-discard">
-          <%= link_to delete_route_photo_path(photo), data: { turbo_method: :delete, turbo_confirm: "Delete photo?" } do %>
-            <i class="fa-regular fa-x"></i>
-          <% end %>
-        </div>
+<%= turbo_frame_tag 'delete_photo' do %>
+  <% if route.photos.attached?%>
+    <ul class="route-pictures">
+      <% route.photos.each do |photo| %>
+        <%= render 'shared/route_photo', photo: photo, route: route %>
       <% end %>
-    </li>
-    <% end %>
-  </ul>
-<% end  %>
+    </ul>
+  <% end  %>
+<% end %>
