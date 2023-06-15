@@ -10,7 +10,7 @@ export default class extends Controller {
 
   changeRange(e) {
     console.log('In Range Change')
-    let rangeMin = 100;
+    const rangeMin = 100;
     let minRange = parseInt(this.minsliderTarget.value);
     let maxRange = parseInt(this.maxsliderTarget.value);
 
@@ -23,12 +23,27 @@ export default class extends Controller {
     } else {
       this.minvalueTarget.value = minRange;
       this.maxvalueTarget.value = maxRange;
-      console.log(this.rangeTarget);
-      console.log(this.rangeTarget.style);
-      console.log(this.rangeTarget.style.left);
-      console.log((minRange / this.minsliderTarget.max) * 100 + "%");
       this.rangeTarget.style.left = (minRange / this.minsliderTarget.max) * 100 + "%";
       this.rangeTarget.style.right = 100 - (maxRange / this.maxsliderTarget.max) * 100 + "%";
+    }
+  }
+
+  changeValue(e) {
+    console.log('In Input Change')
+    const rangeMin = 100;
+    let minPrice = parseInt(this.minvalueTarget.value);
+    let maxPrice = parseInt(this.maxvalueTarget.value);
+
+    if (maxPrice - minPrice >= rangeMin && maxPrice <= this.maxsliderTarget.max) {
+      if (e.target.name === "min") {
+        this.minsliderTarget.value = minPrice;
+        console.log('minslide edit');
+        this.rangeTarget.style.left = (minPrice / this.minsliderTarget.max) * 100 + "%";
+      } else {
+        this.maxsliderTarget.value = maxPrice;
+        console.log('maxslide edit');
+        this.rangeTarget.style.right = 100 - (maxPrice / this.maxsliderTarget.max) * 100 + "%";
+      }
     }
   }
 }
