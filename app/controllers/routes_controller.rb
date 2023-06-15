@@ -7,17 +7,17 @@ class RoutesController < ApplicationController
 
 
   def index
-    @routes = Route.where.not(name: nil)
+    @routes = Route.includes(:favorites).where.not(name: nil)
     @address = ""
     @distance = 0
     @type_of_route = nil
 
     if params[:search].present?
       @address = params[:search][:address]
-      @distance =  params[:search][:distance].to_i
+      @distance = params[:search][:distance].to_i
       @type_of_route = params[:search][:type_of_route]
 
-      @routes = @routes.where("distance <= ?", @distance * 1000 ) if @distance.present? && @distance > 0
+      @routes = @routes.where("distance <= ?", @distance * 1000) if @distance.present? && @distance > 0
       @routes = @routes.where(type_of_route: @type_of_route ) if @type_of_route.present?
       if @address.present?
         points = Point.near(@address, 10)
@@ -99,6 +99,13 @@ class RoutesController < ApplicationController
   def edit
     authorize @route
     @route.photos.build if @route.photos.blank?
+    respond_to do |format|
+      if turbo_frame_request?
+        format.html { render partial: 'shared/route_photos', locals: { route: @route } }
+      else
+        format.html
+      end
+    end
   end
 
   def update

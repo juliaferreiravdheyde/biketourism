@@ -11,20 +11,20 @@
           <%= simple_form_for Route.new do |f| %>
             <button type="submit" class='icon-button'>
               <i class="fa-solid fa-record-vinyl" style="cor-06"></i>
-              <span>Gravar</span>
+              <span>Record</span>
             </button>
           <% end %>
         </li>
         <li>
           <%= link_to favorites_path, class: 'text-center' do %>
             <i class="fa-solid fa-heart" style="cor-06"></i>
-            <span>Salvos</span>
+            <span>Save</span>
           <% end %>
         </li>
         <li>
           <%= link_to routes_path, class: 'text-center' do %>
             <i class="fa-solid fa-magnifying-glass"></i>
-            <span>Search</span>
+            <span>Find</span>
           <% end %>
         </li>
       </ul>
