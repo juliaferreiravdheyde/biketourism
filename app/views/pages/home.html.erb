@@ -1,17 +1,15 @@
 
 <div class="container pt-4 pb-4">
-  <!--<%= simple_form_for :search, url: routes_path , method: "GET", html: {class: 'form-inline' } do |f| %>
-    <%= f.input :address, input_html: {value: @address}, label: false, placeholder: "Search your Route" %>
-    <%= f.submit "Search", class: "btn btn-primary" %>
-  <% end %> -->
-  <% if current_user.present? %>
-    <% if current_user.pinned_route.present? %>
-      <%= link_to current_user.pinned_route.name, route_path(current_user.pinned_route), class:"btn-pin"%>
-    <% end %>
+  <%= render "shared/searchbar", address: @address, type_of_route: @type_of_route, distance: @distance %>
+
+<% if current_user.present? %>
+  <% if current_user.pinned_route.present? %>
+    <%= link_to current_user.pinned_route.name, route_path(current_user.pinned_route), class:"btn-pin"%>
   <% end %>
+<% end %>
   <h2 class="font-1-xl cor-11 pb-3 pt-4">Best routes</h2>
-  <div>
 </div>
+  <div>
   <%= render "shared/route_cards_horizontal", routes: @best_routes %>
   </div>
 <%= render "shared/type_cards_horizontal" %>
