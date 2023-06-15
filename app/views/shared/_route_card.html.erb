@@ -1,15 +1,16 @@
 <div class="card-product">
-    <div class="pin-icon">
-      <% if current_user&.pinned_route == route %>
-        <%= button_to route_pinned_routes_path(current_user.pinned_route), class: "pin-button" do %>
-          <i class="fa-solid fa-thumbtack"></i>
-        <% end %>
-      <% else %>
-        <%= button_to route_pinned_routes_path(route_id: route.id), class: "pin-button" do %>
-          <i class="fa-solid fa-thumbtack"></i>
-        <% end %>
+  <div class="pin-icon">
+    <% if current_user&.pinned_route == route %>
+      <%= link_to route_pinned_routes_path(current_user.pinned_route), class: "pin-button", remote: true, data: { controller: "pin-button", action: "ajax:success->pinButton#handleSuccess", turbo_method: :post } do %>
+        <%= image_tag 'pin-verde-2.svg', data: { target: "pinButton.pinImage" } %>
       <% end %>
-    </div>
+    <% else %>
+      <%= link_to route_pinned_routes_path(route_id: route.id), class: "pin-button", remote: true, data: { controller: "pin-button", action: "ajax:success->pinButton#handleSuccess", turbo_method: :post } do %>
+        <%= image_tag 'pin-branco-2.svg', data: { target: "pinButton.pinImage" } %>
+      <% end %>
+    <% end %>
+  </div>
+
 
     <% if route.photos.attached? %>
       <%= cl_image_tag route.photos[0].key, class: "product-image primary-image", data: { 'picker-target': "pimage" } %>
@@ -36,12 +37,12 @@
       </ul>
       <% favorite = Favorite.where(route: route, user: current_user) %>
       <% if favorite.present? %>
-        <%= link_to favorite_path(favorite.first), data: { turbo_method: :delete }, class: "bookmark" do %>
-          <%= route.favorites.size %> <i class="fa-brands fa-gratipay"></i>
+        <%= link_to favorite_path(favorite.first), class: "bookmark", data: { controller: "favorites", action: "toggleFavorite", turbo_method: :delete } do %>
+          <i class="fa-solid fa-heart" data-target="favorites.heart"></i>
         <% end %>
       <% else %>
-        <%= button_to route_favorites_path(route), data: { turbo_method: :post }, class: "bookmark" do %>
-          <%= route.favorites.size %> <i class="fa-sharp fa-regular fa-heart"></i>
+        <%= link_to route_favorites_path(route), class: "bookmark", data: { controller: "favorites", action: "toggleFavorite",  turbo_method: :post } do %>
+          <i class="fa-sharp fa-regular fa-heart" data-target="favorites.heart"></i>
         <% end %>
       <% end %>
     </div>

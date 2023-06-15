@@ -10,6 +10,8 @@ application.register("hello", HelloController)
 import MapController from "./map_controller"
 application.register("map", MapController)
 
+import PinController from "./pin_controller"
+application.register("pin", PinController)
+
 import RouteTrackingController from "./route_tracking_controller"
 application.register("route-tracking", RouteTrackingController)
-
