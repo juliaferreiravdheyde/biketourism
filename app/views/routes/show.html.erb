@@ -16,7 +16,7 @@
     <div class='route-creator-show d-flex align-items-center justify-content-end'>
     <h3 class="font-2-xss cor-11">Created by <%= @route.creator.first_name %></h3>
     <% if @route.creator.photo.attached? %>
-      <%= cl_image_tag current_user.photo.key, class: "avatar", alt: "dropdown menu" %>
+      <%= cl_image_tag @route.creator.photo.key, class: "avatar", alt: "dropdown menu" %>
     <% else %>
       <%= image_tag "user.svg", class: "avatar-show"%>
     <% end %>
