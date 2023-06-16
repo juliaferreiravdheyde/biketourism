@@ -39,6 +39,8 @@ class RoutePolicy < ApplicationPolicy
   end
 
   def delete_photo?(photo)
+    return false if user.nil?
+
     photo.metadata[:user_id] == user.id || record.creator == user
   end
 end
