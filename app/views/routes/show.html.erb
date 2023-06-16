@@ -38,11 +38,11 @@
 
     <div class="favorite-show">
       <% if @favorite.present? %>
-        <%= link_to favorite_path(@favorite.first), data: { turbo_method: :delete } do  %>
+        <%= link_to favorite_path(@favorite.first, path: request.original_fullpath), data: { turbo_method: :delete } do  %>
           <i class="fa-solid fa-heart" style="color:var(--cor-11)"></i>
       <% end %>
       <% else %>
-        <%= link_to route_favorites_path(@route), data: { turbo_method: :post } do  %>
+        <%= link_to route_favorites_path(@route, path: request.original_fullpath), data: { turbo_method: :post } do  %>
           <i class="fa-regular fa-heart" style="color: var(--cor-11)"></i>
         <% end %>
       <% end %>
