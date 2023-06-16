@@ -39,12 +39,12 @@
       </ul>
       <% favorite = Favorite.where(route: route, user: current_user) %>
       <% if favorite.present? %>
-        <%= link_to favorite_path(favorite.first), class: "bookmark", data: { controller: "favorites", action: "toggleFavorite", turbo_method: :delete } do %>
-          <i class="fa-solid fa-heart" data-target="favorites.heart"></i>
+        <%= link_to favorite_path(favorite.first, path: request.original_fullpath), class: "bookmark", data: { controller: "favorites", action: "toggleFavorite", turbo_method: :delete } do %>
+         <%= route.favorites.size %> <i class="fa-solid fa-heart" data-target="favorites.heart"></i>
         <% end %>
       <% else %>
-        <%= link_to route_favorites_path(route), class: "bookmark", data: { controller: "favorites", action: "toggleFavorite",  turbo_method: :post } do %>
-          <i class="fa-sharp fa-regular fa-heart" data-target="favorites.heart"></i>
+        <%= link_to route_favorites_path(route, path: request.original_fullpath), class: "bookmark", data: { controller: "favorites", action: "toggleFavorite",  turbo_method: :post } do %>
+         <%= route.favorites.size %> <i class="fa-sharp fa-regular fa-heart" data-target="favorites.heart"></i>
         <% end %>
       <% end %>
     </div>

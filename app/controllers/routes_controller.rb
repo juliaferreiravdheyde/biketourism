@@ -9,19 +9,24 @@ class RoutesController < ApplicationController
   def index
     @routes = Route.includes(:favorites).where.not(name: nil)
     @address = ""
-    @distance = 0
+    @min_distance = 0
+    @max_distance = 100
     @type_of_route = nil
 
     if params[:search].present?
+
       @address = params[:search][:address]
-      @distance = params[:search][:distance].to_i
+
+      @min_distance = params[:search][:min].to_i
+      @max_distance = params[:search][:max].to_i
       @type_of_route = params[:search][:type_of_route]
 
-      @routes = @routes.where("distance <= ?", @distance * 1000) if @distance.present? && @distance > 0
+      @routes = @routes.where("distance >= ? AND distance <= ?", @min_distance * 1000, @max_distance * 1000)
+#     @routes = @routes.where("distance <= ?", @distance * 1000) if @distance.present? && @distance > 0
       @routes = @routes.where(type_of_route: @type_of_route) if @type_of_route.present?
       if @address.present?
         points = Point.near(@address, 10)
-        @routes = @routes.where(id: points.map(&:route).pluck(:id).uniq) 
+        @routes = @routes.where(id: points.map(&:route).pluck(:id).uniq)
       end
     end
   end
@@ -74,7 +79,15 @@ class RoutesController < ApplicationController
     authorize @route
     if @route.points.size < 2
       redirect_to register_path(@route), alert: "Not enough tracking data"
-    elsif @route.update(route_params)
+    elsif @route.update(route_params.except('photos'))
+      if params[:route][:photos].present?
+        params[:route][:photos][1..].each do |photo|
+          @route.photos.attach(io: photo,
+                               filename: photo.original_filename,
+                               content_type: photo.content_type,
+                               metadata: { user_id: current_user.id })
+        end
+      end
       @route.distance = @route.total_distance
       @route.positive_elevation = @route.total_positive_elevation
       @route.save
