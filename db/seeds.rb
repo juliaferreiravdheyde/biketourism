@@ -18,10 +18,18 @@ Route.destroy_all
 User.destroy_all
 
 user1 = User.create!(first_name: "Joao", email: "joao@gmail.com", password: "123123")
+user1.photo.attach(io: File.open(Rails.root.join('app', 'assets', 'images', 'profile-1.webp')), filename: 'photo1.jpg', content_type: 'image/jpeg' )
+
 user2 = User.create!(first_name: "Paulo", email: "paulo@gmail.com", password: "123123")
 user3 = User.create!(first_name: "Alphonse", email: "alphadeny@hotmail.fr", password: "123123")
+user3.photo.attach(io: File.open(Rails.root.join('app', 'assets', 'images', 'profile-2.jpg')), filename: 'photo1.jpg', content_type: 'image/jpeg' )
+
 user4 = User.create!(first_name: "Thiago", email: "thiago@olatu.com", password: "123123")
+user4.photo.attach(io: File.open(Rails.root.join('app', 'assets', 'images', 'profile-3.jpg')), filename: 'photo1.jpg', content_type: 'image/jpeg' )
+
 user5 = User.create!(first_name: "Julia", email: "juliavdheyde@icloud.com", password: "123123")
+user5.photo.attach(io: File.open(Rails.root.join('app', 'assets', 'images', 'profile-4.jpg')), filename: 'photo1.jpg', content_type: 'image/jpeg' )
+
 
 Unsplash.configure do |config|
   config.application_access_key = ENV["ACCESS_KEYS"]
@@ -30,17 +38,17 @@ Unsplash.configure do |config|
   config.utm_source = "bike_tourism_app"
 
   route1 = Route.new(
-    name: "Rota Parque do Ibirapuera",
-    description: "Trilha muito tranquilha ao redor do Parque",
-    type_of_route: "Urban",
+    name: "Pico do Jaragua",
+    description: "Descida braba",
+    type_of_route: "Suburban",
     positive_elevation: 1.5,
     creator: user3
   )
 
   route2 = Route.new(
-    name: "Rota Centro de SP",
-    description: "passeio pelo pontos históricos no centro da cidade",
-    type_of_route: "Urban",
+    name: "Pico do Jaragua 2",
+    description: "Melhor rota para quem gosta de desafio",
+    type_of_route: "Suburban",
     positive_elevation: 2.9,
     creator: user5
   )
@@ -88,7 +96,7 @@ Unsplash.configure do |config|
   route8 = Route.new(
     name: "Trilha do Morro da Urca",
     description: "Pedal agradável em meio a natureza",
-    type_of_route: "Mountain",
+    type_of_route: "CountrySide",
     positive_elevation: 13.2,
     creator: user1
   )
@@ -104,7 +112,7 @@ Unsplash.configure do |config|
   route10 = Route.new(
     name: "Morro do Careca",
     description: "Pedal em meio a natureza, incrível",
-    type_of_route: "Mountain",
+    type_of_route: "CountrySide",
     positive_elevation: 11.1,
     creator: user2
   )
