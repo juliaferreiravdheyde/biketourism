@@ -7,7 +7,7 @@ class FavoritesController < ApplicationController
     @route = Route.find(params[:route_id])
     @favorite = Favorite.create(route: @route, user: current_user)
     authorize @favorite
-    redirect_to root_path
+    redirect_to params[:path]
   end
 
   def destroy
@@ -15,7 +15,7 @@ class FavoritesController < ApplicationController
     authorize @favorite
     @route = @favorite.route
     @favorite.destroy
-    redirect_to root_path
+    redirect_to params[:path]
   end
 end
 

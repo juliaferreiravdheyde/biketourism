@@ -1,6 +1,6 @@
 
 <div class="container pt-4 pb-4">
-  <%= render "shared/searchbar", address: @address, type_of_route: @type_of_route, distance: @distance %>
+  <%= render "shared/searchbar", address: @address, type_of_route: @type_of_route, min_distance: @min_distance, max_distance: @max_distance %>
 
 <% if current_user.present? %>
   <% if current_user.pinned_route.present? %>
