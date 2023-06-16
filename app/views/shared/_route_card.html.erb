@@ -1,11 +1,11 @@
 <div class="card-product">
   <div class="pin-icon">
     <% if current_user&.pinned_route == route %>
-      <%= button_to route_pinned_routes_path(current_user.pinned_route ), class: "pin-button", remote: true, data: { turbo_frame: "_top", controller: "pin", action: "click->pin#handleSuccess" } do %>
+      <%= link_to route_pinned_routes_path(current_user.pinned_route), class: "pin-button", remote: true, data: { controller: "pin-button", action: "ajax:success->pinButton#handleSuccess", turbo_method: :post } do %>
         <%= image_tag 'pin-verde-2.svg', data: { target: "pinButton.pinImage" } %>
       <% end %>
     <% else %>
-      <%= button_to route_pinned_routes_path(route_id: route.id), class: "pin-button", remote: true, data: { turbo_frame: "_top", controller: "pin", action: "click->pin#handleSuccess" } do %>
+      <%= link_to route_pinned_routes_path(route_id: route.id), class: "pin-button", remote: true, data: { controller: "pin-button", action: "ajax:success->pinButton#handleSuccess", turbo_method: :post } do %>
         <%= image_tag 'pin-branco-2.svg', data: { target: "pinButton.pinImage" } %>
       <% end %>
     <% end %>
@@ -13,7 +13,7 @@
 
     <%= link_to route do  %>
       <% if route.photos.attached? %>
-          <%= cl_image_tag route.photos[0].key, class: "product-image primary-image", data: { 'picker-target': "pimage" } %>
+        <%= cl_image_tag route.photos[0].key, class: "product-image primary-image", data: { 'picker-target': "pimage" } %>
       <% else %>
         <% default_image_url = case route.type_of_route
                               when "Urban"
@@ -28,9 +28,9 @@
         %>
         <%= image_tag default_image_url, class: "product-image primary-image" %>
       <% end %>
-    <% end %>
+     <% end %>
 
-    <div class="card-route-details <%=route.id%>">
+    <div class="card-route-details">
       <ul>
         <li><span class="type"><%= route.type_of_route %></span></li>
         <li><h3 class="card-tit"><%= link_to route.name, route %></h3></li>
@@ -38,14 +38,13 @@
         <li><span class="distance">Distance: <%= route.distance < 1000 ? "#{route.distance}m" : "#{(route.distance / 1000.0).round(2)}km" %></span></li>
       </ul>
       <% favorite = Favorite.where(route: route, user: current_user) %>
-      <% favorite = Favorite.where(route: route, user: current_user) %>
       <% if favorite.present? %>
         <%= link_to favorite_path(favorite.first), class: "bookmark", data: { controller: "favorites", action: "toggleFavorite", turbo_method: :delete } do %>
-         <%= route.favorites.size %> <i class="fa-solid fa-heart" data-target="favorites.heart"></i>
+          <i class="fa-solid fa-heart" data-target="favorites.heart"></i>
         <% end %>
       <% else %>
         <%= link_to route_favorites_path(route), class: "bookmark", data: { controller: "favorites", action: "toggleFavorite",  turbo_method: :post } do %>
-         <%= route.favorites.size %> <i class="fa-sharp fa-regular fa-heart" data-target="favorites.heart"></i>
+          <i class="fa-sharp fa-regular fa-heart" data-target="favorites.heart"></i>
         <% end %>
       <% end %>
     </div>
