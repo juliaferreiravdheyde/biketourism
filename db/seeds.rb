@@ -72,7 +72,7 @@ Unsplash.configure do |config|
   route6 = Route.new(
     name: "Trilha Morro do Castelo",
     description: "Passeio agradável em meio a natureza",
-    type_of_route: "Moutain",
+    type_of_route: "Mountain",
     positive_elevation: 10.1,
     creator: user4
   )
@@ -386,7 +386,6 @@ Unsplash.configure do |config|
   route8.positive_elevation = route8.total_positive_elevation
   route9.positive_elevation = route9.total_positive_elevation
   route10.positive_elevation = route10.total_positive_elevation
-
 
   route1.save
   route2.save
