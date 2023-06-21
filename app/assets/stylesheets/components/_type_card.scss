@@ -1,49 +1,33 @@
-
 .background-gallery-vertical-type {
   background-color: var(--cor-1);
   padding: 60px 0;
 }
 
-.gallery-vertical-type {
-	display: grid;
-	grid-template-columns: repeat(4, 34vw);
-	grid-template-rows: 1fr;
-	grid-column-gap: 1.4rem;
-	grid-row-gap: 1rem;
-	overflow: scroll;
-	scroll-snap-type: both mandatory;
-	scroll-padding: 1rem;
+.type-routes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
 }
 
-.gallery-vertical-type li {
-	display: block;
-	border-radius: 3px;
+.gallery-vertical-type {
+	display: flex;
+  gap: 16px;
 
-  }
+}
+
 
 .gallery-vertical-type img {
-  border-radius: 50%;
-  height: 100px;
-  width: 100px;
+  border-radius: 16px;
+  height: 180px;
+  width: 180px;
   object-fit: cover;
+  transition: transform .2s;
 }
-
-.active {
-	scroll-snap-type: unset;
-}
-
-.gallery-vertical-type li {
-	scroll-snap-align: center;
-	display: inline-block;
-	border-radius: 3px;
-  }
-
 
 .card-type {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-	gap: 0.5rem;
+
+  position: relative;
+
 
   button {
   border: 0;
@@ -52,7 +36,83 @@
   }
 
   a {
-    color: var(--cor-10);
     display: inline-block;
+  }
+
+  span {
+  color: var(--cor-11);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  }
+
+}
+
+.gallery-vertical-type img:hover { transform: scaley(1.05); }
+
+
+
+
+@media (max-width: 800px) {
+
+  .gallery-vertical-type {
+    display: grid;
+    grid-template-columns: repeat(4, 34vw);
+    grid-template-rows: 1fr;
+    grid-column-gap: 1.4rem;
+    grid-row-gap: 1rem;
+    overflow: scroll;
+    scroll-snap-type: both mandatory;
+    scroll-padding: 1rem;
+  }
+
+  .gallery-vertical-type li {
+    display: block;
+    border-radius: 3px;
+
+    }
+
+  .gallery-vertical-type img {
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+    object-fit: cover;
+  }
+
+  .active {
+    scroll-snap-type: unset;
+  }
+
+  .gallery-vertical-type li {
+    scroll-snap-align: center;
+    display: inline-block;
+    border-radius: 3px;
+    }
+
+  .card-type {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+
+    button {
+    border: 0;
+    font: 400 1rem/1.5 "Roboto", sans-serif;
+    background-color: transparent;
+    }
+
+    a {
+      color: var(--cor-10);
+      display: inline-block;
+    }
+
+    span {
+      color: var(--cor-10);
+      position: unset;
+      font-weight: normal;
+    }
+
   }
 }

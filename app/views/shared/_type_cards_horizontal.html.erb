@@ -1,40 +1,42 @@
 <div class="background-gallery-vertical-type mb-5">
-  <h2 class="font-1-xl cor-11 container pb-3">Browse by type of routes</h2>
-  <ul class="gallery-vertical-type container">
-    <li>
-      <div class="card-type">
-        <%= link_to routes_path(search: { type_of_route: "Urban" }), class: 'text-center', method: :get do %>
-          <%= image_tag "urban.webp" %>
-          <span>Urban</span>
-        <% end %>
-      </div>
-    </li>
+  <div class="container type-routes">
+    <h2 class="font-1-xl cor-11 pb-3">Browse by type of routes</h2>
+    <ul class="gallery-vertical-type">
+      <li>
+        <div class="card-type">
+          <%= link_to routes_path(search: { type_of_route: "Urban" }), class: 'text-center', method: :get do %>
+            <%= image_tag "urban.webp" %>
+            <span>Urban</span>
+          <% end %>
+        </div>
+      </li>
 
-    <li>
-      <div class="card-type">
-        <%= link_to routes_path(search: { type_of_route: "Suburban" }), class: 'text-center', method: :get do %>
-          <%= image_tag "suburban.webp" %>
-          <span>Suburban</span>
-        <% end %>
-      </div>
-    </li>
+      <li>
+        <div class="card-type">
+          <%= link_to routes_path(search: { type_of_route: "Suburban" }), class: 'text-center', method: :get do %>
+            <%= image_tag "suburban.webp" %>
+            <span>Suburban</span>
+          <% end %>
+        </div>
+      </li>
 
-    <li>
-      <div class="card-type">
-        <%= link_to routes_path(search: { type_of_route: "CountrySide" }), class: 'text-center',  method: :get do %>
-          <%= image_tag "countryside.webp" %>
-          <span>CountrySide</span>
-        <% end %>
-      </div>
-    </li>
+      <li>
+        <div class="card-type">
+          <%= link_to routes_path(search: { type_of_route: "CountrySide" }), class: 'text-center',  method: :get do %>
+            <%= image_tag "countryside.webp" %>
+            <span>CountrySide</span>
+          <% end %>
+        </div>
+      </li>
 
-    <li>
-      <div class="card-type">
-        <%= link_to routes_path(search: { type_of_route: "Mountain" }), class: 'text-center', method: :get do %>
-          <%= image_tag "mountain.webp" %>
-          <span>Mountain</span>
-        <% end %>
-      </div>
-    </li>
-  </ul>
+      <li>
+        <div class="card-type">
+          <%= link_to routes_path(search: { type_of_route: "Mountain" }), class: 'text-center', method: :get do %>
+            <%= image_tag "mountain.webp" %>
+            <span>Mountain</span>
+          <% end %>
+        </div>
+      </li>
+    </ul>
+  </div>
 </div>
