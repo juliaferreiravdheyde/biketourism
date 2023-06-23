@@ -12,8 +12,8 @@
 
 .gallery-vertical {
 	display: grid;
-	grid-template-columns: 1fr;
-	gap: 1.5rem;
+	grid-template-columns: 1fr 1fr 1fr;
+	gap: 2rem;
 }
 
 .gallery li {
@@ -197,5 +197,11 @@
 	scroll-snap-type: both mandatory;
 	scroll-padding: 1rem;
   margin-bottom: 20px;
+}
+
+.gallery-vertical {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 1.5rem;
 }
 }
