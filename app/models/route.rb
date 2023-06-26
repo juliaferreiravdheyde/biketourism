@@ -13,7 +13,7 @@ class Route < ApplicationRecord
   validates :name, presence: true, length: { minimum: 5 }
   validates :type_of_route, presence: true
 
-  TYPE_OF_ROUTE = ['Urban', 'Suburban', 'CountrySide', 'Mountain']
+  TYPE_OF_ROUTE = ['Urban', 'Suburban', 'CountrySide', 'Mountain', 'Beach']
 
   # pg_search_scope :search_by_type_of_route, against: :type_of_route
 

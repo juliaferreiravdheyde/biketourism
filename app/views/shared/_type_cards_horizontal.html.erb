@@ -36,5 +36,14 @@
         <% end %>
       </div>
     </li>
+
+    <li>
+      <div class="card-type">
+        <%= link_to routes_path(search: { type_of_route: "Beach" }), class: 'text-center', method: :get do %>
+          <%= image_tag "photo-beach.jpg" %>
+          <span>Beach</span>
+        <% end %>
+      </div>
+    </li>
   </ul>
 </div>
