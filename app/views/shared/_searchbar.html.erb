@@ -1,16 +1,16 @@
 <!-- Button trigger modal -->
 <div class="row g-0 d-flex align-items-start search-bar">
-  <div class="col-sm col-lg-4 offset-lg-4 border-end-0">
+  <div class="col-sm col-lg-6 offset-lg-3 border-end-0">
     <%= simple_form_for :search, url: routes_path, method: "GET", html: { } do |f| %>
       <div class="search-icon">
-        <i class="fas fa-search"></i>
+        <i class="fas fa-search" style="color: var(--cor-7\8);"></i>
       </div>
       <%= f.input :address, input_html: { value: address, class: "search-input" }, label: false, required: false, placeholder:"Search City ex: Ribeirão Preto" %>
     <% end %>
   </div>
   <div class="col-auto border-0 search-filter">
     <button type="button" class="btn btn-filter" data-bs-toggle="modal" data-bs-target="#exampleModal">
-      <i class="fas fa-sliders"></i>
+      <i class="fas fa-sliders" style="color: var(--cor-1);"></i>
     </button>
   </div>
 </div>
