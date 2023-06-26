@@ -32,6 +32,26 @@
   transition: 0.5ms;
  }
 
+ .navbar-toggler {
+padding: 0;
+margin: 3px 0;
+ }
+
  .navbar-toggler:focus {
   box-shadow: none;
  }
+
+
+ .avatar-icon {
+  width: 40px;
+  border-radius: 50%;
+  padding: 5px;
+  background-color: var(--cor-1);
+
+ }
+.avatar-photo {
+  width: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--cor-p1);
+
+}

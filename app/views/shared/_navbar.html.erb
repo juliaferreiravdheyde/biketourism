@@ -5,11 +5,11 @@
     <% end %>
     <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <% if !user_signed_in? %>
-        <%= image_tag "user.svg", class: "avatar"%>
+        <%= image_tag "user.svg", class: "avatar-icon"%>
       <% elsif current_user.photo.attached? %>
-        <%= cl_image_tag current_user.photo.key, class: "avatar", alt: "dropdown menu" %>
+        <%= cl_image_tag current_user.photo.key, class: "avatar-photo", alt: "dropdown menu" %>
       <% else %>
-        <%= image_tag "user.svg", class: "avatar"%>
+        <%= image_tag "user.svg", class: "avatar-icon"%>
       <% end %>
     </button>
 
