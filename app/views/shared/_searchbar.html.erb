@@ -3,7 +3,7 @@
   <div class="col-sm col-lg-6 offset-lg-3 border-end-0">
     <%= simple_form_for :search, url: routes_path, method: "GET", html: { } do |f| %>
       <div class="search-icon">
-        <i class="fas fa-search" style="color: var(--cor-7\8);"></i>
+        <i class="fas fa-search" style="color: var(--cor-8);"></i>
       </div>
       <%= f.input :address, input_html: { value: address, class: "search-input" }, label: false, required: false, placeholder:"Search City ex: Ribeirão Preto" %>
     <% end %>
@@ -20,7 +20,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Find a route</h1>
+        <h1 class="modal-title cor-5 font-1-xl fs-5" id="exampleModalLabel">Find a route</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -46,7 +46,7 @@
             </div>
 
             <%= f.input :type_of_route, label: false, as: :select, collection: Route::TYPE_OF_ROUTE, prompt: 'Choose route type', include_blank: "All Types", input_html: { class: 'mt-4' }, selected: type_of_route, required: false  %>
-            <%= f.submit "Search", class: "btn btn-primary" %>
+            <%= f.submit "Search", class: "btn btn-primary w-100" %>
           <% end %>
       </div>
       <div class="modal-footer">

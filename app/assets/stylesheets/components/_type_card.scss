@@ -12,7 +12,6 @@
 .gallery-vertical-type {
 	display: flex;
   gap: 16px;
-
 }
 
 
@@ -57,11 +56,13 @@
 
 @media (max-width: 800px) {
 
+
+
   .gallery-vertical-type {
     display: grid;
     grid-template-columns: repeat(4, 34vw);
     grid-template-rows: 1fr;
-    grid-column-gap: 1.4rem;
+    grid-column-gap: 0.5rem;
     grid-row-gap: 1rem;
     overflow: scroll;
     scroll-snap-type: both mandatory;
@@ -71,6 +72,7 @@
   .gallery-vertical-type li {
     display: block;
     border-radius: 3px;
+    padding-bottom: 10px;
 
     }
 
@@ -113,6 +115,5 @@
       position: unset;
       font-weight: normal;
     }
-
   }
 }
