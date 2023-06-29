@@ -1,9 +1,22 @@
 .box-login {
 padding: 80px;
-background-color: var(--cor-0);
+background-color: rgba(255, 255, 255, 0.543);
 box-shadow: 0 0 15px rgba(0,0,0,0.1);
 border-radius: 16px;
 }
+
+.background-image-login {
+
+background: url(/assets/back-login.webp);
+background-repeat: no-repeat;
+background-position: 0% 99%;
+background-attachment: fixed;
+padding: 60px
+}
+
+.content-size {
+  margin-bottom: 20px;
+  }
 
 
 @media (max-width: 800px) {
@@ -12,5 +25,17 @@ border-radius: 16px;
     background-color: #f8f9f8;
     box-shadow: none;
     border-radius: 0;
+    margin-top: 30px;
 }
+
+.background-image-login {
+
+  background: none;
+  padding: 0px
+  }
+
+  .content-size {
+    margin-bottom: 20px;
+    }
+
 }
