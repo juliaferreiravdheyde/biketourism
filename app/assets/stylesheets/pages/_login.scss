@@ -1,0 +1,16 @@
+.box-login {
+padding: 80px;
+background-color: var(--cor-0);
+box-shadow: 0 0 15px rgba(0,0,0,0.1);
+border-radius: 16px;
+}
+
+
+@media (max-width: 800px) {
+  .box-login {
+    padding: 0;
+    background-color: #f8f9f8;
+    box-shadow: none;
+    border-radius: 0;
+}
+}
