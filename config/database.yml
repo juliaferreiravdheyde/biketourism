@@ -23,13 +23,13 @@ default: &default
 
 development:
   <<: *default
-  database: biketourism_repo_development
+  database: TrekM8_development
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
   # When left blank, postgres will use the default role. This is
   # the same name as the operating system user running Rails.
-  #username: biketourism_repo
+  #username: TrekM8
 
   # The password associated with the postgres role (username).
   #password:
@@ -57,7 +57,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: biketourism_repo_test
+  database: TrekM8_test
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -81,6 +81,6 @@ test:
 #
 production:
   <<: *default
-  database: biketourism_repo_production
-  username: biketourism_repo
-  password: <%= ENV["BIKETOURISM_REPO_DATABASE_PASSWORD"] %>
+  database: TrekM8_production
+  username: TrekM8
+  password: <%= ENV["TREKM8_DATABASE_PASSWORD"] %>
