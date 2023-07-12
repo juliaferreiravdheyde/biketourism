@@ -71,11 +71,11 @@
       <%# end %>
     <%# end %>
 
-    <%= link_to route_pinned_routes_path(@route), class: "", remote: true, data: { controller: "pin-button", action: "ajax:success->pinButton#handleSuccess", turbo_method: :post } do %>
+    <%= link_to route_pinned_routes_path(@route), class: "", remote: true, data: { turbo_method: :post } do %>
       <% if current_user.pinned_route == @route %>
-        <%= image_tag 'pin-verde-2.svg', data: { target: "pinButton.pinImage" } %>
+        <%= image_tag 'pin-verde-2.svg' %>
       <% else %>
-        <%= image_tag 'pin-branco-2.svg', data: { target: "pinButton.pinImage" } %>
+        <%= image_tag 'pin-branco-2.svg' %>
       <% end %>
     <% end %>
   </div>
