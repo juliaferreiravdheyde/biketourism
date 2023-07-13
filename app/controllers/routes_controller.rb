@@ -20,10 +20,11 @@ class RoutesController < ApplicationController
 
         @address = params[:search][:address]
 
-        @min_distance = params[:search][:min].to_i
-        @max_distance = params[:search][:max].to_i
+        if params[:search][:min].present?
+          @min_distance = params[:search][:min].to_i
+          @max_distance = params[:search][:max].to_i
+        end
         @type_of_route = params[:search][:type_of_route]
-
         @routes = @routes.where("distance >= ? AND distance <= ?", @min_distance * 1000, @max_distance * 1000)
       end
       if @address.present?
@@ -82,6 +83,8 @@ class RoutesController < ApplicationController
     if @route.points.size < 2
       redirect_to register_path(@route), alert: "Not enough tracking data"
     elsif @route.update(route_params.except('photos'))
+      @route.distance = @route.total_distance
+      @route.positive_elevation = @route.total_positive_elevation
       if params[:route][:photos].present?
         params[:route][:photos][1..].each do |photo|
           @route.photos.attach(io: photo,
@@ -90,8 +93,6 @@ class RoutesController < ApplicationController
                                metadata: { user_id: current_user.id })
         end
       end
-      @route.distance = @route.total_distance
-      @route.positive_elevation = @route.total_positive_elevation
       @route.save
       redirect_to route_path(@route), notice: "Route successfully shared!"
     else
