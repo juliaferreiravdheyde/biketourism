@@ -2,8 +2,13 @@
   <% if current_user.present? %>
     <% if current_user.pinned_route.present? %>
       <div class="container pt-4 pb-4 col-lg-4 offset-lg-4">
-        <h3 class="font-1-xl cor-9 pb-1 pt-2 text-center">Your Pin Route</h3>
-        <%= link_to current_user.pinned_route.name, route_path(current_user.pinned_route), class:"btn-pin" %>
+        <%= link_to route_path(current_user.pinned_route), class:"btn-pin" do %>
+          <%= image_tag "pin-icon-verde.svg" %>
+          <%=current_user.pinned_route.name %>
+        <% end %>
+
+       
+        </div>
       </div>
     <% end %>
   <% end %>

@@ -4,13 +4,23 @@
   }
 
 .btn-pin {
-  background-color: var(--cor-p1);;
-  color: var(--cor10);
+  background-color: var(--cor-0);
+  color: var(--cor-p2);
+  border: 0.120rem solid var(--cor-p2);
   padding: 0.8rem;
   display: block;
   text-align: center;
   border-radius: 50px;
   margin: 0.8rem 0;
   font: 400 1.125rem/1.35 "Poppins", sans-serif;
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  align-items: center;
 }
 
+.btn-pin:hover {
+  transition: 0.4s;
+  opacity: 0.8;
+  cursor: pointer;
+}

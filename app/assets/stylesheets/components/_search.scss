@@ -37,6 +37,8 @@
 
 .btn-filter {
   border-radius: 50% !important;
+  height: 40px;
+  width: 40px;
 }
 
 .range-slider {
@@ -145,7 +147,7 @@
 .search-icon {
   position: absolute;
   top: 20px;
-  left: 10px;
+  left: 9px;
   padding: 0 !important;
   font-size: 18px;
   height: 18px;
@@ -165,5 +167,8 @@
   border-radius: 50% !important;
   color: var(--cor-10);
   background-color: #2C6E1A;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 }
