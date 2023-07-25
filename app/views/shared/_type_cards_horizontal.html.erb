@@ -29,14 +29,22 @@
         </div>
       </li>
 
-      <li>
-        <div class="card-type">
-          <%= link_to routes_path(search: { type_of_route: "Mountain" }), class: 'text-center', method: :get do %>
-            <%= image_tag "mountain.webp" %>
-            <span>Mountain</span>
-          <% end %>
-        </div>
-      </li>
-    </ul>
-  </div>
+    <li>
+      <div class="card-type">
+        <%= link_to routes_path(search: { type_of_route: "Mountain" }), class: 'text-center', method: :get do %>
+          <%= image_tag "mountain.webp" %>
+          <span>Mountain</span>
+        <% end %>
+      </div>
+    </li>
+
+    <li>
+      <div class="card-type">
+        <%= link_to routes_path(search: { type_of_route: "Beach" }), class: 'text-center', method: :get do %>
+          <%= image_tag "photo-beach.jpg" %>
+          <span>Beach</span>
+        <% end %>
+      </div>
+    </li>
+  </ul>
 </div>

@@ -16,7 +16,9 @@
     <div class='route-creator-show d-flex align-items-center justify-content-end'>
     <h3 class="font-2-xss cor-11">Created by <%= @route.creator.first_name %></h3>
     <% if @route.creator.photo.attached? %>
-      <%= cl_image_tag @route.creator.photo.key, class: "avatar", alt: "dropdown menu" %>
+      <div class="picture-round">
+          <%= cl_image_tag @route.creator.photo.key, class: "avatar", alt: "dropdown menu" %>
+      </div>
     <% else %>
       <%= image_tag "user.svg", class: "avatar-show"%>
     <% end %>
@@ -63,16 +65,20 @@
       <%= link_to "Delete", route_path(@route), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: 'btn btn-danger' %>
     <% end %>
 
-    <%if @ride_on_going.any? %>
-        <%= button_to "Stop", mark_as_done_route_ride_path(@route, @ride_on_going.first), remote: true, data: {turbo_method: :patch}, class: "btn-start-stop-show" %>
-    <% else %>
-      <%= simple_form_for [@route,@ride] do |f| %>
-        <%= f.submit "Start", class: "btn-start-stop-show"%>
-      <% end %>
-    <% end %>
+    <%#if @ride_on_going.any? %>
+        <%#= button_to "Stop", mark_as_done_route_ride_path(@route, @ride_on_going.first), remote: true, data: {turbo_method: :patch}, class: "btn-start-stop-show" %>
+    <%# else %>
+      <%##= simple_form_for [@route,@ride] do |f| %>
+        <%#= f.submit "Start", class: "btn-start-stop-show"%>
+      <%# end %>
+    <%# end %>
 
-    <%= simple_form_for @route, url: route_pinned_routes_path(@route), method: :post do |f| %>
-      <%= f.submit "Pin", class: "btn-pin-circle-show"%>
+    <%= link_to route_pinned_routes_path(@route), class: "", remote: true, data: { turbo_method: :post } do %>
+      <% if current_user.pinned_route == @route %>
+        <%= image_tag 'pin-verde-2.svg' %>
+      <% else %>
+        <%= image_tag 'pin-branco-2.svg' %>
+      <% end %>
     <% end %>
   </div>
 </div>

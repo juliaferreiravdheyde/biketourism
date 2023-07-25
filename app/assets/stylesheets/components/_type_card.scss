@@ -14,7 +14,6 @@
   gap: 16px;
 }
 
-
 .gallery-vertical-type img {
   border-radius: 16px;
   height: 180px;
@@ -24,9 +23,8 @@
 }
 
 .card-type {
-
+  
   position: relative;
-
 
   button {
   border: 0;
@@ -44,19 +42,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-
   }
-
 }
 
-.gallery-vertical-type img:hover { transform: scaley(1.05); }
-
-
-
+.gallery-vertical-type img:hover { 
+  transform: scaley(1.05);
+}
 
 @media (max-width: 800px) {
-
-
 
   .gallery-vertical-type {
     display: grid;
