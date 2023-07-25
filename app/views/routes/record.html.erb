@@ -1,20 +1,20 @@
   <div data-controller = 'route-tracking' data-route-tracking-id-value='<%= @route.id %>'>
       <div class="navbar-record">
-        <div class="d-flex justify-content-between align-items-center gap-3 container">
+        <div class="d-flex justify-content-between align-items-center gap-3 container pt-2 pb-2">
           <%= link_to route_path(@route), data: { route_tracking_target: 'discard', turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: 'd-none close-button' do  %>
             <i class="fa-regular fa-x"></i>
           <% end %>
-          <h1 class="cor-11 font-1-s text-center w-100 m-auto">Tracking Route</h1>
+          <h1 class="cor-11 font-1-m-b text-center w-100 m-auto">Tracking Route</h1>
           <button class='btn-save d-none' data-route-tracking-target='save' data-action='click->route-tracking#showForm'>Save</button>
         </div>
       </div>
-      <div class='record-top-half-display'>
+      <div class='record-top-half-display d-flex justify-content-center'>
           <%= image_tag('recording.gif', class: 'd-none', data: { route_tracking_target: 'recordgif'} )%>
         <%= render "shared/map", markers: @markers ? @markers : [], height: "300px", html_options: { class:  @markers ? '' : 'd-none' }%>
       </div>
       <div class="container mt-3">
       <div class="d-flex flex-column align-items-center"  data-route-tracking-target='tracker' class=<%= 'd-none' if @route.errors.any? %>>
-        <button class='btn-record mb-2' data-route-tracking-target='startstop' data-action='click->route-tracking#trackRoute'>Track Route</button>
+        <button class='btn-record mb-2 mt-3' data-route-tracking-target='startstop' data-action='click->route-tracking#trackRoute'>Track Route</button>
         <div class="recording mt-4">
           <p data-route-tracking-target='status', class='font-2-m cor-11 text-center mb-2'></p>
           <p data-route-tracking-target='position', class='font-2-xs cor-8 text-center'></p>

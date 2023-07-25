@@ -1,10 +1,9 @@
 
 .banner {
   background-size: cover;
-  background: url(imagem-capa-3.jpg);
+  background: url(banner-2.webp);
   background-repeat: no-repeat;
-  background-position: 50% 70%;
-  background-attachment: fixed;
+  background-position: 50% 90%;
   padding: 200px 0;
 }
 
@@ -40,11 +39,8 @@ max-width: 30ch;
 @media (max-width: 800px) {
   .banner {
     background-size: cover;
-    background: url(imagem-capa-3.jpg);
     background-repeat: no-repeat;
-    background-position: 0% 55%;
-    background-attachment: fixed;
-    padding: 80px 0;
+    padding: 60px 0;
   }
 
   .banner-logged {

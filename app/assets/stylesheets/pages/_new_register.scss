@@ -1,4 +1,31 @@
-.btn-login {
-  display: block;
-  text-align: center;
-}
+.box-register {
+  padding: 80px;
+  background-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 15px rgba(0,0,0,0.1);
+  border-radius: 16px;
+  margin: 40px auto;
+  }
+
+
+  .btn-login {
+    display: block;
+    text-align: center;
+  }
+
+
+  @media (max-width: 800px) {
+    .box-register {
+      padding: 0;
+      background-color: #f8f9f8;
+      box-shadow: none;
+      border-radius: 0;
+      margin-top: 30px;
+  }
+
+  .background-image-login {
+
+    background: none;
+    padding: 0px
+    }
+
+  }

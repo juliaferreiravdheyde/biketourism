@@ -1,16 +1,30 @@
 
-<div class="container pt-4 pb-4">
-  <%= render "shared/searchbar", address: @address, type_of_route: @type_of_route, min_distance: @min_distance, max_distance: @max_distance %>
+  <% if current_user.present? %>
+    <% if current_user.pinned_route.present? %>
+      <div class="container pt-4 pb-4 col-lg-4 offset-lg-4">
+        <%= link_to route_path(current_user.pinned_route), class:"btn-pin" do %>
+          <%= image_tag "pin-icon-verde.svg" %>
+          <%=current_user.pinned_route.name %>
+        <% end %>
 
-<% if current_user.present? %>
-  <% if current_user.pinned_route.present? %>
-    <%= link_to current_user.pinned_route.name, route_path(current_user.pinned_route), class:"btn-pin"%>
+       
+        </div>
+      </div>
+    <% end %>
   <% end %>
-<% end %>
-  <h2 class="font-1-xl cor-11 pb-3 pt-4">Best routes</h2>
+
+
+<div class="banner">
+  <div class="container pt-4 pb-4">
+    <h1 class="font-1-xxl cor-11 pb-4 text-center">Find a bike route</h1>
+    <%= render "shared/searchbar", address: @address, type_of_route: @type_of_route, min_distance: @min_distance, max_distance: @max_distance %>
+  </div>
+</div>
+<div class="container pt-4 pb-4">
+  <h2 class="font-1-xl cor-11 pb-3 pt-3">Best routes</h2>
   <div>
   <%= render "shared/route_cards_horizontal", routes: @best_routes %>
   </div>
-  </div>
+</div>
 
 <%= render "shared/type_cards_horizontal" %>

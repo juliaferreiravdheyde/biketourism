@@ -1,16 +1,16 @@
 <!-- Button trigger modal -->
 <div class="row g-0 d-flex align-items-start search-bar">
-  <div class="col border-end-0">
+  <div class="col-sm col-lg-6 offset-lg-3 border-end-0">
     <%= simple_form_for :search, url: routes_path, method: "GET", html: { } do |f| %>
       <div class="search-icon">
-        <i class="fas fa-search"></i>
+        <i class="fas fa-search" style="color: var(--cor-8);"></i>
       </div>
       <%= f.input :address, input_html: { value: address, class: "search-input" }, label: false, required: false, placeholder:"Search City ex: Ribeirão Preto" %>
     <% end %>
   </div>
   <div class="col-auto border-0 search-filter">
     <button type="button" class="btn btn-filter" data-bs-toggle="modal" data-bs-target="#exampleModal">
-      <i class="fas fa-sliders"></i>
+      <i class="fas fa-sliders" style="color: var(--cor-1);"></i>
     </button>
   </div>
 </div>
@@ -18,9 +18,9 @@
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
-    <div class="modal-content">
+    <div class="modal-content rounded-16">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Find a route</h1>
+        <h1 class="modal-title cor-10 font-1-xl fs-5" id="exampleModalLabel">Find a route</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -46,7 +46,7 @@
             </div>
 
             <%= f.input :type_of_route, label: false, as: :select, collection: Route::TYPE_OF_ROUTE, prompt: 'Choose route type', include_blank: "All Types", input_html: { class: 'mt-4' }, selected: type_of_route, required: false  %>
-            <%= f.submit "Search", class: "btn btn-primary" %>
+            <%= f.submit "Search", class: "btn btn-primary w-100" %>
           <% end %>
       </div>
       <div class="modal-footer">
