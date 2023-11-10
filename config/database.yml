@@ -79,8 +79,12 @@ test:
 # Read https://guides.rubyonrails.org/configuring.html#configuring-a-database
 # for a full overview on how database connection configuration can be specified.
 #
+#production:
+ # <<: *default
+  #database: TrekM8_production
+  #username: TrekM8
+  #password: <%= ENV["TREKM8_DATABASE_PASSWORD"] %> */
+
 production:
-  <<: *default
-  database: TrekM8_production
-  username: TrekM8
-  password: <%= ENV["TREKM8_DATABASE_PASSWORD"] %>
+  url: <%= ENV['HEROKU_POSTGRESQL_BLACK_URL'] %>
+
