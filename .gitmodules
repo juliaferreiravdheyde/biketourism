@@ -1,0 +1,3 @@
+[submodule "biketourism"]
+    path = biketourism
+    url = https://github.com/juliaferreiravdheyde/biketourism.git
